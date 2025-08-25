@@ -166,58 +166,6 @@ h6 {
   }
 }
 
-/* PHP Email Form Messages
-------------------------------*/
-.php-email-form .error-message {
-  display: none;
-  background: #df1529;
-  color: #ffffff;
-  text-align: left;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.php-email-form .sent-message {
-  display: none;
-  color: #ffffff;
-  background: #059652;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.php-email-form .loading {
-  display: none;
-  background: var(--surface-color);
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-}
-
-.php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid var(--accent-color);
-  border-top-color: var(--surface-color);
-  animation: php-email-form-loading 1s linear infinite;
-}
-
-@keyframes php-email-form-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 /*--------------------------------------------------------------
 # Global Header
 --------------------------------------------------------------*/
@@ -1632,20 +1580,43 @@ section,
 /*--------------------------------------------------------------
 # Gallery Section
 --------------------------------------------------------------*/
-.gallery .gallery-item {
+.gallery-item {
+  /* Set a fixed size for the container of each image */
+  height: 250px; /* You can change this to any value you want */
+  width: 250px; /* This makes it a perfect square */
   overflow: hidden;
   border-right: 3px solid var(--background-color);
   border-bottom: 3px solid var(--background-color);
 }
 
-.gallery .gallery-item img {
+.gallery-item img {
+  /* Make the image fill the entire container */
+  width: 100%;
+  height: 100%;
+  
+  /* This is the key property to make it all work */
+  object-fit: cover;
+  
+  /* Your existing transition for the hover effect */
   transition: all ease-in-out 0.4s;
 }
 
-.gallery .gallery-item:hover img {
+.gallery-item:hover img {
   transform: scale(1.1);
 }
 
+.gallery-container {
+  display: flex;
+  justify-content: center; /* This centers the gallery horizontally */
+  margin: 0 auto; /* A fallback for older browsers */
+}
+
+/* For mobile devices, let's create a single column layout */
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: 1fr; /* Display one image per row on small screens */
+  }
+}
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
@@ -1721,9 +1692,103 @@ section,
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
-}
+
+<!-- Pricing Model CSS -->
+
+<style>
+
+        .pricing-table {
+            padding: 60px 0;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex; /* Make card a flex container */
+            flex-direction: column; /* Stack items vertically */
+            height: 100%; /* Ensure cards take full height in row */
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff; /* Primary blue for header */
+            color: #fff;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .card-header.featured {
+            background-color: #28a745; /* Green for featured plan */
+        }
+        .card-body {
+            padding: 30px;
+            flex-grow: 1; /* Allow body to grow and fill space */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push button to bottom */
+        }
+        .card-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #343a40; /* Dark text for price */
+        }
+        .card-title small {
+            font-size: 1rem;
+            color: #6c757d; /* Muted text for per month */
+        }
+        .card-text {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        .list-unstyled li {
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        .list-unstyled li svg {
+            margin-right: 8px;
+            color: #28a745; /* Green checkmark */
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%; /* Full width button */
+            margin-top: 20px; /* Space from list items */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 767.98px) {
+            .pricing-table .card {
+                margin-bottom: 30px; /* Add space between cards on small screens */
+            }
+        }
+
+    </style>
+    
+<!-- Pricing Model CSS END-->
