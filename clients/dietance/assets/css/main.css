@@ -1756,8 +1756,8 @@ section,
             color: #28a745; /* Green checkmark */
         }
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #a26739;
+            border-color: #a26739;
             border-radius: 50px;
             padding: 12px 30px;
             font-weight: 600;
@@ -1766,10 +1766,10 @@ section,
             margin-top: 20px; /* Space from list items */
         }
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+            background-color: #cbb9a2;
+            border-color: #cbb9a2;
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
         }
         .btn-success {
             background-color: #28a745;
