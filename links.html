@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- PRIMARY SEO & TITLE -->
+    <title>TechPro iOS Settings Interface</title>
+    <meta name="description" content="A professional, interactive, and responsive iOS-style settings interface for TechPro Managed IT Services, featuring client galleries, dynamic links, and directions.">
+    <meta name="keywords" content="TechPro, Managed IT, iOS UI, Settings, Client Showcase, Enterprise Solutions, Web Games, Find My">
+
+    <!-- OPEN GRAPH (OG) TAGS - For Facebook, WhatsApp, LinkedIn, and AI/General Bots -->
+    <!-- These tags define how your content appears when shared on social media. -->
+    <meta property="og:title" content="TechPro Managed Services: Control Panel">
+    <meta property="og:description" content="View our client gallery, access key links, and get directions to our HQ via this modern settings interface.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techpro.example.com/settings-app"> <!-- Replace with your actual URL -->
+    <meta property="og:image" content="https://placehold.co/1200x630/007AFF/FFFFFF?text=TechPro+Settings+Preview"> <!-- Replace with a screenshot of the app -->
+    <meta property="og:site_name" content="TechPro">
+    
+    <!-- TWITTER CARD TAGS - For Twitter/X sharing -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TechProIT"> <!-- Replace with your Twitter handle -->
+    <meta name="twitter:creator" content="@TechProIT"> <!-- Replace with your Twitter handle -->
+    <meta name="twitter:title" content="TechPro Managed Services: Control Panel">
+    <meta name="twitter:description" content="View our client gallery, access key links, and get directions to our HQ via this modern settings interface.">
+    <meta name="twitter:image" content="https://placehold.co/1200x675/007AFF/FFFFFF?text=TechPro+Settings+Twitter"> <!-- Replace with a specific Twitter-optimized image -->
+
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /*
+        ============================================================
+        CUSTOM CSS STYLES FOR iOS UI SIMULATION
+        ============================================================
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* Base iOS Font and Background */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #F2F2F7; /* Standard iOS background color */
+            -webkit-tap-highlight-color: transparent; /* Removes touch highlight on mobile */
+            user-select: none;
+            overflow: hidden; /* Prevent body scroll, navigation handles view scrolling */
+        }
+
+        /* Page Transition Logic (Simulating iOS View Stack) */
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Removed overflow-y: auto here. It should be applied to content wrappers within specific pages if needed. */
+            background-color: #F2F2F7;
+            padding-top: 50px; /* Space for status bar */
+            padding-bottom: 40px;
+            /* Smooth slide-in/out transition */
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+            transform: translateX(100%); /* Start off-screen to the right */
+            z-index: 10;
+            display: flex; /* Use flex to manage header and content layout */
+            flex-direction: column;
+        }
+        /* Active view slides into place */
+        .page.active {
+            transform: translateX(0);
+            z-index: 20;
+        }
+        /* Background view slightly slides back when a new view opens */
+        .page.background {
+            transform: translateX(-30%);
+            z-index: 0;
+            filter: brightness(0.9);
+        }
+
+        /* Notification Banner Styling */
+        #notification-banner {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(-200%); /* Hidden state */
+        }
+        #notification-banner.show {
+            transform: translateY(0); /* Visible state */
+        }
+
+        /* Notification Center Overlay Styling (Full Screen) */
+        #notification-center {
+            backdrop-filter: blur(25px); /* Blurs content behind the sheet */
+            -webkit-backdrop-filter: blur(25px);
+            background-color: rgba(242, 242, 247, 0.85);
+            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+            transform: translateY(-100%); /* Hidden state */
+            z-index: 100;
+        }
+        #notification-center.open {
+            transform: translateY(0); /* Visible state */
+        }
+
+        /* Search Input and Icon Positioning */
+        .search-container { 
+            position: relative;
+            /* FIX: Ensure search bar uses full width */
+            width: 100%; 
+        }
+        .search-input {
+            background-color: #E3E3E8;
+            padding-left: 36px; /* Space for search icon */
+            /* FIX: Ensure input also uses full width */
+            width: 100%;
+        }
+        .search-icon {
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none; /* Allows click-through to the input */
+        }
+        /* Clear (X) Button Styling */
+        .clear-icon {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none; 
+        }
+        .clear-icon.visible { display: flex; }
+        
+        /* Search Results Overlay */
+        #search-results {
+            /* FIX 2: Set absolute positioning to overlay everything below the search bar */
+            display: none;
+            position: absolute;
+            top: 130px; /* Below the header/search bar */
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: #F2F2F7; /* Match settings background */
+            /* Ensure it fills the rest of the available height in the settings view */
+            height: calc(100% - 130px); 
+            overflow-y: auto; /* Make results scrollable */
+        }
+        #search-results.active { display: block; }
+
+        /* Client Info Sheet (Bottom Sheet) & Overlay */
+        #client-sheet {
+            height: 60%;
+            transform: translateY(110%); /* Hidden state */
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+            z-index: 200;
+        }
+        #client-sheet.open { transform: translateY(0); } /* Visible state */
+        #client-overlay {
+            background: rgba(0,0,0,0.3);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #client-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Map Container for Directions View */
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Utility to hide the scrollbar (for featured cards container) */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. iOS Status Bar (Fixed Top) - Provides Time, Battery, and Notification Access -->
+    <div class="fixed top-0 w-full h-[44px] flex justify-between items-end pb-2 px-6 z-50 text-black text-xs font-semibold select-none pointer-events-none backdrop-blur-md bg-transparent">
+        <div id="status-time" class="w-20">9:41</div>
+        <div class="flex items-center space-x-2 pointer-events-auto">
+             <!-- Notification Center Trigger Button -->
+            <button onclick="toggleNotificationCenter()" class="mr-2 active:opacity-50">
+                <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+            </button>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            <div class="flex items-center space-x-1">
+                <span id="battery-level">100%</span>
+                <div class="w-6 h-3 border border-gray-400 rounded-sm relative flex items-center px-[1px]">
+                    <div id="battery-fill" class="h-2 bg-black rounded-[1px] w-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Dynamic Notification Banner - Appears briefly at the top -->
+    <div id="notification-banner" class="fixed top-2 left-2 right-2 z-[60] bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 p-3 flex flex-col cursor-pointer" onclick="toggleNotificationCenter()">
+        <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center space-x-2">
+                <div class="w-5 h-5 bg-blue-500 rounded-md flex items-center justify-center">
+                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">MESSAGES • NOW</span>
+            </div>
+            <button class="text-xs text-gray-400 p-1 hover:text-gray-800" onclick="event.stopPropagation(); dismissBanner()">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="flex gap-3">
+            <div class="flex-1">
+                <h4 class="font-bold text-sm text-black">Referral Program</h4>
+                <p class="text-sm text-gray-600 leading-snug">Earn up to 15% commission on every successful referral. Tap to view details.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Notification Center (Drop Down) - Full-screen overlay for detailed notifications -->
+    <div id="notification-center" class="fixed inset-0 pt-16 px-4 overflow-y-auto pb-10">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Notification Center</h2>
+            <button onclick="toggleNotificationCenter()" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 active:bg-gray-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Example Notification Widget -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center space-x-2 text-blue-600 font-semibold text-xs uppercase tracking-wider">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>Opportunity</span>
+                    </div>
+                    <span class="text-xs text-gray-400">1m ago</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">Earn 15% Commission</h3>
+                <p class="text-gray-500 text-sm mb-4">Join our partner program today. Refer a client and get paid automatically when they sign up.</p>
+                <div class="flex gap-2">
+                    <button class="flex-1 bg-blue-500 text-white font-semibold py-2 rounded-xl text-sm active:opacity-90">Join Now</button>
+                    <button class="flex-1 bg-gray-100 text-gray-900 font-semibold py-2 rounded-xl text-sm active:bg-gray-200">Details</button>
+                </div>
+            </div>
+            <!-- System Status Widget -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">System Status</h4>
+                        <p class="text-xs text-gray-500">All Systems Operational</p>
+                    </div>
+                </div>
+                <div class="text-green-500 font-bold text-sm">99.9%</div>
+            </div>
+        </div>
+        <p class="text-center text-gray-400 text-xs mt-8">No older notifications</p>
+    </div>
+
+    <!-- 4. VIEW: MAIN SETTINGS (The primary screen) -->
+    <!-- Added overflow-y-auto for the main view content to scroll -->
+    <div id="view-settings" class="page active overflow-y-auto"> 
+        <!-- Header Section -->
+        <div class="px-4 pb-2 bg-[#F2F2F7]">
+            <!-- Dynamic Day Heading -->
+            <h1 id="header-day" class="text-[34px] font-bold text-black tracking-tight leading-tight">Settings</h1>
+            <!-- Search Bar Component -->
+            <!-- FIX: Added w-full to search container to ensure it takes up max available width -->
+            <div class="mt-2 search-container w-full"> 
+                <svg class="search-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <!-- FIX 1: Added rounded-xl class to the search input -->
+                <input type="text" id="app-search" class="search-input w-full rounded-xl" placeholder="Search" onkeyup="handleSearch()">
+                <!-- Clear Search Button -->
+                <div id="search-clear" class="clear-icon" onclick="clearSearch()">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH RESULTS CONTAINER - Hidden until search is active -->
+        <!-- FIX 2: Moved search-results container outside the main settings scrollable content to ensure it overlays -->
+        <div id="search-results" class="px-4">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase mt-4 mb-2">Top Hits</h3>
+            <div id="results-list" class="bg-white rounded-[10px] overflow-hidden">
+                <!-- Search results are dynamically injected here by JS -->
+            </div>
+        </div>
+
+        <!-- The rest of the content now needs to be wrapped in a scrollable div that starts below the search bar -->
+        <div id="settings-content" class="flex-1 overflow-y-auto">
+            <!-- Group 1: Profile -->
+            <div class="mt-6 mx-4">
+                <div class="bg-white rounded-[10px] flex items-center p-4 gap-4 active:bg-gray-50 transition-colors cursor-pointer" onclick="navigateTo('view-about')">
+                    <div class="w-[60px] h-[60px] rounded-full bg-gray-200 overflow-hidden border border-gray-100">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-xl font-bold">TP</div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h2 class="text-[20px] font-normal text-black truncate">TechPro Managed IT</h2>
+                        <p class="text-[13px] text-gray-500 truncate">Apple ID, iCloud, Media & Purchases</p>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                </div>
+            </div>
+
+            <!-- Featured Cards (Horizontal Scroll) -->
+            <div class="mt-8 mb-2 px-4">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase ml-1 mb-2">Featured Services</h3>
+                <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-2">
+                    <!-- Card 1: Security -->
+                    <div class="min-w-[160px] h-[160px] bg-white rounded-2xl p-4 flex flex-col justify-between shadow-sm border border-gray-100 cursor-pointer active:scale-95 transition-transform">
+                        <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 leading-tight">Security & Compliance</div>
+                            <div class="text-[10px] text-gray-500 mt-1">Protect your assets</div>
+                        </div>
+                    </div>
+                    <!-- Card 2: Cloud -->
+                    <div class="min-w-[160px] h-[160px] bg-white rounded-2xl p-4 flex flex-col justify-between shadow-sm border border-gray-100 cursor-pointer active:scale-95 transition-transform">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 leading-tight">Hybrid Cloud</div>
+                            <div class="text-[10px] text-gray-500 mt-1">Azure & AWS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 2: Connectivity and Links -->
+            <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
+                <!-- Item 1: Website Link (Opens in new tab) -->
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="window.open('https://www.example.com', '_blank')">
+                    <div class="w-7 h-7 rounded-[7px] bg-[#34C759] flex items-center justify-center text-white mr-3">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    </div>
+                    <div class="flex-1 text-[17px] text-black">Website</div>
+                    <div class="flex items-center text-gray-400">
+                        <span class="text-[17px] mr-2 text-gray-500">Online</span>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Item 2: Social Media View -->
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer" onclick="navigateTo('view-socials')">
+                    <div class="w-7 h-7 rounded-[7px] bg-[#007AFF] flex items-center justify-center text-white mr-3">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </div>
+                    <div class="flex-1 text-[17px] text-black">Social Media</div>
+                    <div class="flex items-center text-gray-400">
+                        <span class="text-[17px] mr-2 text-gray-500">Connect</span>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 3: General Functions -->
+            <div class="mt-8 mx-4 bg-white rounded-[10px] overflow-hidden">
+                <!-- Item: General/About View -->
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="navigateTo('view-about')">
+                    <div class="w-7 h-7 rounded-[7px] bg-[#8E8E93] flex items-center justify-center text-white mr-3">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <div class="flex-1 text-[17px] text-black">General</div>
+                    <div class="flex items-center text-gray-400">
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+                
+                <!-- Item: Client Gallery View -->
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="navigateTo('view-gallery')">
+                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <!-- Icon represented by colored dots -->
+                        <div class="w-2 h-2 rounded-full bg-orange-400 absolute top-1 left-2.5"></div>
+                        <div class="w-2 h-2 rounded-full bg-red-400 absolute top-2.5 left-1"></div>
+                        <div class="w-2 h-2 rounded-full bg-blue-400 absolute bottom-1 left-2.5"></div>
+                        <div class="w-2 h-2 rounded-full bg-green-400 absolute top-2.5 right-1"></div>
+                    </div>
+                    <div class="flex-1 text-[17px] text-black">Client Gallery</div>
+                    <div class="flex items-center text-gray-400">
+                        <span class="text-[17px] mr-2 text-gray-500">Showcase</span>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Item: Games View (NEW FEATURE) -->
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="navigateTo('view-games')">
+                    <div class="w-7 h-7 rounded-[7px] bg-purple-500 flex items-center justify-center text-white mr-3">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-9-9 9-9 9 9-9 9zM15 15l-3 3-3-3m0-6h6"></path></svg>
+                    </div>
+                    <div class="flex-1 text-[17px] text-black">Games</div>
+                    <div class="flex items-center text-gray-400">
+                        <span class="text-[17px] mr-2 text-gray-500">Play</span>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Item: Find My/Directions View (Includes new Directions button logic) -->
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer" onclick="navigateTo('view-findmy')">
+                    <div class="w-7 h-7 rounded-[7px] bg-green-100 flex items-center justify-center mr-3 text-green-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <div class="flex-1 text-[17px] text-black">Find My</div>
+                    <div class="flex items-center text-gray-400">
+                        <span class="text-[17px] mr-2 text-gray-500">Directions</span>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-8 text-center text-gray-400 text-xs">Designed by Gemini</p>
+            <div class="h-20"></div>
+        </div>
+    </div>
+
+
+    <!-- 5. VIEW: GENERAL > ABOUT (Details about the "device/service") -->
+    <div id="view-about" class="page overflow-y-auto">
+        <!-- Navigation Header -->
+        <div class="px-2 mb-4 flex items-center h-10 relative">
+            <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <span class="text-[17px]">Settings</span>
+            </button>
+            <h1 class="w-full text-center text-[17px] font-semibold text-black">About</h1>
+        </div>
+
+        <!-- About Info Group -->
+        <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Name</span>
+                <span class="text-[17px] text-gray-500">TechPro Office</span>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Software Version</span>
+                <span class="text-[17px] text-gray-500">18.1</span>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Model Name</span>
+                <span class="text-[17px] text-gray-500">Managed Services Pro</span>
+            </div>
+             <div class="flex justify-between items-center px-4 py-3">
+                <span class="text-[17px] text-black">Model Number</span>
+                <span class="text-[17px] text-gray-500">A2849</span>
+            </div>
+        </div>
+
+        <div class="mx-4 mt-8 bg-white rounded-[10px] overflow-hidden">
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Address</span>
+                <span class="text-[17px] text-gray-500 text-right w-1/2">Global Headquarters, Cyber Street 404</span>
+            </div>
+             <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Contact</span>
+                <span class="text-[17px] text-gray-500">(800) 555-TECH</span>
+            </div>
+        </div>
+        <div class="h-20"></div>
+    </div>
+    
+    <!-- 6. VIEW: SOCIALS (List of external social media links) -->
+    <div id="view-socials" class="page overflow-y-auto">
+        <!-- Navigation Header -->
+        <div class="px-2 mb-4 flex items-center h-10 relative">
+            <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <span class="text-[17px]">Settings</span>
+            </button>
+            <h1 class="w-full text-center text-[17px] font-semibold text-black">Social Media</h1>
+        </div>
+
+        <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
+            <!-- LinkedIn Link -->
+            <a href="https://linkedin.com" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div class="w-7 h-7 rounded-[7px] bg-[#0077b5] flex items-center justify-center text-white mr-3">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </div>
+                <div class="flex-1 text-[17px] text-black">LinkedIn</div>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+            <!-- Twitter / X Link -->
+            <a href="https://twitter.com" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div class="w-7 h-7 rounded-[7px] bg-black flex items-center justify-center text-white mr-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </div>
+                <div class="flex-1 text-[17px] text-black">X (Twitter)</div>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+            <!-- Facebook Link -->
+            <a href="https://facebook.com" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer">
+                <div class="w-7 h-7 rounded-[7px] bg-[#1877F2] flex items-center justify-center text-white mr-3">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </div>
+                <div class="flex-1 text-[17px] text-black">Facebook</div>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+        </div>
+        <div class="h-20"></div>
+    </div>
+
+    <!-- 7. VIEW: GALLERY (Client Project Showcase with Dynamic Grid) -->
+    <!-- FIX: Removed bg-white from .page, added flex-col, and used a separate scrolling wrapper for content -->
+    <div id="view-gallery" class="page"> 
+        <!-- Header - Now fixed at the top of this page/view -->
+        <div class="px-2 pt-2 mb-2 flex items-center justify-between h-10 sticky top-0 bg-white/90 backdrop-blur-lg z-10 border-b border-gray-100 w-full">
+            <button onclick="navigateBack()" class="flex items-center text-[#007AFF] active:opacity-50 px-2">
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <span class="text-[17px]">Back</span>
+            </button>
+            <h1 class="text-[17px] font-semibold text-black absolute left-1/2 transform -translate-x-1/2">Client Showcase</h1>
+            <div class="w-16"></div> 
+        </div>
+
+        <!-- Content Wrapper - This is the part that scrolls -->
+        <!-- FIX: Added flex-1 and overflow-y-auto to this container to enable scrolling of only the content. -->
+        <div class="flex-1 overflow-y-auto bg-white"> 
+             <!-- Photo Grid - grid-cols-3 with the first item dynamically set to span 2x2 by JS -->
+            <div class="grid grid-cols-3 gap-[1px] pb-20" id="gallery-grid">
+                <!-- Items injected via JS (check the renderGallery function) -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- 8. VIEW: GAMES (NEW) - Links to external web games -->
+    <div id="view-games" class="page overflow-y-auto">
+        <!-- Navigation Header -->
+        <div class="px-2 mb-4 flex items-center h-10 relative">
+            <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <span class="text-[17px]">Settings</span>
+            </button>
+            <h1 class="w-full text-center text-[17px] font-semibold text-black">Games</h1>
+        </div>
+
+        <div class="mx-4">
+            <p class="text-[13px] text-gray-500 mb-4 px-4">A curated list of fun and simple web games to enjoy during your downtime.</p>
+        </div>
+
+        <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
+            <!-- Game Link 1: Sunset Race (The user's requested link) -->
+            <a href="https://sunsetrace.ginrin.com/" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div class="w-7 h-7 rounded-[7px] bg-red-500 flex items-center justify-center text-white mr-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div class="flex-1 text-[17px] text-black">Sunset Race (Arcade)</div>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+            <!-- Game Link 2 (Mock Link) -->
+            <a href="https://example.com/puzzle" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div class="w-7 h-7 rounded-[7px] bg-yellow-500 flex items-center justify-center text-white mr-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 100 4m-4 10a2 2 0 100-4m14 4a2 2 0 100-4m-4-10a2 2 0 100 4m-2 2h4m-4 0h-2m-4-2h4m-4 0h-2m-4 2v4m0-4v-2m4 0v2m0 4v2m-4 0h2m4 0h2m-4 0h-2m-4-2v4m0-4v-2"></path></svg>
+                </div>
+                <div class="flex-1 text-[17px] text-black">Daily Puzzle (Logic)</div>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+             <!-- Game Link 3 (Mock Link) -->
+            <a href="https://example.com/strategy" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer">
+                <div class="w-7 h-7 rounded-[7px] bg-green-500 flex items-center justify-center text-white mr-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19C7.895 19 7 18.105 7 17s.895-2 2-2 2 .895 2 2-.895 2-2 2zM12 21h-2a2 2 0 01-2-2V7l12 3v13M12 21a2 2 0 01-2-2v-3"></path></svg>
+                </div>
+                <div class="flex-1 text-[17px] text-black">Tower Defense (Strategy)</div>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+        </div>
+        <div class="h-20"></div>
+    </div>
+
+
+    <!-- 9. VIEW: FIND MY (Map/Directions View) -->
+    <div id="view-findmy" class="page flex flex-col h-full bg-white">
+        <!-- Header -->
+        <div class="px-2 pt-2 mb-0 flex items-center justify-between h-10 bg-white/90 backdrop-blur-lg z-10 border-b border-gray-100">
+            <button onclick="navigateBack()" class="flex items-center text-[#007AFF] active:opacity-50 px-2">
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <span class="text-[17px]">Back</span>
+            </button>
+            <h1 class="text-[17px] font-semibold text-black absolute left-1/2 transform -translate-x-1/2">Directions</h1>
+            <div class="w-16"></div>
+        </div>
+        
+        <!-- Map Container -->
+        <div class="flex-1 w-full bg-gray-100 map-container relative">
+             <!-- Embedded Google Map centered on New Delhi HQ (28.6129,77.2295) -->
+             <iframe 
+                src="https://maps.google.com/maps?q=28.6129,77.2295&z=15&output=embed" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+            
+            <!-- Floating overlay box with Directions button -->
+             <div class="absolute bottom-10 left-4 right-4 bg-white rounded-2xl p-4 shadow-xl border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                         <h3 class="font-bold text-lg text-black">New Delhi HQ</h3>
+                         <p class="text-sm text-gray-500">28.6129° N, 77.2295° E</p>
+                    </div>
+                    <!-- NEW: Directions Button. Calls getDirections() to open Google Maps/Chrome -->
+                    <button onclick="getDirections()" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg active:scale-95 transition-transform" aria-label="Get Directions">
+                        <!-- Map Pin Icon -->
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. CLIENT DETAILS SHEET (Overlay for viewing client details from the gallery) -->
+    <div id="client-overlay" onclick="closeClientSheet()"></div>
+    <div id="client-sheet" class="fixed bottom-0 left-0 right-0 max-h-[90%] bg-white rounded-t-3xl shadow-2xl p-4 flex flex-col">
+        <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div> <!-- Drag Handle -->
+        
+        <div id="sheet-content" class="flex-1 overflow-y-auto">
+            <!-- Dynamic Client Content injected here by openClientSheet() -->
+        </div>
+        
+        <button onclick="closeClientSheet()" class="mt-4 w-full bg-gray-100 text-black font-semibold py-3 rounded-xl active:bg-gray-200">Close</button>
+    </div>
+
+
+    <script>
+        /*
+        ============================================================
+        JAVASCRIPT LOGIC
+        ============================================================
+        */
+
+        // --- 1. Dynamic Header Logic ---
+        // Sets the header text (e.g., "Tuesday") on load.
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        document.getElementById('header-day').innerText = days[new Date().getDay()];
+
+        // Updates the time display in the status bar every second.
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+            document.getElementById('status-time').innerText = timeString.replace(/AM|PM/, '').trim();
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // --- 2. Battery Status Simulation ---
+        // Attempts to use the Battery Status API for real level if available.
+        async function getBatteryStatus() {
+            if ('getBattery' in navigator) {
+                try {
+                    const battery = await navigator.getBattery();
+                    const updateBattery = () => {
+                        const level = Math.round(battery.level * 100);
+                        document.getElementById('battery-level').innerText = level + '%';
+                        document.getElementById('battery-fill').style.width = level + '%';
+                        // Change color to red if battery is low
+                        if (level <= 20) {
+                            document.getElementById('battery-fill').classList.remove('bg-black', 'bg-green-500');
+                            document.getElementById('battery-fill').classList.add('bg-red-500');
+                        } else {
+                            document.getElementById('battery-fill').classList.remove('bg-red-500');
+                            document.getElementById('battery-fill').classList.add('bg-black');
+                        }
+                    };
+                    updateBattery();
+                    battery.addEventListener('levelchange', updateBattery);
+                } catch (e) {
+                    console.error("Battery API not available or access denied:", e);
+                }
+            }
+        }
+        getBatteryStatus();
+
+        // --- 3. Notification Banner & Center Logic ---
+        window.onload = () => {
+            renderGallery(); // Initialize the dynamic gallery layout
+            // Show banner shortly after load
+            setTimeout(() => { document.getElementById('notification-banner').classList.add('show'); }, 800);
+            // Auto-dismiss banner after a few seconds unless center is open
+            setTimeout(() => {
+                const banner = document.getElementById('notification-banner');
+                const center = document.getElementById('notification-center');
+                if(banner.classList.contains('show') && !center.classList.contains('open')) {
+                    banner.classList.remove('show');
+                }
+            }, 6000);
+        };
+        function dismissBanner() { document.getElementById('notification-banner').classList.remove('show'); }
+        function toggleNotificationCenter() {
+            const center = document.getElementById('notification-center');
+            center.classList.toggle('open');
+            // Dismiss banner if notification center is opened
+            if(center.classList.contains('open')) document.getElementById('notification-banner').classList.remove('show');
+        }
+
+        // --- 4. Navigation Logic (iOS style push/pop) ---
+        // Pushes a new view onto the screen stack
+        function navigateTo(viewId) {
+            document.getElementById('search-results').classList.remove('active'); // Hide search when navigating
+            const currentView = document.querySelector('.page.active');
+            const nextView = document.getElementById(viewId);
+            if (currentView && nextView) {
+                currentView.classList.remove('active');
+                currentView.classList.add('background'); // Moves current view slightly left
+                nextView.classList.add('active'); // Slides new view in
+            }
+        }
+        // Pops the current view to return to the main settings view
+        function navigateBack() {
+            const activeView = document.querySelector('.page.active');
+            const mainView = document.getElementById('view-settings');
+            if (activeView && mainView) {
+                activeView.classList.remove('active');
+                mainView.classList.remove('background');
+                mainView.classList.add('active');
+            }
+        }
+        
+        // --- 5. Directions Logic (NEW FEATURE) ---
+        // Opens an external application (Google Maps) for directions to the HQ.
+        function getDirections() {
+            // Target coordinates for New Delhi HQ: 28.6129,77.2295
+            const destination = '28.6129,77.2295';
+            // Google Maps URL scheme for directions (travelmode=driving is optional)
+            const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+            // Opens in a new window/tab
+            window.open(mapUrl, '_blank'); 
+        }
+
+        // --- 6. Search Logic ---
+        // Data structure for all searchable items in the app.
+        const searchableItems = [
+            { name: "General", desc: "Settings", action: () => navigateTo('view-about') },
+            { name: "About", desc: "Model, Serial Number", action: () => navigateTo('view-about') },
+            { name: "Social Media", desc: "Connect, Links", action: () => navigateTo('view-socials') },
+            { name: "Website", desc: "TechPro Online", action: () => window.open('https://www.example.com', '_blank') },
+            { name: "Client Gallery", desc: "Showcase, Photos", action: () => navigateTo('view-gallery') },
+            { name: "Games", desc: "Play, Links, Arcade", action: () => navigateTo('view-games') }, // Added Games
+            { name: "Find My", desc: "Directions, HQ, Location", action: () => navigateTo('view-findmy') },
+            // Deep Links - for direct navigation/actions
+            { name: "Sunset Race", desc: "Web Game", action: () => window.open('https://sunsetrace.ginrin.com/', '_blank') },
+            { name: "LinkedIn", desc: "Social Media Profile", action: () => window.open('https://linkedin.com', '_blank') },
+            { name: "Referral Program", desc: "Earn Commission", action: () => toggleNotificationCenter() },
+        ];
+
+        // Handles filtering and displaying search results based on user input.
+        function handleSearch() {
+            const input = document.getElementById('app-search');
+            const query = input.value.toLowerCase();
+            const resultsContainer = document.getElementById('search-results');
+            const resultsList = document.getElementById('results-list');
+            const clearBtn = document.getElementById('search-clear');
+            const settingsContent = document.getElementById('settings-content'); // Get the main content wrapper
+
+            // Toggle Clear Button visibility
+            if (query.length > 0) {
+                clearBtn.classList.add('visible');
+                resultsContainer.classList.add('active');
+                settingsContent.style.display = 'none'; // Hide the rest of the settings content
+            } else {
+                clearBtn.classList.remove('visible');
+                resultsContainer.classList.remove('active');
+                settingsContent.style.display = 'block'; // Show the rest of the settings content
+                return;
+            }
+
+            // Filter items based on query match in name or description
+            const matches = searchableItems.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.desc.toLowerCase().includes(query)
+            );
+
+            if (matches.length > 0) {
+                // Generate HTML for each search result
+                resultsList.innerHTML = matches.map(item => `
+                    <div class="flex items-center pl-4 pr-3 py-3 border-b border-gray-100 active:bg-gray-50 cursor-pointer" onclick="(${item.action.toString()})()">
+                        <div class="w-7 h-7 rounded-full bg-gray-400 flex items-center justify-center text-white mr-3">
+                            <!-- Simple magnifying glass icon for search result -->
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <div>
+                            <div class="text-[17px] text-black font-medium">${item.name}</div>
+                            <div class="text-[12px] text-gray-500">${item.desc}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                resultsList.innerHTML = `<div class="p-4 text-center text-gray-500">No results found</div>`;
+            }
+        }
+        
+        // Clears the search input and hides results.
+        function clearSearch() {
+            const input = document.getElementById('app-search');
+            input.value = '';
+            handleSearch(); 
+        }
+
+        // --- 7. Gallery Data and Rendering ---
+        const clients = [
+            // Note: The first item (index 0) will be styled as a 2x2 featured item.
+            { name: "Apex Manufacturing", url: "https://example.com", img: "https://placehold.co/800x800/1e3a8a/FFF?text=Apex", duration: "6 Months", cost: "$50k - $75k", desc: "Full infrastructure overhaul and cybersecurity implementation." },
+            { name: "BrightStart Finance", url: "https://example.com", img: "https://placehold.co/400x400/064e3b/FFF?text=Bright", duration: "1 Year", cost: "$120k+", desc: "Cloud migration to Azure and ongoing managed support services." },
+            { name: "Future Health", url: "https://example.com", img: "https://placehold.co/400x400/831843/FFF?text=Health", duration: "3 Months", cost: "$25k", desc: "HIPAA compliance audit and network security hardening." },
+            { name: "Urban Retail", url: "https://example.com", img: "https://placehold.co/400x400/92400e/FFF?text=Urban", duration: "Ongoing", cost: "$5k/mo", desc: "24/7 Helpdesk support for 50+ retail locations." },
+            { name: "TechNova Labs", url: "https://example.com", img: "https://placehold.co/400x400/4c1d95/FFF?text=Nova", duration: "8 Months", cost: "$90k", desc: "Server virtualization and disaster recovery planning." },
+            { name: "Green Energy Co", url: "https://example.com", img: "https://placehold.co/400x400/14532d/FFF?text=Green", duration: "4 Months", cost: "$40k", desc: "IoT security implementation for smart grid devices." },
+            { name: "BlueSky Logistics", url: "https://example.com", img: "https://placehold.co/400x400/0ea5e9/FFF?text=Blue", duration: "9 Months", cost: "$110k", desc: "Global supply chain tracking software integration." },
+            { name: "RedRock Realty", url: "https://example.com", img: "https://placehold.co/400x400/ef4444/FFF?text=Red", duration: "2 Months", cost: "$15k", desc: "Secure Wi-Fi deployment for luxury apartment complex." },
+            { name: "Zenith Law", url: "https://example.com", img: "https://placehold.co/400x400/57534e/FFF?text=Zenith", duration: "Ongoing", cost: "$8k/mo", desc: "Data protection and email encryption services." },
+        ];
+
+        // Renders the gallery grid with dynamic sizing for the first item.
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            let html = '';
+            clients.forEach((client, index) => {
+                let itemClasses = "relative aspect-square bg-gray-200 overflow-hidden cursor-pointer group";
+
+                // Implementation for the dynamic Photos app grid look
+                if (index === 0) {
+                    itemClasses = "relative bg-gray-200 overflow-hidden cursor-pointer group col-span-2 row-span-2";
+                }
+                
+                // FIX 3: Ensure onclick is directly on the surrounding div, or the image if it's guaranteed to fill the space. 
+                // Using the image and ensuring object-cover is correct.
+                html += `
+                    <div class="${itemClasses}">
+                        <img src="${client.img}" class="w-full h-full object-cover active:opacity-75 transition-opacity" 
+                             onerror="this.src='https://placehold.co/400x400/ccc/000?text=No+Image'" 
+                             onclick="openClientSheet(${index})">
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        // --- 8. Client Details Sheet Logic (Bottom-up modal) ---
+        // Opens the bottom sheet with detailed information for a selected client.
+        function openClientSheet(index) {
+            const client = clients[index];
+            const content = document.getElementById('sheet-content');
+            
+            content.innerHTML = `
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="${client.img}" class="w-16 h-16 rounded-xl object-cover border border-gray-100 shadow-sm" onerror="this.src='https://placehold.co/400x400/ccc/000?text=No+Image'">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 leading-none">${client.name}</h2>
+                        <a href="${client.url}" target="_blank" class="text-blue-500 text-sm font-medium mt-1 inline-block">Visit Website &rarr;</a>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <span class="block text-xs text-gray-400 uppercase font-semibold">Project Details</span>
+                        <p class="text-gray-900 mt-1 text-sm">${client.desc}</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-center">
+                            <span class="block text-xs text-gray-400 uppercase font-semibold">Duration</span>
+                            <span class="block font-bold text-gray-900 mt-1">${client.duration}</span>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-center">
+                            <span class="block text-xs text-gray-400 uppercase font-semibold">Cost</span>
+                            <span class="block font-bold text-gray-900 mt-1">${client.cost}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('client-overlay').classList.add('open');
+            document.getElementById('client-sheet').classList.add('open');
+        }
+
+        // Closes the bottom sheet and its overlay.
+        function closeClientSheet() {
+            document.getElementById('client-overlay').classList.remove('open');
+            document.getElementById('client-sheet').classList.remove('open');
+        }
+
+    </script>
+</body>
+</html>
