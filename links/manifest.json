@@ -29,6 +29,7 @@
       "type": "image/png"
     }
   ],
+
   "screenshots": [
     {
       "src": "./snaps/1280x720.png",
@@ -44,5 +45,15 @@
       // form_factor is not set, so it defaults to narrow (mobile)
       "label": "Mobile view of the link directory"
     }
-  ]
+  ],
+
+  "shortcuts": [
+  {
+    "name": "Check Commison Policy",
+    "short_name": "Referral",
+    "description": "View our commission policy for referrals.",
+    "url": "./crp.html",
+    "icons": [{"src": "links/icons/crp.svg", "sizes": "96x96"}]
+  }
+]
 }
