@@ -1,11 +1,13 @@
 {
   "name": "Cyber Alliance India Links",
   "short_name": "CAI Links",
+  "description": "Your centralized hub for Cyber Alliance India resources and links.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1c1c1e",
   "icons": [
+    // ... your existing icons ...
     {
       "src": "./icons/192x192.png",
       "sizes": "192x192",
@@ -25,6 +27,22 @@
       "src": "./icons/180x180.png",
       "sizes": "180x180",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./snaps/1280x720.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "The main dashboard on a wide screen" 
+    },
+    {
+      "src": "./snaps/400x700.png",
+      "sizes": "400x700",
+      "type": "image/png",
+      // form_factor is not set, so it defaults to narrow (mobile)
+      "label": "Mobile view of the link directory"
     }
   ]
 }
