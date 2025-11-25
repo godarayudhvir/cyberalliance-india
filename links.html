@@ -422,6 +422,18 @@
 
             <!-- Group 3: General Functions -->
             <div class="mt-8 mx-4 bg-white rounded-[10px] overflow-hidden">
+
+                <!-- Item 1: Payment Information -->
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer" onclick="navigateTo('view-paymentnfo')">
+                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                         <img src="/assets/icons/upi.png" alt="upi Icon">
+                    </div>
+                    <div class="flex-1 text-[17px] text-black">Payment Information</div>
+                    <div class="flex items-center text-gray-400">
+                        <span class="text-[17px] mr-2 text-gray-500">UPI, IMPS</span>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>                
                 
                 <!-- Item: Client Gallery View -->
                 <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="navigateTo('view-gallery')">
@@ -569,6 +581,48 @@
         </div>
         <div class="h-20"></div>
     </div>
+
+    <!-- 6. VIEW: Payment information -->
+
+    <div id="view-paymentnfo" class="page overflow-y-auto">
+        <!-- Navigation Header -->
+        <div class="px-2 mb-4 flex items-center h-10 relative">
+            <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <span class="text-[17px]">Back</span>
+            </button>
+            <h1 class="w-full text-center text-[17px] font-semibold text-black">Payment Information</h1>
+        </div>
+
+        <!-- About Info Group -->
+        <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Company Name</span>
+                <span class="text-[17px] text-gray-500">Cyber Alliance India</span>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Account Number</span>
+                <span class="text-[17px] text-gray-500">10248243834</span>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">IFSC</span>
+                <span class="text-[17px] text-gray-500">IDFB0020231</span>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Branch Address</span>
+                <span class="text-[17px] text-gray-500">Dwarka sector 23, New Delhi - 110077</span>
+            </div>            
+        </div>
+
+        <div class="mx-4 mt-8 bg-white rounded-[10px] overflow-hidden">
+             <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">UPI</span>
+                <span class="text-[17px] text-gray-500">cyberallianceindia@idfcbank</span>
+            </div>
+        </div>
+        <div class="h-20"></div>
+    </div>    
+
 
     <!-- 7. VIEW: GALLERY (Client Project Showcase with Dynamic Grid) -->
     <!-- FIX: Removed bg-white from .page, added flex-col, and used a separate scrolling wrapper for content -->
