@@ -346,8 +346,9 @@
 
             <!-- Group 2 Connectivity and Links -->
             <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
+
                 <!-- Item 1: Website Link (Opens in new tab) -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="window.open('https://cyberalliance.in/', '_blank')">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="window.open('/index.html', '_blank')">
                     <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
                          <img src="/assets/ios/safari.png" alt="Safari Icon">
                     </div>
@@ -601,7 +602,7 @@
             <div class="flex items-center space-x-2">
                 <span id="accountNumber" class="text-[17px] text-gray-500">10248243834</span>
                 <button onclick="copyToClipboard('accountNumber', this)" class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
-                    <img src="assets/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
+                    <img src="/assets/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
                 </button>
             </div>
         </div>
@@ -611,7 +612,7 @@
             <div class="flex items-center space-x-2">
                 <span id="ifscCode" class="text-[17px] text-gray-500">IDFB0020231</span>
                 <button onclick="copyToClipboard('ifscCode', this)" class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
-                    <img src="assets/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
+                    <img src="/assets/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
                 </button>
             </div>
         </div>
@@ -628,7 +629,7 @@
             <div class="flex items-center space-x-2">
                 <span id="upiId" class="text-[17px] text-gray-500">cyberallianceindia@idfcbank</span>
                 <button onclick="copyToClipboard('upiId', this)" class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
-                    <img src="assets/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
+                    <img src="/assets/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
                 </button>
             </div>
         </div>
@@ -1005,12 +1006,12 @@
         // --- 7. Gallery Data and Rendering ---
         const clients = [
             // Note: The first item (index 0) will be styled as a 2x2 featured item.
-            { name: "Hankuk C&T", url: "https://hankuk.co.in", img: "assets/img/clients/hankuk.png", duration: "3 Days", cost: "Rs. 45,000", desc: "This wasnt just a static site it was more than that." },
-            { name: "Ja:am Sleepwear", url: "https://jaamsleepwear.com/", img: "assets/img/clients/jaamsleepwear.png", duration: "3 Days", cost: "Rs. 30,000", desc: "An basic ecommerce setup as per client requirements" },
-            { name: "Dietance", url: "https://dietance.com/", img: "assets/img/clients/dietance.png", duration: "4 Weeks", cost: "Rs. 25,000", desc: "A Multi page static site developed for a dietitan" },
-            { name: "Dosthaus", url: "https://cyberalliance.in/clients/dosthaus/", img: "assets/img/clients/dosthaus.png", duration: "8 Days", cost: "Rs. 50,000", desc: "A website designed for a cafe in gurugram." },
-            { name: "Essel Zone", url: "https://cyberalliance.in/clients/esselzone/", img: "assets/img/clients/esselzone.png", duration: "1 Day", cost: "Rs. 5,000", desc: "A basic site was created for landing page." },
-            { name: "Sarthak Enterprises", url: "https://cyberalliance.in/clients/sarthak/", img: "assets/img/clients/sarthak.png", duration: "1 Day", cost: "Rs. 5,000", desc: "A basic site was created for landing page." },
+            { name: "Hankuk C&T", url: "https://hankuk.co.in", img: "/assets/img/clients/hankuk.png", duration: "3 Days", cost: "Rs. 45,000", desc: "This wasnt just a static site it was more than that." },
+            { name: "Ja:am Sleepwear", url: "https://jaamsleepwear.com/", img: "/assets/img/clients/jaamsleepwear.png", duration: "3 Days", cost: "Rs. 30,000", desc: "An basic ecommerce setup as per client requirements" },
+            { name: "Dietance", url: "https://dietance.com/", img: "/assets/img/clients/dietance.png", duration: "4 Weeks", cost: "Rs. 25,000", desc: "A Multi page static site developed for a dietitan" },
+            { name: "Dosthaus", url: "https://cyberalliance.in/clients/dosthaus/", img: "/assets/img/clients/dosthaus.png", duration: "8 Days", cost: "Rs. 50,000", desc: "A website designed for a cafe in gurugram." },
+            { name: "Essel Zone", url: "https://cyberalliance.in/clients/esselzone/", img: "/assets/img/clients/esselzone.png", duration: "1 Day", cost: "Rs. 5,000", desc: "A basic site was created for landing page." },
+            { name: "Sarthak Enterprises", url: "https://cyberalliance.in/clients/sarthak/", img: "/assets/img/clients/sarthak.png", duration: "1 Day", cost: "Rs. 5,000", desc: "A basic site was created for landing page." },
             
             // { name: "companynamehere", url: "urlhere", img: "assets/img/clients/companynamehere.png", duration: "3 Days", cost: "Rs. 45,000", desc: "This wasnt just a static site it was more than that." },
             
