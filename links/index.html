@@ -932,24 +932,27 @@
         // Data structure for all searchable items in the app.
         const searchableItems = [
             
-            { name: "About", desc: "Comapany name, Founder", action: () => navigateTo('view-about') },
-
-            { name: "Social Media", desc: "Follow us", action: () => navigateTo('view-socials') },
-
-            { name: "Website", desc: "Cyberalliance.in", action: () => window.open('https://www.cyberalliance.in', '_blank') },
-
-            { name: "Client Gallery", desc: "Clients showcase, Photos", action: () => navigateTo('view-gallery') },
-
-            { name: "Games", desc: "Play, Links, Arcade", action: () => navigateTo('view-games') },
-
-            { name: "Find My", desc: "Directions, HQ, Location", action: () => navigateTo('view-findmy') },
+            // { name: "About", desc: "Comapany name, Founder", action: () => navigateTo('view-about') },
+            // { name: "Social Media", desc: "Follow us", action: () => navigateTo('view-socials') },
+            // { name: "Client Gallery", desc: "Clients showcase, Photos", action: () => navigateTo('view-gallery') },
+            // { name: "Games", desc: "Play, Links, Arcade", action: () => navigateTo('view-games') },
+            // { name: "Find My", desc: "Directions, HQ, Location", action: () => navigateTo('view-findmy') },
+            // { name: "Website", desc: "Cyberalliance.in", action: () => window.open('https://www.cyberalliance.in', '_blank') },
 
             // Deep Links - for direct navigation/actions
-            { name: "Sunset Race", desc: "Game", action: () => window.open('https://sunsetrace.ginrin.com/', '_blank') },
             { name: "Referral Program", desc: "Earn Commission", action: () => window.open('crp.html', '_blank') },
+            { name: "Services Pricing", desc: "Pricing of our Service", action: () => window.open('pricing.html', '_blank') },
             { name: "Instagram", desc: "Follow us on Insta", action: () => window.open('https://www.instagram.com/cyberalliance.in/', '_blank') },
             { name: "YouTube", desc: "Subscribe us on YouTube", action: () => window.open('https://www.youtube.com/@cyberallianceindia', '_blank') },
             { name: "Github", desc: "Follow us on Github", action: () => window.open('https://github.com/godarayudhvir', '_blank') },
+            { name: "LinkedIn", desc: "Follow us on LinkedIn", action: () => window.open('https://www.linkedin.com/company/cyber-alliance-india', '_blank') },
+            { name: "X / Twitter", desc: "Follow us on X.com", action: () => window.open('https://x.com/cyberalliancein', '_blank') },
+
+            // Easter Egg Links
+            { name: "Jellyfin", desc: "Private Media Server", action: () => window.open('http://100.126.172.119:8096', '_blank') },
+            { name: "Komga", desc: "Private Manga Server", action: () => window.open('http://100.126.172.119:25600', '_blank') },
+            { name: "Qbittorrent", desc: "Remote access Qbittorrent", action: () => window.open('http://100.126.172.119:8080', '_blank') },
+            { name: "2544", desc: "You shouldn't know this!", action: () => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUXbmV2ZXIgZ29ubmEgZ2l2ZSB5b3UgdXA%3D', '_blank') },
         ];
 
         // Handles filtering and displaying search results based on user input.
