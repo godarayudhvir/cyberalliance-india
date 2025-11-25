@@ -919,6 +919,11 @@
             document.getElementById('client-sheet').classList.remove('open');
         }
 
+        /** Disables the default browser context menu (right-click menu) for the entire document body.**/
+    document.body.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
     </script>
 </body>
 </html>
