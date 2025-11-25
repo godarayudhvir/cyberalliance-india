@@ -1,14 +1,14 @@
-const CACHE_NAME = 'cai-links-cache-v1';
+const CACHE_NAME = 'cai-links-cache-v2'; // <--- UPDATED VERSION
 const urlsToCache = [
   './', // Caches the root HTML file (e.g., index.html)
   './index.html',
-  './crp.html',
+  './crp.html', // Caches the new link target
   './pricing.html',
   './icons/180x180.png',
   './icons/192x192.png',
   './icons/512x512.png',
   './icons/1024x1024.png',
-  './links/icons/crp.svg',
+  './links/icons/crp.svg', // Caches the shortcut icon
   // Add other critical static assets here
 ];
 
@@ -21,6 +21,8 @@ self.addEventListener('install', event => {
         console.log('Opened cache and pre-caching essential files');
         return cache.addAll(urlsToCache);
       })
+      // Force the SW to skip the waiting phase and move to activation immediately
+      .then(() => self.skipWaiting()) 
   );
 });
 
@@ -45,7 +47,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// 3. Activation: Clean up old caches (optional but recommended)
+// 3. Activation: Clean up old caches and take immediate control of clients
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -58,6 +60,10 @@ self.addEventListener('activate', event => {
           }
         })
       );
+    })
+    .then(() => {
+        // 🔑 Take immediate control of all open pages/clients
+        return self.clients.claim(); 
     })
   );
 });
