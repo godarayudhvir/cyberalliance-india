@@ -53,7 +53,7 @@
     "short_name": "Referral",
     "description": "View our commission policy for referrals.",
     "url": "./crp.html",
-    "icons": [{"src": "./links/icons/crp.svg", "sizes": "96x96"}]
+    "icons": [{"src": "links/icons/crp.svg", "sizes": "96x96"}]
   }
 ]
 }

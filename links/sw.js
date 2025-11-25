@@ -2,13 +2,10 @@ const CACHE_NAME = 'cai-links-cache-v1';
 const urlsToCache = [
   './', // Caches the root HTML file (e.g., index.html)
   './index.html',
-  './crp.html',
-  './pricing.html',
   './icons/180x180.png',
   './icons/192x192.png',
   './icons/512x512.png',
   './icons/1024x1024.png',
-  './links/icons/crp.svg',
   // Add other critical static assets here
 ];
 
