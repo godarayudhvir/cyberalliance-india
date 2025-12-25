@@ -1098,7 +1098,15 @@
 
     </script>
         <!-- Umami Analytics Script -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="1ee05dca-d5c9-4231-9003-5573cb92b0cd"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="1ee05dca-d5c9-4231-9003-5573cb92b0cd">
+        const urlParams = new URLSearchParams(window.location.search);
+  const myRef = urlParams.get('ref');
+
+  if (myRef) {
+    // This tells Umami to treat the 'ref' value as the official referrer
+    window.umami.track({ referrer: myRef });
+  }
+    </script>
 
     <script>
     if ('serviceWorker' in navigator) {
