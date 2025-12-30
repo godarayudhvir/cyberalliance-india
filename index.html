@@ -62,6 +62,46 @@
 </head>
 <body>
 
+    <div id="mobile-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index:9999; justify-content:center; align-items:center; padding: 20px;">
+    <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 30px; border-radius: 24px; width: 100%; max-width: 320px; text-align: center; font-family: sans-serif; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);">
+        
+        <h3 style="color: white; margin: 0 0 10px 0; font-size: 22px;">Mobile Site?</h3>
+        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 25px;">We have a version designed specifically for your phone.</p>
+        
+        <button onclick="goToMobile()" style="background: #3b82f6; color: white; border: none; padding: 14px 20px; border-radius: 12px; width: 100%; font-size: 16px; font-weight: 600; cursor: pointer; margin-bottom: 15px; transition: 0.3s;">
+            Yes, Switch
+        </button>
+        
+        <button onclick="closePopup()" style="background: transparent; border: none; color: rgba(255,255,255,0.5); font-size: 14px; cursor: pointer; text-decoration: underline;">
+            No thanks, stay here
+        </button>
+    </div>
+</div>
+
+<script>
+window.onload = function() {
+    // Detects iOS (iPhone, iPad, iPod) or Android
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    
+    // Check if they've dismissed it before
+    const hasSeenPopup = localStorage.getItem('hideMobilePopup');
+
+    if ((isIOS || isAndroid) && !hasSeenPopup) {
+        document.getElementById('mobile-popup').style.display = 'flex';
+    }
+};
+
+function goToMobile() {
+    window.location.href = "m.index.html"; 
+}
+
+function closePopup() {
+    localStorage.setItem('hideMobilePopup', 'true');
+    document.getElementById('mobile-popup').style.display = 'none';
+}
+</script>
+
     <nav class="fixed w-full z-50 nav-blur border-b border-neutral-800">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-extrabold tracking-tighter uppercase italic">Cyber <span class="text-blue-500">Alliance</span> India</a>
