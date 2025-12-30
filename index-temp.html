@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Cyber Alliance India | Premium Managed IT & Web Solutions</title>
+    <meta name="description" content="Managed IT service provider offering Web Development, IT support, Security Services, and Open Source Solutions.">
+    <meta name="keywords" content="Web Development, Hosting, Gsuite, m365, remote it support, vmware, unraid, cybersec, itsec, unifi, ubiquity, cisco">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #ffffff; scroll-behavior: smooth; overflow-x: hidden; }
+        .gradient-text { background: linear-gradient(90deg, #3b82f6, #2dd4bf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-card { background: rgba(22, 22, 22, 0.7); border: 1px solid #262626; backdrop-filter: blur(10px); }
+        .nav-blur { backdrop-filter: blur(15px); background: rgba(10, 10, 10, 0.7); }
+        
+        /* SEAMLESS INFINITE SCROLL LOGIC */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .slider-container { overflow: hidden; width: 100%; position: relative; }
+        
+        .slider-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+        }
+
+        .testimonial-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+        }
+
+        .slider-track:hover, .testimonial-track:hover { animation-play-state: paused; }
+
+        .client-logo {
+            flex: 0 0 auto;
+            width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #404040;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 nav-blur border-b border-neutral-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold tracking-tighter uppercase italic">Cyber <span class="text-blue-500">Alliance</span> India</a>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-neutral-400">
+                <a href="#about" class="hover:text-white transition py-2">About</a>
+                <a href="#services" class="hover:text-white transition py-2">Services</a>
+                <a href="#testimonials" class="hover:text-white transition py-2">Clients Reviews</a>
+                <a href="#contact" class="bg-blue-600 text-white px-6 py-2.5 rounded-full hover:bg-blue-700 transition shadow-lg inline-block">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-48 pb-20 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <span class="px-4 py-1 border border-blue-500/30 rounded-full text-blue-400 text-xs font-bold uppercase tracking-widest bg-blue-500/5">Established 2022</span>
+            <h1 class="text-6xl md:text-8xl font-extrabold mb-8 mt-6 tracking-tighter leading-none">Built with <span class="gradient-text">Intent.</span></h1>
+            <p class="text-xl text-neutral-400 mb-12 max-w-2xl mx-auto font-light">Engineering high-performance infrastructure with absolute intent.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="javascript:void(0)" id="chat-trigger" class="bg-white text-black px-10 py-4 rounded-xl font-bold hover:scale-105 transition transform">Live Chat</a>
+                <a href="https://calendar.app.google/ibtZ5BofoAAVYZjR8" class="border border-neutral-700 px-10 py-4 rounded-xl font-bold hover:bg-neutral-900 transition">Schedule Meeting</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-10 border-y border-neutral-900 bg-neutral-950/50 slider-container">
+        <div class="slider-track">
+            <div class="flex items-center">
+                <div class="client-logo">Suwaco Hydrochem</div>
+                <div class="client-logo">DostHaus Cafe</div>
+                <div class="client-logo">HanKuk C&T</div>
+                <div class="client-logo">Sarthak Enterprises</div>
+                <div class="client-logo">EsselZone</div>
+                <div class="client-logo">ja:am sleepwear</div>
+            </div>
+            <div class="flex items-center">
+                <div class="client-logo">Suwaco Hydrochem</div>
+                <div class="client-logo">DostHaus Cafe</div>
+                <div class="client-logo">HanKuk C&T</div>
+                <div class="client-logo">Sarthak Enterprises</div>
+                <div class="client-logo">EsselZone</div>
+                <div class="client-logo">ja:am sleepwear</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-4xl font-extrabold mb-6">Securing Your Digital Future<br><span class="text-blue-500"> with Intent</span></h2>
+                <p class="text-neutral-400 mb-6 leading-relaxed">Since 2022, we’ve provided enterprise-grade Managed IT services to help businesses scale without tech headaches.</p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="p-6 bg-neutral-900/50 border border-neutral-800 rounded-2xl">
+                        <i class="bi bi-cpu text-blue-500 text-2xl mb-3 block"></i>
+                        <h4 class="font-bold">Next-Gen Tech</h4>
+                        <p class="text-xs text-neutral-500">Leveraging AI and virtualization to streamline your workflows.</p>
+                    </div>
+                    <div class="p-6 bg-neutral-900/50 border border-neutral-800 rounded-2xl">
+                        <i class="bi bi-shield-check text-teal-500 text-2xl mb-3 block"></i>
+                        <h4 class="font-bold">Proactive Security</h4>
+                        <p class="text-xs text-neutral-500">24/7 monitoring and rapid incident response to keep your data safe.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card p-10 rounded-3xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl"></div>
+                <h3 class="text-2xl font-bold mb-6">Our Methodology</h3>
+                <p class="text-neutral-400 text-sm mb-6 italic">"We believe that every piece of infrastructure should be built with intent."</p>
+                <ul class="space-y-4">
+                    <li class="flex items-center space-x-3"><i class="bi bi-check2-circle text-blue-500"></i><span>Audit & Discovery</span></li>
+                    <li class="flex items-center space-x-3"><i class="bi bi-check2-circle text-blue-500"></i><span>Strategic Roadmap</span></li>
+                    <li class="flex items-center space-x-3"><i class="bi bi-check2-circle text-blue-500"></i><span>Implementation & Continuous Optimization</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<section id="services" class="py-24 px-6 bg-neutral-950/30">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Our <span class="gradient-text">Expertise.</span></h2>
+            <p class="text-neutral-400 max-w-2xl mx-auto">Precision-engineered solutions tailored for modern digital ecosystems.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass-card p-8 rounded-3xl hover:border-blue-500/50 transition-all group">
+                <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                    <i class="bi bi-code-slash text-blue-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Web & App Dev</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed mb-4">Custom full-stack applications, high-performance landing pages, and scalable e-commerce platforms.</p>
+                <ul class="text-[11px] uppercase tracking-wider text-neutral-500 space-y-2">
+                    <li><i class="bi bi-chevron-right text-blue-500 mr-2"></i>React & Next.js</li>
+                    <li><i class="bi bi-chevron-right text-blue-500 mr-2"></i>Mobile App Dev</li>
+                    <li><i class="bi bi-chevron-right text-blue-500 mr-2"></i>API Integration</li>
+                </ul>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl hover:border-teal-500/50 transition-all group">
+                <div class="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                    <i class="bi bi-cpu-fill text-teal-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Managed IT</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed mb-4">End-to-end infrastructure management, remote support, and proactive hardware monitoring.</p>
+                <ul class="text-[11px] uppercase tracking-wider text-neutral-500 space-y-2">
+                    <li><i class="bi bi-chevron-right text-teal-500 mr-2"></i>Remote Support</li>
+                    <li><i class="bi bi-chevron-right text-teal-500 mr-2"></i>Network Setup</li>
+                    <li><i class="bi bi-chevron-right text-teal-500 mr-2"></i>SLA Management</li>
+                </ul>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl hover:border-purple-500/50 transition-all group">
+                <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                    <i class="bi bi-hdd-network text-purple-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">OSS Self-Hosting</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed mb-4">Take control of your data with private cloud solutions, Unraid, and Docker-based deployments.</p>
+                <ul class="text-[11px] uppercase tracking-wider text-neutral-500 space-y-2">
+                    <li><i class="bi bi-chevron-right text-purple-500 mr-2"></i>Nextcloud / Vaultwarden</li>
+                    <li><i class="bi bi-chevron-right text-purple-500 mr-2"></i>Homelab Setup</li>
+                    <li><i class="bi bi-chevron-right text-purple-500 mr-2"></i>Data Sovereignty</li>
+                </ul>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl hover:border-orange-500/50 transition-all group">
+                <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                    <i class="bi bi-envelope-at text-orange-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Cloud Workspace</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed mb-4">Seamless migration and management for enterprise collaboration suites.</p>
+                <ul class="text-[11px] uppercase tracking-wider text-neutral-500 space-y-2">
+                    <li><i class="bi bi-chevron-right text-orange-500 mr-2"></i>Google Workspace</li>
+                    <li><i class="bi bi-chevron-right text-orange-500 mr-2"></i>Microsoft 365</li>
+                    <li><i class="bi bi-chevron-right text-orange-500 mr-2"></i>Zoho Workplace</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>    
+
+    <section id="testimonials" class="py-24 bg-neutral-950 overflow-hidden">
+        <h2 class="text-3xl font-extrabold mb-12 text-center uppercase tracking-widest text-neutral-600">Client Reviews</h2>
+        
+        <div class="slider-container">
+            <div class="testimonial-track">
+                <div class="flex gap-6 pr-6">
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-l-blue-500 w-[380px] shrink-0">
+                        <p class="text-neutral-400 mb-6 italic">"Cyber Alliance is my preferred choice for resolving technology-related issues. Highly recommended."</p>
+                        <div class="font-bold text-sm">Sudhanshu <span class="text-neutral-600 ml-2">| IT Support</span></div>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-l-teal-500 w-[380px] shrink-0">
+                        <p class="text-neutral-400 mb-6 italic">"Exceptional service at a competitive price point. Commendable for a startup."</p>
+                        <div class="font-bold text-sm">Vishwash <span class="text-neutral-600 ml-2">| Managed Hosting</span></div>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-l-purple-500 w-[380px] shrink-0">
+                        <p class="text-neutral-400 mb-6 italic">"The response time surpasses expectations. Reliably consistent resource."</p>
+                        <div class="font-bold text-sm">Adarsh <span class="text-neutral-600 ml-2">| Google Workspace</span></div>
+                    </div>
+                </div>
+                <div class="flex gap-6 pr-6">
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-l-blue-500 w-[380px] shrink-0">
+                        <p class="text-neutral-400 mb-6 italic">"Cyber Alliance is my preferred choice for resolving technology-related issues. Highly recommended."</p>
+                        <div class="font-bold text-sm">Sudhanshu <span class="text-neutral-600 ml-2">| IT Support</span></div>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-l-teal-500 w-[380px] shrink-0">
+                        <p class="text-neutral-400 mb-6 italic">"Exceptional service at a competitive price point. Commendable for a startup."</p>
+                        <div class="font-bold text-sm">Vishwash <span class="text-neutral-600 ml-2">| Managed Hosting</span></div>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl border-l-4 border-l-purple-500 w-[380px] shrink-0">
+                        <p class="text-neutral-400 mb-6 italic">"The response time surpasses expectations. Reliably consistent resource."</p>
+                        <div class="font-bold text-sm">Adarsh <span class="text-neutral-600 ml-2">| Google Workspace</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+
+<section id="contact" class="py-24 px-6 max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+            <h2 class="text-5xl font-extrabold mb-6 tracking-tighter">Ready to <span class="text-blue-500">connect?</span></h2>
+            <p class="text-neutral-400 mb-10 text-lg">Connect with our engineering team to discuss your infrastructure needs.</p>
+            
+            <!-- <div class="w-full h-64 rounded-3xl overflow-hidden mb-10 grayscale hover:grayscale-0 transition-all duration-500 border border-neutral-800">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14013.11184282314!2d77.03061455!3d28.59143975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1ad394017637%3A0x67399435b7194f44!2sSector%2024%2C%20Dwarka%2C%20New%20Delhi%2C%20Delhi%20110077!5e0!3m2!1sen!2sin!4v1700000000000" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div> -->
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <a href="https://wa.me/918851573195" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-green-500/50 transition group">
+                    <i class="bi bi-whatsapp text-2xl text-green-500 mb-2"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 group-hover:text-white">WhatsApp</span>
+                </a>
+                <a href="tel:+918851573195" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-blue-500/50 transition group">
+                    <i class="bi bi-telephone text-2xl text-blue-500 mb-2"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 group-hover:text-white">Call Now</span>
+                </a>
+                <a href="mailto:info@cyberalliance.in,?cc=cyberallianceindia@gmail.com" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-orange-500/50 transition group">
+                    <i class="bi bi-envelope text-2xl text-orange-500 mb-2"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 group-hover:text-white">Email Us</span>
+                </a>
+                <a href="https://www.instagram.com/cyberalliance.in/" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-green-500/50 transition group">
+                    <i class="bi bi-instagram text-2xl text-blue-500 mb-2"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 group-hover:text-white">Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/cyberallianceindia" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-blue-500/50 transition group">
+                    <i class="bi bi-facebook text-2xl text-blue-500 mb-2"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 group-hover:text-white">Facebook</span>
+                </a>
+                <a href="https://www.linkedin.com/company/cyber-alliance-india" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-orange-500/50 transition group">
+                    <i class="bi bi-linkedin text-2xl text-blue-500 mb-2"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 group-hover:text-white">Linkedin</span>
+                </a>                
+            </div>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl border border-neutral-800 shadow-2xl">
+            <h3 class="text-xl font-bold mb-8 flex items-center">
+                Consult us now
+            </h3>
+            
+            <form action="https://api.web3forms.com/submit" method="POST" id="it-contact-form">
+                <input type="hidden" name="access_key" value="be5918a4-e944-4bb9-b273-b7ad3303b06d">
+                <input type="hidden" name="subject" value="New Business Inquiry - Cyber Alliance">
+                
+                <div id="ref-section" class="mb-6">
+                    <input type="hidden" name="ref_tag" id="hidden-ref-input">
+                    
+                    <div id="manual-ref-field" style="display: none;">
+                        <label class="text-[10px] uppercase tracking-widest text-neutral-500 font-bold mb-2 block">Referral Code (Optional)</label>
+                        <input type="text" name="manual_ref_code" placeholder="Enter partner code" class="w-full bg-black border border-neutral-800 p-4 rounded-xl outline-none focus:border-blue-500 text-sm">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <input type="text" name="name" placeholder="Full Name" required class="bg-black border border-neutral-800 p-4 rounded-xl outline-none focus:border-blue-500 transition text-sm">
+                    <input type="email" name="email" placeholder="Work Email" required class="bg-black border border-neutral-800 p-4 rounded-xl outline-none focus:border-blue-500 transition text-sm">
+                </div>
+
+                <textarea name="message" rows="4" required placeholder="Tell us about your IT infrastructure needs..." class="w-full bg-black border border-neutral-800 p-4 rounded-xl mb-6 outline-none focus:border-blue-500 transition text-sm"></textarea>
+
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-all tracking-widest uppercase text-xs">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    function handleReferral() {
+        const params = new URLSearchParams(window.location.search);
+        const ref = params.get('ref');
+        
+        const hiddenInput = document.getElementById('hidden-ref-input');
+        const manualField = document.getElementById('manual-ref-field');
+
+        if (ref) {
+            // URL has ?ref=something
+            hiddenInput.value = ref;
+            manualField.style.display = 'none'; // Keep hidden
+            console.log("Tracking detected: " + ref);
+        } else {
+            // No URL ref found - Show the manual input
+            manualField.style.display = 'block'; 
+        }
+    }
+
+    // Run once content is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', handleReferral);
+    } else {
+        handleReferral();
+    }
+})();
+</script>
+
+<style>
+    /* Video Scroll Animation */
+@keyframes videoScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.video-track {
+    display: flex;
+    width: max-content;
+    animation: videoScroll 30s linear infinite;
+}
+
+.video-track:hover {
+    animation-play-state: paused;
+}
+
+.video-card {
+    aspect-ratio: 9/16;
+    width: 280px;
+    flex-shrink: 0;
+}
+</style>
+
+<section id="video-testimonials" class="py-24 bg-neutral-950 border-t border-neutral-900 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 mb-12">
+        <h2 class="text-4xl font-extrabold tracking-tighter">Client <span class="text-blue-500">Stories.</span></h2>
+        <p class="text-neutral-500 mt-2">Engineering success, captured in motion.</p>
+    </div>
+
+    <div class="slider-container">
+        <div class="video-track flex gap-6">
+            <div class="flex gap-6">
+                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-laptop-34462-large.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <p class="text-white font-bold text-sm">Web Development</p>
+                    </div>
+                </div>
+                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-working-on-a-computer-4352-large.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <p class="text-white font-bold text-sm">Infrastructure</p>
+                    </div>
+                </div>
+                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-man-working-on-a-laptop-4347-large.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <p class="text-white font-bold text-sm">Cloud Solutions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-6">
+                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-laptop-34462-large.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <p class="text-white font-bold text-sm">Web Development</p>
+                    </div>
+                </div>
+                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-working-on-a-computer-4352-large.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <p class="text-white font-bold text-sm">Infrastructure</p>
+                    </div>
+                </div>
+                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-man-working-on-a-laptop-4347-large.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <p class="text-white font-bold text-sm">Cloud Solutions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer class="bg-black border-t border-neutral-900 pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-2">
+                <div class="text-2xl font-extrabold mb-6 italic uppercase">Cyber<span class="text-blue-500">Alliance</span></div>
+                <p class="text-neutral-500 text-sm max-w-sm mb-6">Building high-performance infrastructure and web applications with a focus on intent and rapid execution.</p>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/godarayudhvir" class="text-neutral-500 hover:text-white transition text-xl"><i class="bi bi-github"></i></a>
+                    <a href="https://www.instagram.com/cyberalliance.in/" class="text-neutral-500 hover:text-white transition text-xl"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.youtube.com/@cyberallianceindia" class="text-neutral-500 hover:text-white transition text-xl"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 text-sm uppercase">Quick Links</h4>
+                <ul class="space-y-3 text-sm text-neutral-500">
+                    <li><a href="#about" class="hover:text-blue-500 transition">About Us</a></li>
+                    <li><a href="#services" class="hover:text-blue-500 transition">Our Services</a></li>
+                    <li><a href="https://calendar.app.google/ibtZ5BofoAAVYZjR8" class="hover:text-blue-500 transition">Book Meeting</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 text-sm uppercase">Important Links</h4>
+                <ul class="space-y-3 text-sm text-neutral-500">
+                    <li><a href="#" class="hover:text-blue-500 transition">Referral Policy</a>
+                    <li><a href="#" class="hover:text-blue-500 transition">Services Pricing</a></li>
+                    <li><a href="#" class="hover:text-blue-500 transition">Terms of services</a></li>
+                    <li><a href="#" class="hover:text-blue-500 transition">Privacy policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-neutral-900 pt-8 text-center text-[10px] text-neutral-600 uppercase tracking-widest">
+            &copy; 2025 Cyber Alliance India.
+        </div>
+    </footer>
+
+<script>
+  window.chatwootSettings = {
+    "position": "right",
+    "type": "standard",
+    "launcherTitle": "Chat with us",
+    "hideMessageBubble": false // Set to true if you want ONLY the button to show, and not the bubble
+  };
+
+  (function(d,t) {
+    var BASE_URL="https://app.chatwoot.com";
+    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=BASE_URL+"/packs/js/sdk.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g,s);
+    g.onload=function(){
+      window.chatwootSDK.run({
+        websiteToken: '6mKtN7PXwmkDeBpSQ9mt22uo',
+        baseUrl: BASE_URL
+      })
+    }
+  })(document,"script");
+
+  // This part makes the button work
+  window.addEventListener("chatwoot:ready", function () {
+    const triggerBtn = document.getElementById('chat-trigger');
+    if (triggerBtn) {
+      triggerBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.$chatwoot.toggle("open");
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

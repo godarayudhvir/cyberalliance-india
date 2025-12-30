@@ -1,9 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Alliance India</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Cyber Alliance India</title>
+
 <meta name="description" content="Managed IT service provider. offering Web Development, remote IT support, Collaboration Suite Management, Virtualization, Security Services, Open Source Solutions, Wireless Deployments and various other Managed IT Services."/>
 <meta name="keywords" content="Web Development, Hosting, domain, Gsuite, m365, remote it support, vmware, unraid, cybersec, itsec, unifi, ubiquity, cisco"/>
 <meta property="og:type" content="website"/>
@@ -14,171 +18,812 @@
 <meta property="og:image:height" content="900">
 <meta property="og:description" content="Managed IT service provider. offering Web Development, remote IT support, Collaboration Suite Management, Virtualization, Security Services, Open Source Solutions, Wireless Deployments and various other Managed IT Services."/>
 <meta property="og:locale" content="en_IN" />
+
   <!-- Favicons -->
   <link href="assets/img/favicons/favicon.128x128.png" rel="icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --bg-wallpaper: url('/assets/img/day.webp');
-            --blur: blur(30px);
-        }
 
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow: hidden;
-            background: var(--bg-wallpaper) center/cover no-repeat;
-        }
 
-        /* --- Menu Bar & Ticker --- */
-        .menu-bar {
-            height: 30px; background: rgba(255, 255, 255, 0.2); backdrop-filter: var(--blur);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 15px; font-size: 13px; color: white; z-index: 10000; position: relative;
-        }
-        .ticker-container { flex: 1; overflow: hidden; white-space: nowrap; margin: 0 20px; }
-        .ticker-text { display: inline-block; animation: ticker 25s linear infinite; font-weight: 500; }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-        /* --- Desktop Grid --- */
-        .desktop-area {
-            position: absolute; top: 60px; left: 20px;
-            display: grid; grid-template-columns: repeat(auto-fill, 100px); grid-auto-rows: 110px; gap: 15px; z-index: 1;
-            width: calc(100% - 40px);
-        }
-        .desktop-icon { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; color: white; text-decoration: none; }
-        .desktop-icon img { width: 64px; height: 64px; margin-bottom: 5px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); transition: transform 0.2s; }
-        .desktop-icon:hover img { transform: scale(1.05); }
-        .desktop-icon span { font-size: 11px; font-weight: 500; background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 5px; }
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-        /* --- Weather Widget --- */
-        .weather-widget {
-            position: fixed; top: 50px; right: 20px;
-            width: 160px; height: 160px; background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: var(--blur); border-radius: 28px; border: 1px solid rgba(255,255,255,0.2);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;
-        }
+  <!-- Main CSS File -->
+  <link rel="stylesheet" href="assets/css/brightside.css">
+  <!-- <link rel="stylesheet" href="assets/css/brightside.css" media="(prefers-color-scheme: light)"> -->
+  <!-- <link rel="stylesheet" href="assets/css/darkside.css" media="(prefers-color-scheme: dark)"> -->
 
-        /* --- Responsive Viewports --- */
-        @media (max-width: 768px) {
-            .weather-widget { display: none; }
-            .ticker-container { margin: 0 10px; }
-            .window { width: 95% !important; height: auto !important; max-height: 90vh; }
-            .desktop-area { grid-template-columns: repeat(3, 1fr); justify-items: center; left: 0; width: 100%; }
-        }
+  <!-- Google AdSense Connection
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7855430259237603"
+     crossorigin="anonymous"></script>
 
-        /* --- Window System --- */
-        .window {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 700px; height: 450px; background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: var(--blur); border-radius: 12px; display: none;
-            flex-direction: column; box-shadow: 0 40px 80px rgba(0,0,0,0.4); z-index: 500; overflow: hidden;
-        }
-        .window-header { padding: 12px; display: flex; align-items: center; background: rgba(0,0,0,0.03); border-radius: 12px 12px 0 0; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; border: none; cursor: pointer; background: #ff5f56; margin-right: 10px; }
-        .window-title { flex: 1; text-align: center; font-size: 13px; font-weight: 700; color: #333; }
-        
-        .form-content { padding: 25px; display: flex; flex-direction: column; gap: 12px; }
-        .form-content input, .form-content textarea { padding: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: inherit; }
-        .submit-btn { background: #007aff; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+  <!-- =======================================================
+  * Template Name: CyberAlliance - v2.0.0
+  * Template URL: https://bootstrapmade.com/CyberAlliance-bootstrap-startup-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 
-        /* --- Dock --- */
-        .dock-container { position: fixed; bottom: 15px; width: 100%; display: flex; justify-content: center; z-index: 2000; pointer-events: none; }
-        .dock { background: rgba(255, 255, 255, 0.2); backdrop-filter: var(--blur); padding: 10px 20px; border-radius: 24px; display: flex; gap: 15px; pointer-events: auto; }
-        .dock-item { width: 55px; height: 55px; transition: 0.2s; }
-        .dock-item:hover { transform: scale(1.3) translateY(-10px); }
-        .dock-item img { width: 100%; height: 100%; border-radius: 13px; }
-    </style>
-      <!-- Umami Analytics -->
+  <!-- Addons by Godarayudh-->
+
+  <!-- Umami Analytics -->
   <script defer src="https://cloud.umami.is/script.js" data-website-id="1ee05dca-d5c9-4231-9003-5573cb92b0cd"></script>
 
+  <!-- Videojs -->
+  <link href="assets/css/video-js.css" rel="stylesheet" />
+  
+  <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/971c6d1881bbeab35797346e8/72aed6e242faa462a3a8c331f.js");</script>
+
 </head>
+
 <body>
 
-<nav class="menu-bar">
-    <div style="font-weight: bold;">CAI</div>
-    <div class="ticker-container">
-        <div class="ticker-text">We are currently building this new website. In the meantime, please visit our legacy site for all your needs. To celebrate the New Year, we are pleased to offer a 25% discount on all our services until January 5, 2026.</div>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logos/logo.300x900nobg-2.webp" alt="">
+        <!-- <span>CyberAlliance</span> -->
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>    
+          <!-- <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
+          <li><a href="https://wa.me/918851573195">Contact us</a></li>
+          <li><a href="https://calendar.app.google/Bahse3hHt1jFi7ck9">Meeting</a></li>
+          <li><a class="getstarted scrollto" href="/links/">Links</a></li>
+        </ul> 
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
     </div>
-</nav>
+  </header><!-- End Header -->
 
-<div class="desktop-area">
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
 
-    <a href="https://cyberalliance.in/links/pricing" target="_blank" class="desktop-icon">
-        <img src="https://upload.wikimedia.org/wikipedia/en/e/e9/NumbersIcon.png">
-        <span>Pricing</span>
-    </a>
-
-    <a href="https://cyberalliance.in/links/crp" target="_blank" class="desktop-icon">
-        <img src="https://www.apple.com/v/apps/e/images/overview/apps/tier1/chiclets/contacts_chiclet__bfsq7qs1ptjm_xlarge_2x.png">
-        <span>Refer</span>
-    </a>
-
-    <div class="desktop-icon" onclick="window.location.href='oldindex.html'">
-        <img src="https://www.apple.com/v/apps/e/images/overview/apps/tier2/time_machine_chiclet__gdptjev6b6qa_large_2x.png">
-        <span>Legacy Site</span>
-    </div>  
-
-    <div class="desktop-icon" onclick="openWindow('web3-win')">
-        <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Pages_12.1_macOS_app_icon.png">
-        <span>Inquiry</span>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up">Built with Intent. Thats the code.</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">We engineer high-performance web solutions built with precision while leveraging AI to fast-track development, ensuring rapid delivery.</h2>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center text-lg-start">
+              <a href="#portfolio" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Get Started</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="assets/img/hero-img.png" class="img-fluid" alt="icons8.com/illustrations/author/zD2oqC8lLBBA">
+        </div>
+      </div>
     </div>
 
-    <div class="desktop-icon" onclick="window.open('https://cyberalliance.in/links/')">
-        <img src="https://www.apple.com/v/apps/e/images/overview/apps/tier2/settings_chiclet__dr80i4otdb6u_large_2x.png">
-        <span>More</span>
-    </div>      
+  </section><!-- End Hero -->
 
-    <div class="desktop-icon" onclick="window.open('https://chess.com')">
-        <img src="https://www.apple.com/v/apps/e/images/overview/apps/tier2/chess_chiclet__c2xewin5b5iu_large_2x.png">
-        <span>Chess</span>
+  <main id="main">
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+
+      <div class="container" data-aos="fade-up">
+        <div class="row gx-0">
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="content">
+              <h3>About us</h3>
+              <h2>We extend our expertise in IT services to you, under the banner of Cyber Alliance India.</h2>
+              <p>
+                Established in 2021 by a tech enthusiast boasting years of experience in the field of Information Technology, Providing diverse range of Managed IT Services to Individuals and Small Businesses.
+              </p>
+              <div class="text-center text-lg-start">
+                <a href="#portfolio" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Learn More</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <video
+            id="my-video"
+            class="video-js vjs-big-play-centered"
+            controls
+            autoplay : loop
+            muted
+            width=""
+            height="360"
+            poster="videos/MY_VIDEO_POSTER.jpg"
+            data-setup="{}"
+          >
+            <source src="videos/MY_VIDEO.mp4" type="video/mp4" />
+
+            <p class="vjs-no-js">
+              To view this video please enable JavaScript, and consider upgrading to a
+              web browser that
+              <a href="https://videojs.com/html5-video-support/" target="_blank"
+                >supports HTML5 video</a
+              >
+            </p>
+          </video>
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- End About Section -->  
+
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-emoji-smile"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
+                <p>+ Happy Clients</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Projects</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-headset" style="color: #15be56;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="3500" data-purecounter-duration="1" class="purecounter"></span>
+                <p>+ Hours Of Support</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-people" style="color: #bb0852;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="purecounter"></span>
+                <p>+ Hard Workers</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+
+          <div class="container" data-aos="fade-up">
+    
+            <header class="section-header">
+              <h2>Portfolio</h2>
+              <p>What we provide?</p>
+              <!-- <h9><strong>*Currently only providing IT Training*</strong></h9> -->
+            </header>
+    
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="portfolio-flters">
+                  
+                  <li data-filter="*">All</li>
+                  <li data-filter=".Workspace">Workspace</li>                  
+                  <li data-filter=".ossh">Selfhosting</li>
+                  <li data-filter=".other">Other</li>
+                  
+                </ul>
+              </div>
+            </div>
+    
+            <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+              <!-- Workspace -->
+
+              <div class="col-lg-4 col-md-6 portfolio-item Workspace">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/gsuite.webp" class="img-fluid" alt="gsuite-service-image">
+                  <div class="portfolio-info">
+                    <h4>Google Workspace</h4>
+                    <div class="portfolio-links"> <a href="https://Workspace.google.com/" title="Learn More Link"><i class="bi bi-link"></i></a></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6 portfolio-item Workspace">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/m365.webp" class="img-fluid" alt="m365-service-image">
+                  <div class="portfolio-info">
+                    <h4>Microsoft 365</h4>
+                    <div class="portfolio-links"> <a href="https://www.microsoft.com/en-in/microsoft-365" title="Learn More Link"><i class="bi bi-link"></i></a></div>
+                  </div>
+                </div>
+              </div>  
+
+              <div class="col-lg-4 col-md-6 portfolio-item Workspace">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/zoho.jpg" class="img-fluid" alt="m365-service-image">
+                  <div class="portfolio-info">
+                    <h4>Microsoft 365</h4>
+                    <div class="portfolio-links"> <a href="https://www.zoho.com/en-in/workplace/" title="Learn More Link"><i class="bi bi-link"></i></a></div>
+                  </div>
+                </div>
+              </div>                
+
+              <!-- <div class="col-lg-4 col-md-6 portfolio-item Workspace">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/nextcloud.webp" class="img-fluid" alt="nextcloud-service-image">
+                  <div class="portfolio-info">
+                    <h4>NextCloud</h4>
+                    <div class="portfolio-links"> <a href="http://nextcloud.com/" title="Learn More Link"><i class="bi bi-link"></i></a></div>
+                  </div>
+                </div>
+              </div>               -->
+
+              <!-- Open Source -->              
+
+              <div class="col-lg-4 col-md-6 portfolio-item ossh">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/vaultwarden.webp" class="img-fluid" alt="vaultwarden-service-image">
+                  <div class="portfolio-info">
+                    <h4>VaultWarden</h4>
+                    <div class="portfolio-links"> <a href="https://github.com/dani-garcia/vaultwarden" title="Learn More Link"><i class="bi bi-link"></i></a></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-6 portfolio-item ossh">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/paperless-ngx.webp" class="img-fluid" alt="paperless-ngx-service-image">
+                  <div class="portfolio-info">
+                    <h4>Paperless-ngx</h4>
+                    <div class="portfolio-links"> <a href="https://docs.paperless-ngx.com/" title="Learn More Link"><i class="bi bi-link"></i></a></div>
+                  </div>
+                </div>
+              </div> 
+              
+              <div class="col-lg-4 col-md-6 portfolio-item ossh">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/uptime-kuma.webp" class="img-fluid" alt="uptime-kuma-service-image">
+                  <div class="portfolio-info">
+                    <h4>Uptime Kuma</h4>
+                    <div class="portfolio-links"> <a href="https://uptime.kuma.pet/" title="Learn More Link"><i class="bi bi-link"></i></a></div>
+                  </div>
+                </div>
+              </div>  
+              
+              <!-- Other -->                           
+               
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/it-support.webp" class="img-fluid" alt="it-support-service-image">
+                  <div class="portfolio-info">
+                    <h4>IT Support</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>              
+
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/mail.webp" class="img-fluid" alt="mail-service-image">
+                  <div class="portfolio-info">
+                    <h4>Custom E-Mail</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/managed-shopify.webp" class="img-fluid" alt="managed-shopify-service-image">
+                  <div class="portfolio-info">
+                    <h4>Managed Shopify</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>              
+
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/mobile-app-development.jpg" class="img-fluid" alt="mobile-app-development-service-image">
+                  <div class="portfolio-info">
+                    <h4>Mobile App Development</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/web-design-development.webp" class="img-fluid" alt="web-design-development-service-image">
+                  <div class="portfolio-info">
+                    <h4>Website Desgin and Development</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>              
+
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/networking-solutions.webp" class="img-fluid" alt="networking-solutions-service-image">
+                  <div class="portfolio-info">
+                    <h4>Networking Solutions</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/surveillance-solutions.jpg" class="img-fluid" alt="surveillance-solutions-service-image">
+                  <div class="portfolio-info">
+                    <h4>Surveillance Solutions</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/remote-network-access-setup.webp" class="img-fluid" alt="remote-network-access-setup-service-image">
+                  <div class="portfolio-info">
+                    <h4>Remote Network Access Setup</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>              
+
+              <div class="col-lg-4 col-md-6 portfolio-item other">
+                <div class="portfolio-wrap">
+                  <img src="assets/img/services/website-migration.jpg" class="img-fluid" alt="website-migration-service-image">
+                  <div class="portfolio-info">
+                    <h4>Website Migration</h4>
+                    <P>Contact us</P>
+                  </div>
+                </div>
+              </div>              
+
+        </section>
+        
+        <!-- End Portfolio Section -->
+    
+
+    <!-- ======= F.A.Q Section ======= -->
+    <section id="faq" class="faq">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>F.A.Q</h2>
+          <p>Frequently Asked Questions</p>
+        </header>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <!-- F.A.Q List 1-->
+            <div class="accordion accordion-flush" id="faqlist1">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    What are your payment terms for IT projects and services?
+                  </button>
+                </h2>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    For most projects, we require a 50% advance payment to commence work. The remaining 50% is due upon project completion.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    How will I stay updated on the progress of my development project?
+                  </button>
+                </h2>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    You will receive weekly reports detailing the changes and progress made on your development project.
+                    Additionally, Interactive demonstration at the end of each month.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+
+            <!-- F.A.Q List 2-->
+            <div class="accordion accordion-flush" id="faqlist2">
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
+                    Do your products and implementations come with a warranty?
+                  </button>
+                </h2>
+                <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                  <div class="accordion-body">
+                    Yes, we stand by the quality of our work. We offer a 1-month post-implementation warranty on all products and solutions we deliver. This warranty covers any defects or issues directly related to our implementation.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
+                    Do you offer an Annual Maintenance Contract (AMC)?
+                  </button>
+                </h2>
+                <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                  <div class="accordion-body">
+                    We highly recommend opting for an Annual Maintenance Contract (AMC) when available, proactive monitoring, and timely resolution of any IT issues. 
+                    While not mandatory, an AMC ensures the long-term stability and efficiency of your IT infrastructure.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- End F.A.Q Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Testimonials</h2>
+          <p>This is what people had to say about us</p>
+        </header>
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="200">
+          <div class="swiper-wrapper">
+            
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  Exceptional service provided at a competitive price point. Highly commendable for a start-up. Maintain this momentum.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="/assets/img/a-z/V.webp" class="testimonial-img" alt="">
+                  <h3>Vishwash</h3>
+                  <h4>Managed Web-hosting</h4>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+            
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  Cyber Alliance has consistently been a trusted and reliable resource for me. Their response time surpasses expectations, making them highly recommended.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="/assets/img/a-z/A.webp" class="testimonial-img" alt="">
+                  <h3>Adarsh</h3>
+                  <h4>Google Workspace</h4>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  Cyber Alliance is my preferred choice for resolving any technology-related issues. Their expertise is evident in their work, and I am confident in their ability to solve my problems effectively. Their services come with my highest recommendation. Continue to excel!
+                </p>
+                <div class="profile mt-auto">
+                  <img src="/assets/img/a-z/S.webp" class="testimonial-img" alt="">
+                  <h3>Sudhanshu</h3>
+                  <h4>IT Support</h4>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  The service provided is commendable, and the affordability of the prices is noteworthy. I look forward to a prosperous future and am eager to engage in future collaborations.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="/assets/img/a-z/R.webp" class="testimonial-img" alt="">
+                  <h3>Ritu</h3>
+                  <h4>IT Support</h4>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  Though they are in their initial stages, the team is a pleasure to work with. I anticipate seeing their growth and improvement in the forthcoming years.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="/assets/img/a-z/R.webp" class="testimonial-img" alt="">
+                  <h3>Ravi</h3>
+                  <h4>IT Procurement</h4>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->         
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  I am thoroughly impressed with the services provided by this IT company. Their solutions have been impeccable and tailored to my specific needs. Their commitment to excellence is evident in their high-quality work. I couldn't have asked for a better IT partner.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="/assets/img/a-z/R.webp" class="testimonial-img" alt="">
+                  <h3>Sachin</h3>
+                  <h4>IT Support</h4>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->                   
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section>
+    
+    <!-- End Testimonials Section -->
+
+    <!-- Team Section -->
+    <!-- <section id="team" class="team">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Team</h2>
+          <p>Powered by</p>
+        </header>
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-1.png" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Yudhvir Singh Godara</h4>
+                <span>CEO</span>
+                <p>Founder of Cyber Alliance India, previously holding roles at Max Hospital and American Express.</p>
+              </div>
+            </div>
+          </div>          
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Aman Joshi</h4>
+                <span>CTO</span>
+                <p>Experienced Full stack Developer. Proficient in building scalable web applications using JavaScript, React.js, Node.js, and Express.js, focused on clean code and seamless UI/UX experience.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Divakar Bisht</h4>
+                <span>Full Stack Developer</span>
+                <p>Serving as a Team Leader, He oversees a team of 8 developers, building on his prior experience as a Full Stack Developer at Genpact.</p>
+              </div>
+            </div>
+          </div>         
+          
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-4.png" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Abdullah S Q</h4>
+                <span>Sr. Accounts Manager</span>
+                <p>As a Senior Account Manager, He forges strong relationships and acts as a trusted advisor with our clients, 
+                  guiding them through the complexities of modern IT.</p>
+              </div>
+            </div>
+          </div>          
+
+        </div>
+
+      </div>
+
+    </section> -->
+    
+    <!-- End Team Section  -->
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Our Clients</h2>
+          <p>Proud to be working with</p>
+        </header>
+
+        <div class="clients-slider swiper">
+
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/clients/suwaco.webp" class="img-fluid" alt="Suwaco Hydro Chemical"></div>            
+            <div class="swiper-slide"><img src="assets/img/clients/dosthaus.webp" class="img-fluid" alt="Dosthaus"></div>     
+            <div class="swiper-slide"><img src="assets/img/clients/hankuk-logo.webp" class="img-fluid" alt="Hankuk Construction & Trading"></div>         
+            <div class="swiper-slide"><img src="assets/img/clients/sarthak.webp" class="img-fluid" alt="Sarthak Enterprises"></div>         
+            <div class="swiper-slide"><img src="assets/img/clients/esselzone.webp" class="img-fluid" alt="Essel Zone"></div>
+            <div class="swiper-slide"><img src="assets/img/clients/jaam.webp" class="img-fluid" alt="Ja:am Sleepwear"></div>
+
+          </div>
+
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+    </section>
+    
+    <!-- End Clients Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <img src="assets/img/logos/logo.100x100nobg.webp" alt="">
+              <span>Cyber Alliance India</span>
+            </a>
+            <p>We are a managed IT services provider that takes care of your IT needs.<br> offering a range of services, such as Network Mgmt, Workspace Mgmt, and more.<br> Contact us today and let us manage your IT for you.</p>
+            <div class="social-links mt-3">
+              
+              <a href="https://www.instagram.com/cyberalliance.in/" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="https://github.com/godarayudhvir" class="github"><i class="bi bi-github"></i></a>
+              <a href="https://www.youtube.com/@cyberallianceindia" class="youtube"><i class="bi bi-youtube"></i></a>
+              <a href="/links/" class="More"><i class="bi bi-link"></i></a>
+
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#about">About us</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#portfolio">Services</a></li>
+              <!-- <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Contact Us</h4>
+            <p>
+              Cyber Alliance India<br>
+              <!-- Vegas Mall, Office tower 3rd Floor<br> -->
+              Dwarka Sec - 24, New Delhi - 110077<br><br></a>
+              <strong>Phone:</strong> +91 885-157-3195<br>
+              <strong>Email:</strong> info@cyberalliance.in<br>
+            </p>
+
+          </div>
+
+        </div>
+      </div>
     </div>
 
     
 
-</div>
-
-<div id="web3-win" class="window" style="height:auto; width:450px; max-width:90%;">
-    <div class="window-header"><button class="dot" onclick="closeWindow('web3-win')"></button><div class="window-title">Project Inquiry</div></div>
-    <form action="https://api.web3forms.com/submit" method="POST" class="form-content">
-        <input type="hidden" name="access_key" value="be5918a4-e944-4bb9-b273-b7ad3303b06d">
-        <input type="text" name="name" placeholder="Name / Organization" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Project details..." rows="4" required></textarea>
-        <input type="text" id="f-ref" name="referral_code" placeholder="Referral Code">
-        <button type="submit" class="submit-btn">Submit Details</button>
-    </form>
-</div>
-
-<div class="dock-container">
-
-    <div class="dock">
-        <a href="https://calendar.app.google/ibtZ5BofoAAVYZjR8" target="_blank" class="dock-item"><img src="https://www.apple.com/v/apps/e/images/overview/apps/tier1/chiclets/facetime_chiclet__dkfd0tacahua_xlarge_2x.png"></a>
-        <a href="https://wa.me/918851573195" target="_blank" class="dock-item"><img src="https://www.apple.com/v/apps/e/images/overview/apps/tier1/chiclets/messages_chiclet__f8bzind6fdqy_xlarge_2x.png"></a>
-        <a href="tel:918851573195" class="dock-item"><img src="https://www.apple.com/v/apps/e/images/overview/apps/tier1/chiclets/phone_chiclet__f1brppw3aqy6_xlarge_2x.png"></a>
-        <a href="mailto:team@cyberalliance.in" class="dock-item"><img src="https://www.apple.com/v/apps/e/images/overview/apps/tier1/chiclets/mail_chiclet__s40xvfy4twyu_xlarge_2x.png"></a>
-    </div>
-    
-</div>
-
-<script>
-    function openWindow(id) { 
-        document.getElementById(id).style.display = 'flex'; 
-    }
-    function closeWindow(id) { 
-        document.getElementById(id).style.display = 'none'; 
-    }
-
-    function handleReferral() {
-        const urlParams = new URLSearchParams(window.location.search);
-        let ref = urlParams.get('ref') || localStorage.getItem('ca_referral');
-        if (ref) {
-            localStorage.setItem('ca_referral', ref);
-            document.getElementById('f-ref').value = ref;
+    <script>
+      window.chatwootSettings = {"position":"right","type":"standard","launcherTitle":"Chat with us"};
+      (function(d,t) {
+        var BASE_URL="https://app.chatwoot.com";
+        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=BASE_URL+"/packs/js/sdk.js";
+        g.defer = true;
+        g.async = true;
+        s.parentNode.insertBefore(g,s);
+        g.onload=function(){
+          window.chatwootSDK.run({
+            websiteToken: '6mKtN7PXwmkDeBpSQ9mt22uo',
+            baseUrl: BASE_URL
+          })
         }
-    }
+      })(document,"script");
+    </script>
+    
+    
 
-    window.onload = () => { handleReferral(); };
-</script>
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Cyber Alliance India</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- Hire me for web design /links/index.html -->
+       <!--Designed by <a href="https://cyberalliance.in/">Cyber Alliance India</a>--> 
+      </div>
+    </div>
+  </footer>
+  
+  <!-- End Footer -->
+
+  <!-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/js/hidectrls.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!--Videojs script file-->
+  <script src="assets/js/video.min.js"></script>
+          
 </body>
+
 </html>
