@@ -133,7 +133,7 @@
             <iframe 
                 id="methodology-video"
                 class="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover" 
-                src="https://www.youtube.com/embed/0RssLJL30h0?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=0RssLJL30h0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" 
+                src="https://www.youtube.com/embed/WNzQvTbRcis?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=WNzQvTbRcis&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" 
                 title="Tech Showcase" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -142,7 +142,7 @@
         </div>
         
         <div class="absolute bottom-6 right-6 z-20 flex space-x-3">
-            <a href="https://www.youtube.com/watch?v=0RssLJL30h0" target="_blank" class="bg-black/40 hover:bg-black/70 backdrop-blur-md border border-white/10 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90">
+            <a href="https://www.youtube.com/watch?v=WNzQvTbRcis" target="_blank" class="bg-black/40 hover:bg-black/70 backdrop-blur-md border border-white/10 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90">
                 <i class="bi bi-box-arrow-up-right text-sm"></i>
             </a>
 
@@ -302,8 +302,8 @@
             <h2 class="text-5xl font-extrabold mb-6 tracking-tighter">Ready to <span class="text-blue-500">connect?</span></h2>
             <p class="text-neutral-400 mb-10 text-lg">Connect with our engineering team to discuss your needs.</p>
 
-            <!-- <div class="w-full h-64 rounded-3xl overflow-hidden mb-10 grayscale hover:grayscale-0 transition-all duration-500 border border-neutral-800"> <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14013.11184282314!2d77.03061455!3d28.59143975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1ad394017637%3A0x67399435b7194f44!2sSector%2024%2C%20Dwarka%2C%20New%20Delhi%2C%20Delhi%20110077!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"> </iframe> </div> -->
-            
+            <div class="w-full h-64 rounded-3xl overflow-hidden mb-10 grayscale hover:grayscale-0 transition-all duration-500 border border-neutral-800"> <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14013.11184282314!2d77.03061455!3d28.59143975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1ad394017637%3A0x67399435b7194f44!2sSector%2024%2C%20Dwarka%2C%20New%20Delhi%2C%20Delhi%20110077!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"> </iframe> </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <a href="https://wa.me/918851573195" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-green-500/50 transition group">
                     <i class="bi bi-whatsapp text-2xl text-green-500 mb-2"></i>
@@ -395,63 +395,65 @@
 </script>
 
 <style>
-    /* Video Scroll Animation */
-@keyframes videoScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-.video-track {
+/* Updated Client Stories Styles: Removed auto-scroll and added centering */
+.video-track-centered {
     display: flex;
-    width: max-content;
-    animation: videoScroll 30s linear infinite;
-}
-
-.video-track:hover {
-    animation-play-state: paused;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
 }
 
 .video-card {
     aspect-ratio: 9/16;
     width: 280px;
     flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+}
+
+@media (max-width: 640px) {
+    .video-card {
+        width: 100%;
+        max-width: 300px;
+    }
 }
 </style>
 
-<section id="video-testimonials" class="py-24 bg-neutral-950 border-t border-neutral-900 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 mb-12">
+<section id="video-testimonials" class="py-24 bg-neutral-950 border-t border-neutral-900">
+    <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
         <h2 class="text-4xl font-extrabold tracking-tighter">Client <span class="text-blue-500">Stories.</span></h2>
         <p class="text-neutral-500 mt-2">Engineering success, captured in motion.</p>
     </div>
 
-    <div class="slider-container">
-        <div class="video-track flex gap-6">
-            <div class="flex gap-6">
-                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-                        <source src="https://www.pexels.com/download/video/5495890/" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <p class="text-white font-bold text-sm">Web Development</p>
-                    </div>
-                </div>
-                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-                        <source src="https://www.pexels.com/download/video/7989667/" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <p class="text-white font-bold text-sm">Infrastructure</p>
-                    </div>
-                </div>
-                <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-                        <source src="https://www.pexels.com/download/video/7970386/" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <p class="text-white font-bold text-sm">Cloud Solutions</p>
-                    </div>
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="video-track-centered">
+            <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                    <source src="https://www.pexels.com/download/video/3256821/" type="video/mp4">
+                </video>
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                    <p class="text-white font-bold text-sm">Web Development</p>
                 </div>
             </div>
+            <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                    <source src="https://www.pexels.com/download/video/7581210/" type="video/mp4">
+                </video>
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                    <p class="text-white font-bold text-sm">Managed IT Services</p>
+                </div>
+            </div>
+            <div class="video-card glass-card rounded-3xl overflow-hidden relative group">
+                <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                    <source src="https://www.pexels.com/download/video/8170425/" type="video/mp4">
+                </video>
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                    <p class="text-white font-bold text-sm">Cloud Workspace</p>
+                </div>
             </div>
         </div>
     </div>
