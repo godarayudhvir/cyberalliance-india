@@ -494,6 +494,75 @@
         </div>
     </section>
 
+<section id="videos" class="py-20 bg-[#0a0a0a] border-t border-neutral-900">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <div class="max-w-2xl">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-4">Meet Team <span class="gradient-text">IBRACORP</span></h2>
+                <p class="text-neutral-400">Giving a shoutout to our friends at <span class="text-blue-500 font-bold">IBRACORP</span>. 
+                While we build our own original content, enjoy their expert guides on security and open-source tech.</p>
+            </div>
+            <a href="https://www.youtube.com/@IBRACORP" target="_blank" class="text-blue-500 font-bold uppercase tracking-widest text-sm flex items-center hover:text-blue-400 transition">
+                View Channel <i class="bi bi-box-arrow-up-right ml-2"></i>
+            </a>
+        </div>
+
+        <div class="relative group">
+            <div id="video-scroller" class="flex gap-6 overflow-x-auto pb-8 snap-x no-scrollbar">
+                
+                <div class="min-w-[300px] md:min-w-[450px] snap-center">
+                    <div class="glass-card rounded-3xl overflow-hidden border border-neutral-800 aspect-video relative group/item">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/Y-yA990_3m0" title="Jellyfin Guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <h3 class="mt-4 font-bold text-lg">The Definitive Guide to Jellyfin</h3>
+                </div>
+
+                <div class="min-w-[300px] md:min-w-[450px] snap-center">
+                    <div class="glass-card rounded-3xl overflow-hidden border border-neutral-800 aspect-video relative group/item">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/9BvYkC53Pms" title="Remote Access" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <h3 class="mt-4 font-bold text-lg">Remote Access on Unraid (Nginx Proxy Manager)</h3>
+                </div>
+
+                <div class="min-w-[300px] md:min-w-[450px] snap-center">
+                    <div class="glass-card rounded-3xl overflow-hidden border border-neutral-800 aspect-video relative group/item">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/P_P5N6O3A-8" title="Docker Media Stack" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <h3 class="mt-4 font-bold text-lg">Build the ULTIMATE Docker Media Stack</h3>
+                </div>
+
+                <div class="min-w-[300px] md:min-w-[450px] snap-center">
+                    <div class="glass-card rounded-3xl overflow-hidden border border-neutral-800 aspect-video relative group/item">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/videoseries?list=PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj" title="Security Series" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <h3 class="mt-4 font-bold text-lg">Explore Full Security Playlist</h3>
+                </div>
+                
+            </div>
+
+            <div class="absolute top-1/2 -left-4 -translate-y-1/2 hidden md:block">
+                <button onclick="document.getElementById('video-scroller').scrollBy({left: -400, behavior: 'smooth'})" class="p-3 bg-black/50 border border-neutral-800 rounded-full hover:bg-blue-500 transition">
+                    <i class="bi bi-chevron-left text-white"></i>
+                </button>
+            </div>
+            <div class="absolute top-1/2 -right-4 -translate-y-1/2 hidden md:block">
+                <button onclick="document.getElementById('video-scroller').scrollBy({left: 400, behavior: 'smooth'})" class="p-3 bg-black/50 border border-neutral-800 rounded-full hover:bg-blue-500 transition">
+                    <i class="bi bi-chevron-right text-white"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>/* Custom Scrollbar Hiding */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}</style>
+
     <footer class="bg-black border-t border-neutral-900 pt-20 pb-10 px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
             <div class="col-span-2">
