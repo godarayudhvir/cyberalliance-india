@@ -644,16 +644,38 @@
     }
   });
 
-  // NEW: BLOG FETCHING LOGIC
+// UPDATED: BLOG FETCHING LOGIC WITH 404 PROTECTION
   async function initBlog() {
       const container = document.getElementById('blog-container');
       let i = 1;
       let active = true;
+      
       while(active) {
           try {
               const res = await fetch(`posts/${i}.md`);
-              if(!res.ok) break;
+              
+              // 1. Check for standard network errors
+              if (!res.ok) {
+                  active = false;
+                  break;
+              }
+
+              // 2. Check Content-Type: If it's HTML, GitHub is serving a 404 page
+              const contentType = res.headers.get("content-type");
+              if (contentType && contentType.includes("text/html")) {
+                  active = false;
+                  break;
+              }
+
               const text = await res.text();
+              
+              // 3. Content Check: Fail-safe if the server returns a 200 but sends an HTML 404 page
+              if (text.trim().startsWith("<!DOCTYPE") || text.trim().startsWith("<html")) {
+                  active = false;
+                  break;
+              }
+
+              // Parse Markdown Metadata
               const title = text.match(/^# (.*)/m)?.[1] || "Untitled Post";
               const img = text.match(/!\[.*\]\((.*)\)/)?.[1] || "https://images.unsplash.com/photo-1451187580459-43490279c0fa";
               const desc = text.match(/^> (.*)/m)?.[1] || "Engineering insights from the Cyber Alliance team.";
@@ -670,7 +692,9 @@
                 </div>`;
               container.appendChild(card);
               i++;
-          } catch(e) { active = false; }
+          } catch(e) { 
+              active = false; 
+          }
       }
   }
 
