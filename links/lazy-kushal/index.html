@@ -26,7 +26,7 @@
             <div class="absolute inset-0 bg-yellow-400 rounded-3xl rotate-6 opacity-20"></div>
             <div class="absolute inset-0 bg-red-600 rounded-3xl -rotate-3 opacity-20"></div>
             <div class="relative bg-zinc-800 rounded-3xl w-32 h-32 flex items-center justify-center border-2 border-white/10 overflow-hidden shadow-xl">
-                <img src="dp.jpg" alt="Lazy Kushal" class="w-full h-full object-cover">
+                <img src="dp.jpg" alt="Lazy Kushal" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Lazy+Kushal&background=eab308&color=000'">
             </div>
         </div>
 
@@ -60,31 +60,35 @@
 
     <script>
         function launchApp() {
-            const handle = "@lazy_kushal";
+            const channelId = "UCoh2JcbELgGq8NO0wmEBucA"; 
+            const handle = "lazy_kushal";
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            
-            // App URIs
-            // iOS often prefers youtube:// while Android prefers vnd.youtube://
-            let appUrl = "vnd.youtube://www.youtube.com/" + handle;
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                appUrl = "youtube://www.youtube.com/" + handle;
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+            let appUrl;
+
+            if (isIOS) {
+                // iOS Deep Link
+                appUrl = "youtube://www.youtube.com/channel/" + channelId;
+            } else {
+                // Android Intent (Bypasses Home and Search, goes to Channel)
+                appUrl = "intent://www.youtube.com/channel/" + channelId + "#Intent;package=com.google.android.youtube;scheme=https;end";
             }
 
-            const webUrl = "https://www.youtube.com/" + handle + "?sub_confirmation=1";
+            const webUrl = "https://www.youtube.com/@" + handle + "?sub_confirmation=1";
 
-            // Attempt to trigger the app
+            // Try to open the app
             window.location.href = appUrl;
 
-            // Fallback: If they are still here after 2.5s, send to browser
+            // Fallback: If still on this page after 2.5s, go to web URL
             setTimeout(function() {
-                // We check if the page is still visible to avoid redirecting 
-                // if they actually switched to the app
                 if (!document.hidden) {
                     window.location.href = webUrl;
                 }
             }, 2500);
         }
 
+        // Run on load
         window.onload = launchApp;
     </script>
 
