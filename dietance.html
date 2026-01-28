@@ -11,7 +11,7 @@
     <div class="max-w-md w-full bg-white shadow-2xl rounded-3xl overflow-hidden border border-gray-100 mx-4">
         <div class="p-8 pb-6">
             <div class="flex flex-col">
-                <span class="text-[11px] font-bold text-blue-600 uppercase tracking-[0.15em] mb-1">Secure Merchant Payment</span>
+                <span class="text-[11px] font-bold text-blue-600 uppercase tracking-[0.15em] mb-1">Official Merchant Payment</span>
                 <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dietance</h1>
             </div>
         </div>
@@ -23,36 +23,36 @@
                     <span class="text-gray-900 font-bold">Mr. Shailesh</span>
                 </div>
                 <div class="text-right">
-                    <span class="text-3xl font-bold text-gray-900">₹11,560.00</span>
-                    <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">INR • Verified Merchant</p>
+                    <span class="text-3xl font-bold text-gray-900">₹100.00</span>
+                    <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">INR • Tax Included</p>
                 </div>
             </div>
         </div>
 
         <div class="p-8 space-y-6">
-            <button onclick="triggerMerchantUPI()" 
-               class="flex items-center justify-center w-full py-4 px-6 bg-[#635BFF] hover:bg-[#5249d9] text-white font-semibold rounded-xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(99,91,255,0.39)] transform hover:-translate-y-0.5 active:scale-[0.98]">
+            <button onclick="payNow()" 
+               class="flex items-center justify-center w-full py-4 px-6 bg-[#635BFF] hover:bg-[#5249d9] text-white font-semibold rounded-xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(99,91,255,0.39)] transform hover:-translate-y-0.5 active:scale-[0.95]">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
-                Pay ₹11,560 via UPI
+                Pay via UPI App
             </button>
 
             <div class="relative flex py-3 items-center">
-                <div class="flex-grow border-t border-gray-200"></div>
-                <span class="flex-shrink mx-4 text-gray-400 text-[10px] font-bold uppercase tracking-widest">Or Scan QR</span>
-                <div class="flex-grow border-t border-gray-200"></div>
+                <div class="flex-grow border-t border-gray-100"></div>
+                <span class="flex-shrink mx-4 text-gray-400 text-[10px] font-bold uppercase tracking-widest">Or Scan to Pay</span>
+                <div class="flex-grow border-t border-gray-100"></div>
             </div>
 
             <div class="flex flex-col items-center">
-                <div class="p-3 border-2 border-dashed border-gray-200 rounded-2xl bg-white">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=cyberallianceindia@idfcbank&pn=Cyber%20Alliance%20India&mc=0000&tr=SHAILESH11560&tn=Payment%20from%20Mr%20Shailesh&am=11560&cu=INR" 
+                <div class="p-4 border border-gray-100 rounded-3xl bg-white shadow-sm ring-1 ring-gray-900/5">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=cyberallianceindia@idfcbank&pn=Cyber%20Alliance%20India&mc=0000&tr=SHAILESH_PAY&tn=Payment%20to%20Dietance&am=100&cu=INR" 
                          alt="Payment QR" class="w-40 h-40">
                 </div>
             </div>
             
             <div class="flex flex-col items-center pt-2">
-                <div class="flex items-center space-x-2 grayscale opacity-70">
+                <div class="flex items-center space-x-2 grayscale opacity-60">
                     <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Powered by</span>
                     <span class="text-xs font-black text-gray-600 tracking-tighter italic">CYBER ALLIANCE INDIA</span>
                 </div>
@@ -61,18 +61,25 @@
     </div>
 
     <script>
-        function triggerMerchantUPI() {
-            const vpa = "cyberallianceindia@idfcbank";
-            const name = "Cyber Alliance India";
-            const amount = "11560";
-            const note = "Payment from Mr Shailesh";
-            const txId = "CAI" + Date.now(); // Unique ID to ensure the debit triggers every time
+        function payNow() {
+            // Configuration
+            const config = {
+                pa: "cyberallianceindia@idfcbank",
+                pn: "Cyber Alliance India",
+                am: "100.00",
+                cu: "INR",
+                tn: "Payment to Dietance for Shailesh",
+                tr: "TR" + Date.now(), // Unique Transaction Ref
+                mc: "0000",             // Merchant Category Code
+                mode: "02",             // Secure Intent Mode
+                purpose: "11"           // Payment Purpose (11 is standard for commerce)
+            };
 
-            // Merchant Intent Link
-            const intent = `upi://pay?pa=${vpa}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}&tr=${txId}&mc=0000&mode=04&purpose=00`;
+            // Build UPI String
+            const upiString = `upi://pay?pa=${config.pa}&pn=${encodeURIComponent(config.pn)}&am=${config.am}&cu=${config.cu}&tn=${encodeURIComponent(config.tn)}&tr=${config.tr}&mc=${config.mc}&mode=${config.mode}&purpose=${config.purpose}`;
 
-            // Open UPI app
-            window.location.href = intent;
+            // Execute Redirect
+            window.location.href = upiString;
         }
     </script>
 
