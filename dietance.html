@@ -3,76 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | Dietance</title>
+    <title>Secure Checkout | Dietance</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 flex items-center justify-center min-h-screen font-sans">
+<body class="bg-[#F1F5F9] flex items-center justify-center min-h-screen font-sans antialiased">
 
-    <div class="max-w-md w-full bg-white shadow-2xl rounded-3xl overflow-hidden border border-gray-100 mx-4">
-        <div class="p-8 pb-6">
+    <div class="max-w-md w-full bg-white shadow-2xl rounded-[2rem] overflow-hidden mx-4 border border-slate-200">
+        <div class="p-8 pb-6 bg-white">
             <div class="flex flex-col">
-                <span class="text-[11px] font-bold text-blue-600 uppercase tracking-[0.15em] mb-1">Verified Merchant Pay</span>
-                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dietance</h1>
+                <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] mb-1">Secure Payment Gateway</span>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tight">Dietance</h1>
             </div>
         </div>
 
-        <div class="px-8 py-7 bg-gray-50/50 border-y border-gray-100">
+        <div class="px-8 py-6 bg-slate-900 text-white">
             <div class="flex justify-between items-center">
-                <div class="flex flex-col">
-                    <span class="text-gray-500 font-medium">Customer</span>
-                    <span class="text-gray-900 font-bold">Mr. Shailesh <br> +91 9711182913 </span>
+                <div>
+                    <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Total Amount</p>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-2xl font-light text-slate-400">₹</span>
+                        <span class="text-4xl font-black">11,560.00</span>
+                    </div>
                 </div>
                 <div class="text-right">
-                    <span class="text-3xl font-bold text-gray-900">₹100.00</span>
-                    <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">INR • Secure Transaction</p>
+                    <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Customer</p>
+                    <p class="font-bold text-lg text-indigo-300">Mr. Shailesh</p>
                 </div>
             </div>
         </div>
 
         <div class="p-8 space-y-6">
+            <div class="flex flex-col items-center">
+                <div class="group relative cursor-pointer" onclick="downloadQR()" title="Click to save to gallery">
+                    <div class="p-4 bg-white border-2 border-indigo-50 rounded-3xl shadow-sm transition-all hover:border-indigo-200">
+                        <img id="qr-code" src="" alt="Payment QR" class="w-48 h-48 block">
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center bg-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl">
+                        <span class="bg-indigo-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg">TAP TO SAVE</span>
+                    </div>
+                </div>
+                <p class="mt-4 text-[11px] text-slate-400 font-medium italic text-center">
+                    Tap the QR code to save it to your gallery <br> or use the button below
+                </p>
+            </div>
+
             <button onclick="triggerSecurePay()" 
-               class="flex items-center justify-center w-full py-4 px-6 bg-[#635BFF] hover:bg-[#5249d9] text-white font-semibold rounded-xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(99,91,255,0.39)] transform hover:-translate-y-0.5 active:scale-[0.98]">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+               class="flex items-center justify-center w-full py-4 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl transition-all shadow-lg shadow-indigo-100 active:scale-[0.98]">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                 </svg>
                 Pay via UPI App
             </button>
-
-            <div class="relative flex py-3 items-center">
-                <div class="flex-grow border-t border-gray-200"></div>
-                <span class="flex-shrink mx-4 text-gray-400 text-[10px] font-bold uppercase tracking-widest">Or Scan QR</span>
-                <div class="flex-grow border-t border-gray-200"></div>
-            </div>
-
-            <div class="flex flex-col items-center">
-                <div class="p-3 border-2 border-dashed border-gray-200 rounded-2xl bg-white shadow-sm">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=cyberallianceindia@idfcbank&pn=Cyber%20Alliance%20India&mc=5411&tr=S100TEST&tn=Payment%20to%20Dietance&am=100&cu=INR" 
-                         alt="Payment QR" class="w-40 h-40">
-                </div>
-            </div>
-            
-            <div class="flex flex-col items-center pt-2">
-                <div class="flex items-center space-x-2 grayscale opacity-70">
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Powered by</span>
-                    <span class="text-xs font-black text-gray-600 tracking-tighter italic">CYBER ALLIANCE INDIA</span>
-                </div>
-            </div>
         </div>
     </div>
 
     <script>
-        function triggerSecurePay() {
-            const pa = "cyberallianceindia@idfcbank";
-            const pn = "Cyber Alliance India";
-            const am = "100.00";
-            const tn = "Payment to Dietance for Shailesh";
-            const tr = "TR" + Math.floor(Math.random() * 9999999); // Unique Ref
-            const mc = "5411"; // Grocery/Retail Store MCC (Generic)
-            
-            // The logic: mode=02 and purpose=11 forces a merchant-verified debit
-            const upiUrl = `upi://pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=INR&tn=${encodeURIComponent(tn)}&tr=${tr}&mc=${mc}&mode=02&purpose=11`;
+        const amount = "11560.00";
+        const pa = "cyberallianceindia@idfcbank";
+        const pn = "Cyber Alliance India";
+        const tn = "Dietance Payment - Shailesh";
+        const tr = "DT" + Date.now();
+        
+        const upiUrl = `upi://pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${amount}&cu=INR&tn=${encodeURIComponent(tn)}&tr=${tr}&mc=5411&mode=02&purpose=11`;
+        
+        // QR API URL
+        const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(upiUrl)}`;
 
+        // Set QR Source
+        document.getElementById('qr-code').src = qrApiUrl;
+
+        function triggerSecurePay() {
             window.location.href = upiUrl;
+        }
+
+        async function downloadQR() {
+            try {
+                const response = await fetch(qrApiUrl);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `Dietance_QR_${amount}.png`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error("Download failed", error);
+                alert("Please long-press the QR code to save it manually.");
+            }
         }
     </script>
 </body>
