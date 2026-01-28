@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Daily Routine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Deeper dark background */
+            color: #d1d5db; /* Lighter text color for contrast */
+        }
+        .card-custom {
+            background-color: #1f1f1f; /* Darker card background */
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
+            border: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .header {
+            background: #000000; /* True black header */
+        }
+        .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        /* Custom styles for the scrolling banner */
+        .scrolling-banner-container {
+            width: 100%;
+            overflow: hidden;
+            background: #121212;
+            color: #fde047; /* Bright yellow */
+            padding: 1rem 0;
+            white-space: nowrap;
+        }
+        .scrolling-banner {
+            display: inline-block;
+            animation: scroll-left 40s linear infinite;
+        }
+        .scrolling-banner a {
+            display: inline-block;
+            padding: 0 1.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            color: #fde047; /* Bright yellow links */
+            transition: color 0.2s ease-in-out;
+        }
+        .scrolling-banner a:hover {
+            color: #f59e0b;
+        }
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        /* Style for placeholder text to make it visible */
+        .form-control::placeholder,
+        .card-custom input::placeholder {
+            color: #9ca3af; /* Light gray for visibility */
+            opacity: 1; /* Ensure it's not transparent */
+        }
+        .up-arrow, .down-arrow {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .up-arrow:hover {
+            transform: translateY(-2px);
+        }
+        .down-arrow:hover {
+            transform: translateY(2px);
+        }
+        .notes-widget {
+            resize: vertical;
+        }
+        .stopwatch-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .stopwatch-button:hover {
+            transform: scale(1.05);
+        }
+        /* Style for the new indented set list - Ensuring no bullet point */
+        .sets-list li, .sets-list div {
+            padding-left: 0.5rem; /* Small indent */
+            list-style: none; /* Explicitly remove list style for all children */
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <header class="header text-white py-6 shadow-md rounded-b-xl">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">The Daily Grind</h1>
+            <p class="text-lg mt-2 text-gray-400">Time to crush your goals.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8 flex-grow px-4">
+        <div class="card-custom p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:justify-between items-center mb-6">
+                <h2 id="day-title" class="text-2xl md:text-3xl font-bold text-yellow-400"></h2>
+                <div class="mt-4 md:mt-0 flex flex-wrap justify-center">
+                    <button class="day-btn px-4 py-2 mx-1 my-1 rounded-full text-sm font-medium transition-all duration-200 bg-gray-700 hover:bg-gray-600 text-gray-300" data-day="Monday">Mon</button>
+                    <button class="day-btn px-4 py-2 mx-1 my-1 rounded-full text-sm font-medium transition-all duration-200 bg-gray-700 hover:bg-gray-600 text-gray-300" data-day="Tuesday">Tue</button>
+                    <button class="day-btn px-4 py-2 mx-1 my-1 rounded-full text-sm font-medium transition-all duration-200 bg-gray-700 hover:bg-gray-600 text-gray-300" data-day="Wednesday">Wed</button>
+                    <button class="day-btn px-4 py-2 mx-1 my-1 rounded-full text-sm font-medium transition-all duration-200 bg-gray-700 hover:bg-gray-600 text-gray-300" data-day="Thursday">Thu</button>
+                    <button class="day-btn px-4 py-2 mx-1 my-1 rounded-full text-sm font-medium transition-all duration-200 bg-gray-700 hover:bg-gray-600 text-gray-300" data-day="Friday">Fri</button>
+                    <button class="day-btn px-4 py-2 mx-1 my-1 rounded-full text-sm font-medium transition-all duration-200 bg-gray-700 hover:bg-gray-600 text-gray-300" data-day="Saturday">Sat</button>
+                    <button class="day-btn px-4 py-2 mx-1 my-1 rounded-full text-sm font-medium transition-all duration-200 bg-gray-700 hover:bg-gray-600 text-gray-300" data-day="Sunday">Sun</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center p-4 my-6 bg-gray-800 rounded-lg shadow-inner">
+                <h3 class="text-xl font-semibold mb-2 text-white">Stopwatch</h3>
+                <div id="stopwatch-display" class="text-4xl md:text-5xl font-mono text-yellow-400 my-4">00:00:00</div>
+                <div id="time-stamps" class="text-sm font-mono text-gray-400">
+                    <span id="start-time-display"></span>
+                    <span id="end-time-display"></span>
+                </div>
+                <div class="flex space-x-4 mt-4">
+                    <button id="start-btn" class="stopwatch-button px-4 py-2 rounded-full text-sm font-medium bg-green-500 text-white hover:bg-green-600">Start</button>
+                    <button id="stop-btn" class="stopwatch-button px-4 py-2 rounded-full text-sm font-medium bg-red-500 text-white hover:bg-red-600">Stop</button>
+                    <button id="reset-btn" class="stopwatch-button px-4 py-2 rounded-full text-sm font-medium bg-blue-500 text-white hover:bg-blue-600">Reset</button>
+                </div>
+            </div>
+            
+            <div id="routine-display" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+
+            <div id="notes-widget" class="mt-8">
+                <h3 class="text-lg font-semibold mb-2 text-yellow-400">Notes</h3>
+                <textarea id="notes-textarea" class="notes-widget form-control w-full p-3 rounded-md border-gray-600 focus:border-yellow-400 focus:ring-yellow-400 bg-gray-800 text-white focus:bg-gray-800" rows="4" placeholder="Add your notes for today's workout..."></textarea>
+            </div>
+
+            <div id="rest-day-message" class="text-center py-10" style="display: none;">
+                <p class="text-xl text-gray-500 font-semibold">
+                    Rest is part of the process. You've earned it.
+                </p>
+            </div>
+            
+            <div id="edit-buttons" class="mt-8 flex flex-wrap justify-end space-x-2 space-y-2 md:space-y-0">
+                <button id="download-config-btn" class="px-4 py-2 rounded-full text-sm font-medium bg-indigo-500 text-white hover:bg-indigo-600 transition-colors duration-200">
+                    Download Config
+                </button>
+                <label for="upload-config-input" class="px-4 py-2 rounded-full text-sm font-medium bg-indigo-500 text-white hover:bg-indigo-600 transition-colors duration-200 cursor-pointer flex items-center justify-center">
+                    Upload Config
+                </label>
+                <input type="file" id="upload-config-input" accept=".json" style="display: none;">
+
+                <button id="share-btn" class="px-4 py-2 rounded-full text-sm font-medium bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200">
+                    Share Routine
+                </button>
+                 <button id="add-category-btn" class="px-4 py-2 rounded-full text-sm font-medium bg-gray-600 text-white hover:bg-gray-700 transition-colors duration-200" style="display: none;">
+                    Add Muscle Group
+                </button>
+                 <button id="clear-all-routines-btn" class="px-4 py-2 rounded-full text-sm font-medium bg-purple-500 text-white hover:bg-purple-600 transition-colors duration-200">
+                    Forge Your Path
+                </button>
+                <button id="clear-storage-btn" class="px-4 py-2 rounded-full text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition-colors duration-200">
+                    Reset To Default
+                </button>
+                <button id="edit-btn" class="px-4 py-2 rounded-full text-sm font-medium bg-yellow-400 text-black hover:bg-yellow-500 transition-colors duration-200">
+                    Edit Routine
+                </button>
+                <button id="save-btn" class="px-4 py-2 rounded-full text-sm font-medium bg-green-500 text-white hover:bg-green-600 transition-colors duration-200" style="display: none;">
+                    Save Routine
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div class="scrolling-banner-container mt-8">
+        <div class="scrolling-banner">
+            <span class="font-bold text-yellow-400">💪 MORE INSPIRATION:</span>
+            <a href="https://www.youtube.com/@JeffNippard" target="_blank">Jeff Nippard</a>
+            <a href="https://www.youtube.com/@JesseJamesWest" target="_blank">Jesse James West</a>
+            <a href="https://www.youtube.com/@WillTennyson" target="_blank">Will Tennyson</a>
+            <a href="https://www.youtube.com/@JeremyEthier" target="_blank">Jeremy Ethier</a>
+            <a href="https://www.youtube.com/@yellowdude_co" target="_blank">Yellowdude Co</a>
+            <a href="https://www.youtube.com/@RenaissancePeriodization" target="_blank">Renaissance Periodization</a>
+            <a href="https://www.youtube.com/@sam_sulek" target="_blank">Sam Sulek</a>
+            <a href="https://www.youtube.com/@tyler-path" target="_blank">Tyler Path</a>
+            <a href="https://www.youtube.com/@trainerwinny" target="_blank">Trainer Winny</a>
+            <a href="https://www.youtube.com/@jordanyeohfitness" target="_blank">Jordan Yeoh Fitness</a>
+            <span class="font-bold text-yellow-400">💪 MORE INSPIRATION:</span>
+            <a href="https://www.youtube.com/@JeffNippard" target="_blank">Jeff Nippard</a>
+            <a href="https://www.youtube.com/@JesseJamesWest" target="_blank">Jesse James West</a>
+            <a href="https://www.youtube.com/@WillTennyson" target="_blank">Will Tennyson</a>
+            <a href="https://www.youtube.com/@JeremyEthier" target="_blank">Jeremy Ethier</a>
+            <a href="https://www.youtube.com/@yellowdude_co" target="_blank">Yellowdude Co</a>
+            <a href="https://www.youtube.com/@RenaissancePeriodization" target="_blank">Renaissance Periodization</a>
+            <a href="https://www.youtube.com/@sam_sulek" target="_blank">Sam Sulek</a>
+            <a href="https://www.youtube.com/@tyler-path" target="_blank">Tyler Path</a>
+            <a href="https://www.youtube.com/@trainerwinny" target="_blank">Trainer Winny</a>
+            <a href="https://www.youtube.com/@jordanyeohfitness" target="_blank">Jordan Yeoh Fitness</a>
+        </div>
+    </div>
+
+    <footer class="text-center py-4 text-gray-500 mt-8">
+        <p>Big Brrr's at <a href="https://cyberalliance.in" target="_blank" class="text-yellow-400 hover:text-yellow-300 font-medium">Cyber Alliance India</a> made this using Gemini to Help you grow. Your routine is saved right on your device, so you can train offline.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // UPDATED: Data model uses 'logs' array for sets, where each log has 'weight' and 'reps'
+            // NOTE: All default set/rep data (logs: [{ weight: '...', reps: '...' }]) has been REMOVED.
+            // REMOVED 'completed: false' from initialRoutines exercises.
+            const initialRoutines = {
+                'Monday': {
+                    notes: '',
+                    routine: [
+                        { category: 'Back', exercises: [{ name: 'Lat Pull Down (Wide Grip)', logs: [], url: '' }, { name: 'Lat Pull Down (Close Grip)', logs: [], url: '' }, { name: 'Chest Supported Rows', logs: [], url: '' }] },
+                        { category: 'Traps', exercises: [{ name: 'Reverse Pec Deck', logs: [], url: '' }, { name: 'Scapular Pull up', logs: [], url: '' }] },
+                        { category: 'Arms (Tri)', exercises: [{ name: 'Overhead Cable Triceps Extensions', logs: [], url: '' }, { name: 'Triceps Pressdowns', logs: [], url: '' }, { name: 'Close-Grip Bench Press', logs: [], url: '' }] },
+                        { category: 'Cardio', exercises: [{ name: '2 Mins Cycle', logs: [], url: '' }, { name: '3 Mins Running', logs: [], url: '' }, { name: 'Running (Post Gym)', logs: [], url: '' }] }
+                    ]
+                },
+                'Tuesday': {
+                    notes: '',
+                    routine: [
+                        { category: 'Chest', exercises: [{ name: 'Dumbbell Press (Incline)', logs: [], url: '' }, { name: 'Barbell Bench Press', logs: [], url: '' }] },
+                        { category: 'Shoulders', exercises: [{ name: 'Machine Shoulder Press', logs: [], url: '' }, { name: 'Cable Lateral Raise', logs: [], url: '' }, { name: 'Reverse Pec Deck Machine', logs: [], url: '' }] },
+                        { category: 'Pushups', exercises: [{ name: 'Pushups', logs: [], url: '' }] },
+                        { category: 'Cardio', exercises: [{ name: '2 Mins Cycle', logs: [], url: '' }, { name: '3 Mins Running', logs: [], url: '' }, { name: 'Running (Post Gym)', logs: [], url: '' }] }
+                    ]
+                },
+                'Wednesday': {
+                    notes: '',
+                    routine: [
+                        { category: 'Legs', exercises: [{ name: 'Hack Squat', logs: [], url: '' }, { name: 'Leg Extension', logs: [], url: '' }, { name: 'Romanian Deadlift (RDL)', logs: [], url: '' }, { name: 'Walking Lunge', logs: [], url: '' }, { name: 'Standing Calf Raises', logs: [], url: '' }] },
+                        { category: 'Core', exercises: [{ name: 'Weighted Cable Crunches', logs: [], url: '' }] },
+                        { category: 'Forearms', exercises: [{ name: 'Dumbbell Wrist Curls (Supinated)', logs: [], url: '' }, { name: 'Dumbbell Wrist Curls (Pronated)', logs: [], url: '' }, { name: 'Plate Pinches', logs: [], url: '' }] },
+                        { category: 'Cardio', exercises: [{ name: '5 Mins Cycle', logs: [], url: '' }, { name: '10 Mins Running', logs: [], url: '' }] }
+                    ]
+                },
+                'Thursday': {
+                    notes: '',
+                    routine: [
+                        { category: 'Back', exercises: [{ name: 'Seated Row (Wide Grip)', logs: [], url: '' }, { name: 'Seated Row (Close Grip)', logs: [], url: '' }, { name: 'Half-Kneeling One-Arm Pulldown', logs: [], url: '' }] },
+                        { category: 'Traps', exercises: [{ name: 'Face Pulls', logs: [], url: '' }, { name: 'Scapular Pull up', logs: [], url: '' }] },
+                        { category: 'Arms (Bi)', exercises: [{ name: 'Incline Dumbbell Curl', logs: [], url: '' }, { name: 'Preacher Curl (Hammer)', logs: [], url: '' }, { name: 'Bayesian Cable Curl', logs: [], url: '' }] },
+                        { category: 'Cardio', exercises: [{ name: '3 Mins Cycle', logs: [], url: '' }, { name: '7 Mins Running', logs: [], url: '' }, { name: 'Running (Post Gym)', logs: [], url: '' }] }
+                    ]
+                },
+                'Friday': {
+                    notes: '',
+                    routine: [
+                        { category: 'Chest', exercises: [{ name: 'Barbell Bench Press (Incline)', logs: [], url: '' }, { name: 'Pec Deck Machine', logs: [], url: '' }] },
+                        { category: 'Shoulders', exercises: [{ name: 'Barbell Overhead Press', logs: [], url: '' }, { name: 'Lean-In Dumbbell Lateral Raise', logs: [], url: '' }, { name: 'Reverse Cable Crossover', logs: [], url: '' }] },
+                        { category: 'Pushups', url: 'https://www.youtube.com/results?search_query=Pushups', exercises: [{ name: 'Pushups', logs: [], url: '' }] },
+                        { category: 'Cardio', exercises: [{ name: '3 Mins Cycle', logs: [], url: '' }, { name: '7 Mins Running', logs: [], url: '' }, { name: 'Running (Post Gym)', logs: [], url: '' }] }
+                    ]
+                },
+                'Saturday': {
+                    notes: '',
+                    routine: [
+                        { category: 'Legs', exercises: [{ name: 'Bulgarian Split Squat', logs: [], url: '' }, { name: 'Barbell Back Squat', logs: [], url: '' }, { name: 'Seated Hamstring Curl', logs: [], url: '' }, { name: 'Walking Lunge', logs: [], url: '' }, { name: 'Standing Calf Raises', logs: [], url: '' }] },
+                        { category: 'Core', exercises: [{ name: 'Weighted Cable Crunches', logs: [], url: '' }, { name: 'Hanging Leg Raises', logs: [], url: '' }] },
+                        { category: 'Forearms', exercises: [{ name: 'Dumbbell Wrist Curls (Supinated)', logs: [], url: '' }, { name: 'Dumbbell Wrist Curls (Pronated)', logs: [], url: '' }, { name: 'Plate Pinches', logs: [], url: '' }] },
+                        { category: 'Cardio', exercises: [{ name: '5 Mins Cycle', logs: [], url: '' }, { name: '10 Mins Running', logs: [], url: '' }] }
+                    ]
+                },
+                'Sunday': {
+                    notes: '',
+                    routine: []
+                }
+            };
+
+            let routines = {};
+            
+            // --- NEW FUNCTION: Calculate the total volume for a given category/section ---
+            const calculateCategoryVolume = (section) => {
+                let totalVolume = 0;
+                
+                section.exercises.forEach(exercise => {
+                    exercise.logs.forEach(log => {
+                        // Attempt to parse weight and reps as numbers
+                        const weight = parseFloat(log.weight);
+                        const reps = parseFloat(log.reps);
+
+                        // Volume is calculated only if both are valid numbers
+                        if (!isNaN(weight) && isFinite(weight) && !isNaN(reps) && isFinite(reps)) {
+                            totalVolume += weight * reps;
+                        }
+                    });
+                });
+                
+                // Format the volume (e.g., round to the nearest integer)
+                // Use toLocaleString for comma separation (e.g., 20,000)
+                return Math.round(totalVolume).toLocaleString(); 
+            };
+            // --- END NEW FUNCTION ---
+
+            // Routine & State Elements
+            const dayTitleEl = document.getElementById('day-title');
+            const routineDisplayEl = document.getElementById('routine-display');
+            const restDayMessageEl = document.getElementById('rest-day-message');
+            const notesTextarea = document.getElementById('notes-textarea');
+            const dayButtons = document.querySelectorAll('.day-btn');
+            const editBtn = document.getElementById('edit-btn');
+            const saveBtn = document.getElementById('save-btn');
+            const clearStorageBtn = document.getElementById('clear-storage-btn');
+            const clearAllBtn = document.getElementById('clear-all-routines-btn');
+            const addCategoryBtn = document.getElementById('add-category-btn');
+            const shareBtn = document.getElementById('share-btn');
+            
+            // New Config Elements
+            const downloadConfigBtn = document.getElementById('download-config-btn');
+            const uploadConfigInput = document.getElementById('upload-config-input');
+
+            // Stopwatch elements
+            const stopwatchDisplay = document.getElementById('stopwatch-display');
+            const startBtn = document.getElementById('start-btn');
+            const stopBtn = document.getElementById('stop-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const startTimeDisplay = document.getElementById('start-time-display');
+            const endTimeDisplay = document.getElementById('end-time-display');
+
+            let timer;
+            let timeElapsed = 0;
+            let isRunning = false;
+            let routineStartTime = null;
+            let routineEndTime = null;
+            
+            let isEditing = false;
+            let currentDay = '';
+
+            // NEW: Function to get all unique exercise names from the initial routines
+            const getUniqueExerciseNames = (routines) => {
+                const names = new Set();
+                Object.values(routines).forEach(dayRoutine => {
+                    dayRoutine.routine.forEach(section => {
+                        section.exercises.forEach(exercise => {
+                            if (exercise.name) {
+                                names.add(exercise.name.trim());
+                            }
+                        });
+                    });
+                });
+                return Array.from(names).sort();
+            };
+            
+            // NEW: Generate the datalist HTML from unique names
+            const uniqueExerciseNames = getUniqueExerciseNames(initialRoutines);
+            const exerciseDatalistHtml = `<datalist id="exercise-suggestions">${uniqueExerciseNames.map(name => `<option value="${name}">`).join('')}</datalist>`;
+            
+            // Append the datalist to the body once for use in Edit Mode inputs
+            document.body.insertAdjacentHTML('beforeend', exerciseDatalistHtml);
+
+
+            // Load routines from localStorage or use defaults
+            const loadRoutines = () => {
+                const savedRoutines = localStorage.getItem('dailyRoutines');
+                if (savedRoutines) {
+                    try {
+                         routines = JSON.parse(savedRoutines);
+                         // NEW: Strip the legacy 'completed' status from all routines on load
+                         Object.values(routines).forEach(dayRoutine => {
+                            dayRoutine.routine.forEach(section => {
+                                section.exercises.forEach(exercise => {
+                                    delete exercise.completed; // Remove the property
+                                });
+                            });
+                        });
+                    } catch (e) {
+                         console.error("Failed to parse routines from localStorage. Resetting to default.");
+                         routines = JSON.parse(JSON.stringify(initialRoutines)); 
+                    }
+                } else {
+                    // Deep copy initial routines to avoid modifying the original template
+                    routines = JSON.parse(JSON.stringify(initialRoutines)); 
+                }
+            };
+
+            loadRoutines();
+
+            // --- FUNCTION: Captures current DOM inputs and updates the routines object in memory ---
+            const captureCurrentRoutineState = () => {
+                const tempRoutine = [];
+                const routineSections = routineDisplayEl.querySelectorAll('.card-custom');
+
+                if (!isEditing || routineSections.length === 0) return;
+
+                routineSections.forEach(section => {
+                    const category = section.querySelector('.category-name').value.trim();
+                    const exercises = [];
+                    const exerciseItems = section.querySelectorAll('.exercise-item');
+
+                    exerciseItems.forEach(item => {
+                        // Check for both .exercise-name and its input value
+                        const nameInput = item.querySelector('.exercise-name');
+                        const name = nameInput ? nameInput.value.trim() : '';
+                        
+                        let urlInput = item.querySelector('.exercise-url');
+                        let url = urlInput ? urlInput.value.trim() : '';
+                        
+                        const logs = [];
+                        
+                        // Read dynamic logs/sets
+                        const logContainers = item.querySelectorAll('.log-entry');
+                        logContainers.forEach(logContainer => {
+                            const weight = logContainer.querySelector('.log-weight').value.trim();
+                            const reps = logContainer.querySelector('.log-reps').value.trim();
+                            logs.push({ weight: weight, reps: reps });
+                        });
+
+                        // **LOGIC REMOVED**: No need to capture 'completed' status from the DOM or preserve it.
+                        
+                        if (name !== '' || logs.length > 0) {
+                            if (url === '') {
+                                url = `https://www.youtube.com/results?search_query=${encodeURIComponent(name)}`;
+                            }
+                            exercises.push({ 
+                                name: name, 
+                                url: url,
+                                logs: logs
+                                // Removed completed property
+                            });
+                        }
+                    });
+
+                    if (category !== '' || exercises.length > 0) {
+                        tempRoutine.push({ category, exercises });
+                    }
+                });
+                
+                if (routines[currentDay]) {
+                    routines[currentDay].routine = tempRoutine;
+                    routines[currentDay].notes = notesTextarea.value; 
+                }
+            };
+            // --- END FUNCTION ---
+
+            const displayRoutine = (day, editing = false) => {
+                isEditing = editing;
+                currentDay = day;
+
+                dayButtons.forEach(btn => {
+                    if (btn.dataset.day === day) {
+                        btn.classList.add('bg-yellow-400', 'text-black');
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600', 'text-gray-300');
+                    } else {
+                        btn.classList.remove('bg-yellow-400', 'text-black');
+                        btn.classList.add('bg-gray-700', 'hover:bg-gray-600', 'text-gray-300');
+                    }
+                });
+
+                dayTitleEl.textContent = `${day}'s Routine`;
+                routineDisplayEl.innerHTML = '';
+                
+                const routineData = routines[day] || { notes: '', routine: [] };
+                const routine = routineData.routine;
+
+                notesTextarea.value = routineData.notes;
+                
+                if (isEditing) {
+                    // ------------------
+                    // Render EDIT MODE 
+                    // ------------------
+                    routine.forEach((section, categoryIndex) => {
+                        const sectionDiv = document.createElement('div');
+                        sectionDiv.className = 'card-custom p-4 relative';
+                        
+                        // Function to generate the HTML for all logs/sets
+                        const generateLogsHtml = (logs, exerciseIndex) => {
+                            return logs.map((log, logIndex) => `
+                                <div class="flex items-center space-x-2 log-entry mt-2" data-log-index="${logIndex}">
+                                    <div class="w-1/2">
+                                        <label for="weight-${categoryIndex}-${exerciseIndex}-${logIndex}" class="text-xs text-gray-400 block mb-1">Weight</label>
+                                        <input id="weight-${categoryIndex}-${exerciseIndex}-${logIndex}" type="text" value="${log.weight || ''}" class="log-weight form-control w-full rounded-md border-gray-600 focus:border-yellow-400 focus:ring-yellow-400 bg-gray-800 text-white focus:bg-gray-800" placeholder="e.g. 100">
+                                    </div>
+                                    <div class="w-1/2">
+                                        <label for="reps-${categoryIndex}-${exerciseIndex}-${logIndex}" class="text-xs text-gray-400 block mb-1">Reps</label>
+                                        <input id="reps-${categoryIndex}-${exerciseIndex}-${logIndex}" type="text" value="${log.reps || ''}" class="log-reps form-control w-full rounded-md border-gray-600 focus:border-yellow-400 focus:ring-yellow-400 bg-gray-800 text-white focus:bg-gray-800" placeholder="e.g. 8 reps / AMRAP">
+                                    </div>
+                                    <button class="delete-set-btn text-red-500 hover:text-red-400 transition-colors" data-category-index="${categoryIndex}" data-exercise-index="${exerciseIndex}" data-log-index="${logIndex}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 112 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            `).join('');
+                        };
+
+                        sectionDiv.innerHTML = `
+                             <div class="absolute top-2 right-2 flex flex-col items-center">
+                                 <button class="up-arrow-category text-gray-400 hover:text-yellow-400 transition-colors" data-index="${categoryIndex}">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                     </svg>
+                                 </button>
+                                 <button class="down-arrow-category text-gray-400 hover:text-yellow-400 transition-colors" data-index="${categoryIndex}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                     </svg>
+                                 </button>
+                             </div>
+                            <input type="text" value="${section.category}" class="category-name form-control text-lg font-semibold mb-2 text-yellow-400 w-full rounded-md border-gray-600 focus:border-yellow-400 focus:ring-yellow-400 bg-gray-800 text-white focus:bg-gray-800" placeholder="Category Name">
+                            <div class="space-y-2 exercises-container">
+                                ${section.exercises.map((exercise, exerciseIndex) => `
+                                    <div class="flex flex-col mb-4 relative exercise-item border-t border-gray-700 pt-3" data-exercise-index="${exerciseIndex}">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="flex-grow">
+                                                <label for="exercise-name-${categoryIndex}-${exerciseIndex}" class="text-xs text-gray-400 block mb-1">Exercise Name</label>
+                                                <input id="exercise-name-${categoryIndex}-${exerciseIndex}" type="text" value="${exercise.name}" class="exercise-name form-control w-full rounded-md border-gray-600 focus:border-yellow-400 focus:ring-yellow-400 bg-gray-800 text-white focus:bg-gray-800" placeholder="Exercise Name" list="exercise-suggestions">
+                                            </div>
+                                            <div class="flex-grow">
+                                                <label for="exercise-url-${categoryIndex}-${exerciseIndex}" class="text-xs text-gray-400 block mb-1">YouTube URL</label>
+                                                <input id="exercise-url-${categoryIndex}-${exerciseIndex}" type="text" value="${exercise.url || ''}" class="exercise-url form-control w-full rounded-md border-gray-600 focus:border-yellow-400 focus:ring-yellow-400 bg-gray-800 text-white focus:bg-gray-800" placeholder="YouTube URL">
+                                            </div>
+                                            <div class="flex flex-col items-center">
+                                                <button class="up-arrow-exercise text-gray-400 hover:text-yellow-400 transition-colors" data-category-index="${categoryIndex}" data-exercise-index="${exerciseIndex}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                    </svg>
+                                                </button>
+                                                <button class="delete-exercise-btn text-red-500 hover:text-red-400 transition-colors" data-category-index="${categoryIndex}" data-exercise-index="${exerciseIndex}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 112 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </button>
+                                                <button class="down-arrow-exercise text-gray-400 hover:text-yellow-400 transition-colors" data-category-index="${categoryIndex}" data-exercise-index="${exerciseIndex}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="log-entries-container mt-3 space-y-2" data-category-index="${categoryIndex}" data-exercise-index="${exerciseIndex}">
+                                            ${generateLogsHtml(exercise.logs, exerciseIndex)}
+                                        </div>
+
+                                        <button class="add-set-btn mt-2 px-3 py-1 text-xs bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors duration-200" data-category-index="${categoryIndex}" data-exercise-index="${exerciseIndex}">+ Add Set</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button class="add-exercise-btn mt-2 w-full px-3 py-1 bg-yellow-400 text-black rounded-md hover:bg-yellow-500 transition-colors duration-200" data-category-index="${categoryIndex}">+ Add Exercise</button>
+                        `;
+                        routineDisplayEl.appendChild(sectionDiv);
+                    });
+
+                    routineDisplayEl.style.display = 'grid';
+                    restDayMessageEl.style.display = 'none';
+                    editBtn.style.display = 'none';
+                    shareBtn.style.display = 'none';
+                    saveBtn.style.display = 'block';
+                    addCategoryBtn.style.display = 'block';
+                } else {
+                    // ------------------
+                    // Render VIEW MODE (UPDATED: Added Volume Calculation)
+                    // ------------------
+                    if (routine.length > 0) {
+                        routine.forEach(section => {
+                            const sectionDiv = document.createElement('div');
+                            sectionDiv.className = 'card-custom p-4';
+                            
+                            // --- NEW: Calculate Volume for the current category ---
+                            const volume = calculateCategoryVolume(section); 
+                            // --- END NEW ---
+                            
+                            const exercisesHtml = section.exercises.map((exercise) => {
+                                const url = exercise.url && exercise.url.trim() !== '' 
+                                    ? exercise.url 
+                                    : `https://www.youtube.com/results?search_query=${encodeURIComponent(exercise.name)}`;
+                                
+                                // NEW: Generate HTML for the list of individual sets/logs
+                                const setsHtml = exercise.logs.map(log => {
+                                    if (log.weight || log.reps) {
+                                        // LOGIC: Add 'kg' if weight is a number
+                                        const weightValue = log.weight.trim();
+                                        let weightDisplay = weightValue;
+                                        if (weightValue && !isNaN(parseFloat(weightValue)) && isFinite(weightValue)) {
+                                            weightDisplay = `${weightValue}kg`;
+                                        }
+
+                                        // Format: 100kg x 12
+                                        const setDisplay = `${weightDisplay || ''}${weightDisplay && log.reps ? ' x ' : ''}${log.reps || ''}`.trim();
+                                        if (setDisplay) {
+                                            // CHANGED <li> to <div> to eliminate nested list issues and styled to remove bullet
+                                            return `<div class="ml-6 text-sm text-gray-500 font-mono">${setDisplay}</div>`;
+                                        }
+                                    }
+                                    return '';
+                                }).filter(Boolean).join('');
+                                
+                                // Main list item for the exercise name. Removed checkbox and completed logic/classes.
+                                return `
+                                <li class="my-2 text-gray-400 list-none"> 
+                                    <div class="flex items-start">
+                                        <div class="flex-grow">
+                                            <a href="${url}" target="_blank" class="text-base font-semibold hover:text-yellow-400 transition-colors">${exercise.name}</a>
+                                            <div class="list-none pt-1 space-y-0 sets-list">
+                                                ${setsHtml}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>`;
+                            }).join('');
+                            
+                            sectionDiv.innerHTML = `
+                                <h3 class="text-lg font-semibold mb-2 text-yellow-400">
+                                    ${section.category} 
+                                    <span class="text-base font-normal text-gray-400">- ${volume || 'N/A'}</span>
+                                </h3>
+                                <ul class="list-none">
+                                    ${exercisesHtml}
+                                </ul>
+                            `;
+                            routineDisplayEl.appendChild(sectionDiv);
+                        });
+
+                        routineDisplayEl.style.display = 'grid';
+                        restDayMessageEl.style.display = 'none';
+                    } else {
+                        routineDisplayEl.style.display = 'none';
+                        restDayMessageEl.style.display = 'block';
+                    }
+                    editBtn.style.display = 'block';
+                    shareBtn.style.display = 'block';
+                    saveBtn.style.display = 'none';
+                    addCategoryBtn.style.display = 'none';
+                }
+            };
+            
+            const saveRoutine = () => {
+                // Call the capture function to ensure all final data is in the routines object
+                captureCurrentRoutineState();
+
+                // Save to localStorage and switch to View Mode
+                localStorage.setItem('dailyRoutines', JSON.stringify(routines));
+                displayRoutine(currentDay, false);
+            };
+
+            // Helper function for reordering
+            const swapElements = (arr, index1, index2) => {
+                [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
+            };
+
+            // ------------------------------------
+            // Event Listeners for Buttons/Actions
+            // ------------------------------------
+
+            // Day Selection
+            dayButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const day = event.target.dataset.day;
+                    displayRoutine(day);
+                });
+            });
+
+            // Edit/Save Mode Toggle
+            editBtn.addEventListener('click', () => {
+                displayRoutine(currentDay, true);
+            });
+
+            saveBtn.addEventListener('click', saveRoutine);
+
+            // Reset to Default (All Days)
+            clearStorageBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to reset ALL routines to the default factory settings?')) {
+                    localStorage.setItem('dailyRoutines', JSON.stringify(initialRoutines));
+                    routines = JSON.parse(JSON.stringify(initialRoutines));
+                    displayRoutine(currentDay);
+                }
+            });
+            
+            // FORGE YOUR PATH (Resets ONLY the current day's routine and enters Edit Mode)
+            clearAllBtn.addEventListener('click', () => {
+                if (confirm(`Are you sure you want to completely clear the routine for ${currentDay}? This action cannot be undone.`)) {
+                    // 1. Reset ONLY the current day's routine to be empty
+                    routines[currentDay] = { 
+                        routine: [], 
+                        notes: routines[currentDay] ? routines[currentDay].notes : '' 
+                    };
+
+                    // 2. Save the entire routines object back to localStorage
+                    localStorage.setItem('dailyRoutines', JSON.stringify(routines)); 
+
+                    // 3. Immediately switch to Edit Mode
+                    displayRoutine(currentDay, true); 
+                }
+            });
+            
+            // Add New Category in Edit Mode
+            addCategoryBtn.addEventListener('click', () => {
+                // Capture current state before modifying the array and re-rendering
+                captureCurrentRoutineState();
+                
+                const newCategory = { category: 'New Category', exercises: [] };
+                if (!routines[currentDay]) {
+                    routines[currentDay] = { notes: '', routine: [] };
+                }
+                routines[currentDay].routine.push(newCategory);
+                displayRoutine(currentDay, true);
+            });
+
+            // Notes auto-save listener
+            notesTextarea.addEventListener('input', () => {
+                 if (routines[currentDay]) {
+                    routines[currentDay].notes = notesTextarea.value;
+                    localStorage.setItem('dailyRoutines', JSON.stringify(routines));
+                 }
+            });
+
+            // ------------------------------------
+            // Config Download/Upload Logic
+            // ------------------------------------
+            
+            const downloadConfig = () => {
+                // Capture current state before downloading, if in Edit Mode
+                if (isEditing) {
+                    captureCurrentRoutineState();
+                }
+
+                const dataStr = JSON.stringify(routines, null, 4); 
+                const blob = new Blob([dataStr], { type: "application/json" });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `DailyGrind_Routine_Config_${new Date().toISOString().slice(0, 10)}.json`;
+                
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('Routine configuration downloaded successfully!');
+            };
+
+            const uploadConfig = (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    try {
+                        const uploadedRoutines = JSON.parse(e.target.result);
+                        
+                        // Basic validation: Check for the structure integrity
+                        if (typeof uploadedRoutines !== 'object' || !uploadedRoutines.Monday || !uploadedRoutines.Monday.routine || !uploadedRoutines.Sunday) {
+                            throw new Error("Invalid file structure. Please upload a valid Daily Grind config file.");
+                        }
+
+                        if (confirm('Are you sure you want to overwrite your entire routine with the uploaded config file?')) {
+                            // NEW: Strip the legacy 'completed' status from uploaded file as well
+                            Object.values(uploadedRoutines).forEach(dayRoutine => {
+                                dayRoutine.routine.forEach(section => {
+                                    section.exercises.forEach(exercise => {
+                                        delete exercise.completed; // Remove the property
+                                    });
+                                });
+                            });
+                            
+                            routines = uploadedRoutines;
+                            localStorage.setItem('dailyRoutines', JSON.stringify(routines));
+                            displayRoutine(currentDay);
+                            alert('Routine configuration uploaded and updated successfully!');
+                        }
+                        
+                    } catch (error) {
+                        alert(`Error uploading configuration: ${error.message}`);
+                        console.error('Upload Error:', error);
+                    }
+                    // Clear the input value so the same file can be uploaded again if needed
+                    event.target.value = ''; 
+                };
+
+                reader.readAsText(file);
+            };
+
+            downloadConfigBtn.addEventListener('click', downloadConfig);
+            uploadConfigInput.addEventListener('change', uploadConfig);
+
+
+            // ------------------------------------
+            // Stopwatch Logic
+            // ------------------------------------
+            const formatTime = (ms) => {
+                let seconds = Math.floor(ms / 1000);
+                let minutes = Math.floor(seconds / 60);
+                let hours = Math.floor(minutes / 60);
+
+                seconds = seconds % 60;
+                minutes = minutes % 60;
+
+                return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            };
+
+            startBtn.addEventListener('click', () => {
+                if (!isRunning) {
+                    isRunning = true;
+                    routineStartTime = new Date();
+                    startTimeDisplay.textContent = `Start: ${routineStartTime.toLocaleTimeString()}`;
+                    endTimeDisplay.textContent = '';
+                    let startTime = Date.now() - timeElapsed;
+                    timer = setInterval(() => {
+                        timeElapsed = Date.now() - startTime;
+                        stopwatchDisplay.textContent = formatTime(timeElapsed);
+                    }, 1000); // Update every second
+                }
+            });
+
+            stopBtn.addEventListener('click', () => {
+                if (isRunning) {
+                    isRunning = false;
+                    clearInterval(timer);
+                    routineEndTime = new Date();
+                    endTimeDisplay.textContent = `End: ${routineEndTime.toLocaleTimeString()}`;
+                }
+            });
+
+            resetBtn.addEventListener('click', () => {
+                if (isRunning) {
+                    clearInterval(timer);
+                }
+                isRunning = false;
+                timeElapsed = 0;
+                stopwatchDisplay.textContent = '00:00:00';
+                routineStartTime = null;
+                routineEndTime = null;
+                startTimeDisplay.textContent = '';
+                endTimeDisplay.textContent = '';
+            });
+
+            // ------------------------------------
+            // PDF generation (jsPDF) (UPDATED for two-column, no 'Completed')
+            // ------------------------------------
+            shareBtn.addEventListener('click', () => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                const margin = 15;
+                let y = margin;
+                const lineHeight = 6;
+                const columnWidth = 85; // A4 width is ~210mm. Use 85mm for columns with 15mm margin on both sides and 10mm gap.
+                const columnGap = 10;
+                const columnX = [margin, margin + columnWidth + columnGap];
+                let currentColumn = 0;
+                const pageMaxY = 280; // Standard A4 max height
+
+                const routineData = routines[currentDay] || { routine: [], notes: '' };
+                const routine = routineData.routine;
+                const notes = routineData.notes;
+                
+                // Helper to check for page break
+                const checkPageBreak = (neededHeight) => {
+                    if (y + neededHeight > pageMaxY) {
+                        doc.addPage();
+                        y = margin;
+                        currentColumn = 0; // Reset to the first column
+                        // Redraw header on new page if desired, but for routine text, just restart position
+                    }
+                };
+
+                // --- HEADER ---
+                doc.setFontSize(24);
+                doc.setFont("helvetica", "bold");
+                doc.text(`${currentDay}'s Routine`, margin, y);
+                y += 10;
+                
+                doc.setFontSize(10);
+                doc.setFont("helvetica", "normal");
+                const today = new Date().toLocaleDateString();
+                doc.text(`Generated: ${today}`, margin, y);
+                y += 5;
+                if (routineStartTime || routineEndTime) {
+                    doc.text(`Duration: ${stopwatchDisplay.textContent}`, margin, y);
+                    y += 5;
+                }
+                
+                y += 10;
+                
+                // --- ROUTINE BODY (Two Columns) ---
+                if (routine.length > 0) {
+                    doc.setFontSize(16);
+                    doc.setFont("helvetica", "bold");
+
+                    routine.forEach(section => {
+                        // Calculate Volume and include it in the category title
+                        const volume = calculateCategoryVolume(section);
+
+                        // Estimate height for section header + volume display
+                        let requiredSpace = 10; 
+
+                        // If not enough room for category in current column, move to next column or new page
+                        if (y + requiredSpace > pageMaxY) {
+                            currentColumn = (currentColumn === 0) ? 1 : 0;
+                            if (currentColumn === 0) {
+                                checkPageBreak(0); // Add page if needed
+                            } else {
+                                y = margin; // Jump to start of second column
+                            }
+                        }
+
+                        // Print Category Title (with Volume)
+                        doc.setFontSize(16);
+                        doc.setFont("helvetica", "bold");
+                        doc.text(`${section.category} - ${volume || 'N/A'}`, columnX[currentColumn], y);
+                        y += 5;
+                        
+                        doc.setFontSize(12);
+                        doc.setFont("helvetica", "normal");
+
+                        section.exercises.forEach(exercise => {
+                            // Calculate space needed for exercise name + all logs
+                            let exerciseHeight = lineHeight; // for exercise name
+                            exercise.logs.forEach(log => {
+                                const logText = log.weight.trim() || log.reps.trim();
+                                if (logText) exerciseHeight += lineHeight;
+                            });
+                            exerciseHeight += 1; // Extra space after exercise
+
+                            // Check if exercise fits in current column
+                            if (y + exerciseHeight > pageMaxY) {
+                                // Attempt to move to next column
+                                currentColumn = (currentColumn === 0) ? 1 : 0;
+                                if (currentColumn === 0) {
+                                    // If column 1 also full, add new page
+                                    doc.addPage();
+                                    y = margin;
+                                } else {
+                                    // Else, just reset y for column 2 start
+                                    y = margin; 
+                                }
+
+                                // If new column/page is used, re-print the category name
+                                doc.setFontSize(16);
+                                doc.setFont("helvetica", "bold");
+                                doc.text(`${section.category} - ${volume || 'N/A'}`, columnX[currentColumn], y);
+                                y += 5;
+                                doc.setFontSize(12);
+                                doc.setFont("helvetica", "normal");
+                                
+                            }
+                            
+                            // Print Exercise Name
+                            doc.text(`- ${exercise.name}`, columnX[currentColumn] + 5, y); // Indent slightly for bullet
+                            y += lineHeight;
+
+                            // Print Logs/Sets
+                            doc.setFontSize(10); // Smaller font for sets
+                            doc.setFont("helvetica", "italic");
+                            exercise.logs.forEach(log => {
+                                let entry = [];
+                                
+                                const weightValue = log.weight.trim();
+                                let weightDisplay = weightValue;
+                                // LOGIC: Add 'kg' if weight is a number
+                                if (weightValue && !isNaN(parseFloat(weightValue)) && isFinite(weightValue)) {
+                                    weightDisplay = `${weightValue}kg`;
+                                }
+                                
+                                if (weightDisplay) entry.push(weightDisplay);
+                                if (log.reps) entry.push(log.reps);
+                                
+                                const logText = entry.join(' x ');
+                                if (logText) {
+                                    doc.text(`  ${logText}`, columnX[currentColumn] + 10, y); // Indent more
+                                    y += lineHeight;
+                                }
+                            });
+                            
+                            doc.setFontSize(12);
+                            doc.setFont("helvetica", "normal");
+                            y += 1; // Small separator space
+                        });
+                        y += 3; // Extra space after all exercises in the section
+                    });
+                } else {
+                    doc.setFontSize(14);
+                    doc.text("Rest Day / No routine planned.", margin, y);
+                    y += 20;
+                }
+                
+                // If the second column was used, ensure notes start on a new line after the highest column
+                if (currentColumn === 1 && y < pageMaxY) {
+                    y = pageMaxY;
+                }
+
+                // --- NOTES ---
+                if (notes) {
+                    checkPageBreak(25); // Check if enough space for Notes header and a line of text
+
+                    doc.setFontSize(16);
+                    doc.setFont("helvetica", "bold");
+                    doc.text("Notes", margin, y);
+                    y += 5;
+                    
+                    doc.setFontSize(12);
+                    doc.setFont("helvetica", "normal");
+                    
+                    // Reset to margin for notes since they span full width
+                    const splitNotes = doc.splitTextToSize(notes, 180); // 180mm width for full page text
+                    doc.text(splitNotes, margin + 5, y);
+                }
+
+                doc.save(`${currentDay}_Workout_Routine.pdf`);
+            });
+
+            // ------------------------------------
+            // Dynamic Edit Mode Handlers
+            // ------------------------------------
+            document.addEventListener('click', (event) => {
+                const addBtn = event.target.closest('.add-exercise-btn');
+                const deleteExBtn = event.target.closest('.delete-exercise-btn');
+                const addSetBtn = event.target.closest('.add-set-btn');
+                const deleteSetBtn = event.target.closest('.delete-set-btn');
+                const upCatBtn = event.target.closest('.up-arrow-category');
+                const downCatBtn = event.target.closest('.down-arrow-category');
+                const upExBtn = event.target.closest('.up-arrow-exercise');
+                const downExBtn = event.target.closest('.down-arrow-exercise');
+                
+                if (addBtn) {
+                    // 1. Capture current state before modifying array
+                    captureCurrentRoutineState();
+                    
+                    const categoryIndex = addBtn.dataset.categoryIndex;
+                    const routineSection = routines[currentDay].routine[categoryIndex];
+                    // NEW: Default exercise with one empty log entry
+                    routineSection.exercises.push({ name: '', logs: [{ weight: '', reps: '' }], url: '' });
+                    displayRoutine(currentDay, true);
+                } else if (deleteExBtn) {
+                    // 1. Capture current state before modifying array
+                    captureCurrentRoutineState();
+                    
+                    const categoryIndex = deleteExBtn.dataset.categoryIndex;
+                    const exerciseIndex = deleteExBtn.dataset.exerciseIndex;
+                    const routineSection = routines[currentDay].routine[categoryIndex];
+                    routineSection.exercises.splice(exerciseIndex, 1);
+                    // Remove category if it becomes empty and there's more than one category
+                    if (routineSection.exercises.length === 0 && routines[currentDay].routine.length > 1) {
+                        routines[currentDay].routine.splice(categoryIndex, 1);
+                    }
+                    displayRoutine(currentDay, true);
+                } else if (addSetBtn) {
+                    // FIX: Capture current state before modifying array
+                    captureCurrentRoutineState();
+
+                    const categoryIndex = parseInt(addSetBtn.dataset.categoryIndex);
+                    const exerciseIndex = parseInt(addSetBtn.dataset.exerciseIndex);
+                    const exercise = routines[currentDay].routine[categoryIndex].exercises[exerciseIndex];
+                    exercise.logs.push({ weight: '', reps: '' });
+                    displayRoutine(currentDay, true); // Re-render to show new set
+                } else if (deleteSetBtn) {
+                    // FIX: Capture current state before modifying array
+                    captureCurrentRoutineState();
+                    
+                    const categoryIndex = parseInt(deleteSetBtn.dataset.categoryIndex);
+                    const exerciseIndex = parseInt(deleteSetBtn.dataset.exerciseIndex);
+                    const logIndex = parseInt(deleteSetBtn.dataset.logIndex);
+                    
+                    const logs = routines[currentDay].routine[categoryIndex].exercises[exerciseIndex].logs;
+                    
+                    // Prevent deleting the last log entry, must have at least one set
+                    if (logs.length > 1) {
+                         logs.splice(logIndex, 1);
+                    } else {
+                        // Optionally clear the last remaining set instead of deleting
+                        logs[0] = { weight: '', reps: '' };
+                    }
+                    displayRoutine(currentDay, true); // Re-render to update
+                } else if (upCatBtn) {
+                    // 1. Capture current state before modifying array
+                    captureCurrentRoutineState();
+                    
+                    const index = parseInt(upCatBtn.dataset.index);
+                    if (index > 0) {
+                        swapElements(routines[currentDay].routine, index, index - 1);
+                        displayRoutine(currentDay, true);
+                    }
+                } else if (downCatBtn) {
+                    // 1. Capture current state before modifying array
+                    captureCurrentRoutineState();
+                    
+                    const index = parseInt(downCatBtn.dataset.index);
+                    if (index < routines[currentDay].routine.length - 1) {
+                        swapElements(routines[currentDay].routine, index, index + 1);
+                        displayRoutine(currentDay, true);
+                    }
+                } else if (upExBtn) {
+                    // 1. Capture current state before modifying array
+                    captureCurrentRoutineState();
+                    
+                    const categoryIndex = parseInt(upExBtn.dataset.categoryIndex);
+                    const exerciseIndex = parseInt(upExBtn.dataset.exerciseIndex);
+                    if (exerciseIndex > 0) {
+                        const exercises = routines[currentDay].routine[categoryIndex].exercises;
+                        swapElements(exercises, exerciseIndex, exerciseIndex - 1);
+                        displayRoutine(currentDay, true);
+                    }
+                } else if (downExBtn) {
+                    // 1. Capture current state before modifying array
+                    captureCurrentRoutineState();
+                    
+                    const categoryIndex = parseInt(downExBtn.dataset.categoryIndex);
+                    const exerciseIndex = parseInt(downExBtn.dataset.exerciseIndex);
+                    const exercises = routines[currentDay].routine[categoryIndex].exercises;
+                    if (exerciseIndex < exercises.length - 1) {
+                        swapElements(exercises, exerciseIndex, exerciseIndex + 1);
+                        displayRoutine(currentDay, true);
+                    }
+                }
+            });
+
+            // Display current day's routine on page load
+            const today = new Date();
+            const istDate = new Date(today.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+            const todayDayName = istDate.toLocaleDateString('en-US', { weekday: 'long' });
+            
+            displayRoutine(todayDayName);
+        });
+    </script>
+</body>
+</html>
