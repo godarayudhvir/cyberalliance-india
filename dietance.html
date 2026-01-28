@@ -11,8 +11,8 @@
     <div class="max-w-md w-full bg-white shadow-2xl rounded-3xl overflow-hidden border border-gray-100 mx-4">
         <div class="p-8 pb-6">
             <div class="flex flex-col">
-                <span class="text-[11px] font-bold text-blue-600 uppercase tracking-[0.15em] mb-1">Secure Checkout</span>
-                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dietance 3</h1>
+                <span class="text-[11px] font-bold text-blue-600 uppercase tracking-[0.15em] mb-1">Merchant Checkout</span>
+                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dietance v4</h1>
             </div>
         </div>
 
@@ -21,28 +21,31 @@
                 <span class="text-gray-500 font-medium">Amount to pay</span>
                 <div class="text-right">
                     <span class="text-3xl font-bold text-gray-900">₹100.00</span>
-                    <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">INR • Tax Included</p>
+                    <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">INR • Secure Merchant Pay</p>
                 </div>
             </div>
         </div>
 
         <div class="p-8 space-y-6">
-            <button onclick="handlePayment()" 
+            <button onclick="triggerMerchantUPI()" 
                class="flex items-center justify-center w-full py-4 px-6 bg-[#635BFF] hover:bg-[#5249d9] text-white font-semibold rounded-xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(99,91,255,0.39)] transform hover:-translate-y-0.5 active:scale-[0.98]">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
-                Pay with UPI
+                Pay with UPI App
             </button>
 
-            <p class="text-[12px] text-center text-gray-400 px-4 leading-relaxed">
-                If the button doesn't open your app, please use the QR code below.
-            </p>
+            <div class="relative flex py-3 items-center">
+                <div class="flex-grow border-t border-gray-200"></div>
+                <span class="flex-shrink mx-4 text-gray-400 text-[10px] font-bold uppercase tracking-widest">Or Scan QR</span>
+                <div class="flex-grow border-t border-gray-200"></div>
+            </div>
 
-            <div class="flex flex-col items-center border-t border-gray-100 pt-6">
-                <p class="text-[10px] text-gray-400 uppercase font-bold mb-3 tracking-widest text-center">Or Scan using any UPI App</p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=dshubhangi@ptaxis&pn=Dietance&am=100&cu=INR" 
-                     alt="Payment QR" class="w-40 h-40 border p-2 rounded-xl bg-white shadow-sm">
+            <div class="flex flex-col items-center">
+                <div class="p-3 border-2 border-dashed border-gray-200 rounded-2xl bg-white">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=cyberallianceindia@idfcbank&pn=Cyber%20Alliance%20India&mc=0000&tr=ORDER101&tn=Dietance%20Order&am=100&cu=INR" 
+                         alt="Payment QR" class="w-36 h-36">
+                </div>
             </div>
             
             <div class="flex flex-col items-center pt-2">
@@ -55,12 +58,24 @@
     </div>
 
     <script>
-        function handlePayment() {
-            // Added pn (Payee Name) which is often required for the debit to trigger
-            const upiLink = "upi://pay?pa=dshubhangi@ptaxis&pn=Dietance&am=100&cu=INR";
-            
-            // This method is more reliable on mobile browsers
-            window.location.href = upiLink;
+        function triggerMerchantUPI() {
+            const vpa = "cyberallianceindia@idfcbank";
+            const name = "Cyber Alliance India";
+            const amount = "100.00";
+            const note = "Dietance Order Payment";
+            const txId = "CAI" + Date.now(); // Generates a unique ID every time
+
+            // Enhanced Merchant Intent Link
+            // mode=04 specifically signals a Merchant-initiated intent
+            const intent = `upi://pay?pa=${vpa}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}&tr=${txId}&mc=0000&mode=04&purpose=00`;
+
+            // Open link
+            window.location.href = intent;
+
+            // Safety Fallback: If app doesn't open in 2 seconds, alert the user
+            setTimeout(() => {
+                console.log("If the UPI app didn't open, please use the QR code.");
+            }, 2000);
         }
     </script>
 
