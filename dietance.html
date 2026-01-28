@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Dietance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 flex items-center justify-center min-h-screen font-sans">
+
+    <div class="max-w-md w-full bg-white shadow-2xl rounded-3xl overflow-hidden border border-gray-100 mx-4">
+        <div class="p-8 pb-6">
+            <div class="flex flex-col">
+                <span class="text-[11px] font-bold text-blue-600 uppercase tracking-[0.15em] mb-1">Secure Checkout</span>
+                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dietance</h1>
+            </div>
+        </div>
+
+        <div class="px-8 py-7 bg-gray-50/50 border-y border-gray-100">
+            <div class="flex justify-between items-center">
+                <span class="text-gray-500 font-medium">Amount to pay</span>
+                <div class="text-right">
+                    <span class="text-3xl font-bold text-gray-900">₹11,560.00</span>
+                    <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">INR • Tax Included</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8 space-y-6">
+            <a href="upi://pay?pa=dshubhangi@ptaxisk&pn=Dietance&am=11560&cu=INR" 
+               class="flex items-center justify-center w-full py-4 px-6 bg-[#635BFF] hover:bg-[#5249d9] text-white font-semibold rounded-xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(99,91,255,0.39)] transform hover:-translate-y-0.5 active:scale-[0.98]">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                Pay with UPI
+            </a>
+
+            <p class="text-[12px] text-center text-gray-400 px-4 leading-relaxed">
+                By clicking "Pay with UPI", you will be redirected to your preferred payment app to complete the transaction.
+            </p>
+            
+            <div class="flex flex-col items-center pt-2">
+                <div class="flex items-center space-x-2 grayscale opacity-70">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Powered by</span>
+                    <span class="text-xs font-black text-gray-600 tracking-tighter italic">CYBER ALLIANCE INDIA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
