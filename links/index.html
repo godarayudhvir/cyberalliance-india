@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="apple-touch-icon" href="./icons/180x180.png" sizes="180x180">
     <link rel="manifest" href="./manifest.json">
-    
+
     <title>Cyber Alliance India | Built with Intent</title>
-    
-    <meta name="description" content="Engineering high-performance infrastructure and premium web solutions with absolute intent.">
-    <meta name="keywords" content="Web Development, Hosting, Gsuite, m365, remote it support, vmware, unraid, cybersec, itsec, unifi, ubiquity, cisco">
-    
+
+    <meta name="description"
+        content="Engineering high-performance infrastructure and premium web solutions with absolute intent.">
+    <meta name="keywords"
+        content="Web Development, Hosting, Gsuite, m365, remote it support, vmware, unraid, cybersec, itsec, unifi, ubiquity, cisco">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberalliance.in/">
     <meta property="og:title" content="Cyber Alliance India | Built with Intent">
-    <meta property="og:description" content="Engineering high-performance infrastructure and premium web solutions with absolute intent.">
-    <meta property="og:image" content="https://cyberalliance.in/assets/img/logo.jpeg"> 
-    
+    <meta property="og:description"
+        content="Engineering high-performance infrastructure and premium web solutions with absolute intent.">
+    <meta property="og:image" content="https://cyberalliance.in/assets/img/logo.jpeg">
+
     <!-- <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://cyberalliance.in/">
     <meta property="twitter:title" content="Cyber Alliance India | Premium Managed IT">
@@ -36,10 +40,13 @@
         /* Base iOS Font and Background */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            background-color: #F2F2F7; /* Standard iOS background color */
-            -webkit-tap-highlight-color: transparent; /* Removes touch highlight on mobile */
+            background-color: #F2F2F7;
+            /* Standard iOS background color */
+            -webkit-tap-highlight-color: transparent;
+            /* Removes touch highlight on mobile */
             user-select: none;
-            overflow: hidden; /* Prevent body scroll, navigation handles view scrolling */
+            overflow: hidden;
+            /* Prevent body scroll, navigation handles view scrolling */
         }
 
         /* Page Transition Logic (Simulating iOS View Stack) */
@@ -51,20 +58,25 @@
             height: 100%;
             /* Removed overflow-y: auto here. It should be applied to content wrappers within specific pages if needed. */
             background-color: #F2F2F7;
-            padding-top: 50px; /* Space for status bar */
+            padding-top: 50px;
+            /* Space for status bar */
             padding-bottom: 40px;
             /* Smooth slide-in/out transition */
             transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-            transform: translateX(100%); /* Start off-screen to the right */
+            transform: translateX(100%);
+            /* Start off-screen to the right */
             z-index: 10;
-            display: flex; /* Use flex to manage header and content layout */
+            display: flex;
+            /* Use flex to manage header and content layout */
             flex-direction: column;
         }
+
         /* Active view slides into place */
         .page.active {
             transform: translateX(0);
             z-index: 20;
         }
+
         /* Background view slightly slides back when a new view opens */
         .page.background {
             transform: translateX(-30%);
@@ -75,89 +87,117 @@
         /* Notification Banner Styling */
         #notification-banner {
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform: translateY(-200%); /* Hidden state */
+            transform: translateY(-200%);
+            /* Hidden state */
         }
+
         #notification-banner.show {
-            transform: translateY(0); /* Visible state */
+            transform: translateY(0);
+            /* Visible state */
         }
 
         /* Notification Center Overlay Styling (Full Screen) */
         #notification-center {
-            backdrop-filter: blur(25px); /* Blurs content behind the sheet */
+            backdrop-filter: blur(25px);
+            /* Blurs content behind the sheet */
             -webkit-backdrop-filter: blur(25px);
             background-color: rgba(242, 242, 247, 0.85);
             transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-            transform: translateY(-100%); /* Hidden state */
+            transform: translateY(-100%);
+            /* Hidden state */
             z-index: 100;
         }
+
         #notification-center.open {
-            transform: translateY(0); /* Visible state */
+            transform: translateY(0);
+            /* Visible state */
         }
 
         /* Search Input and Icon Positioning */
-        .search-container { 
+        .search-container {
             position: relative;
             /* FIX: Ensure search bar uses full width */
-            width: 100%; 
+            width: 100%;
         }
+
         .search-input {
             background-color: #E3E3E8;
-            padding-left: 36px; /* Space for search icon */
+            padding-left: 36px;
+            /* Space for search icon */
             /* FIX: Ensure input also uses full width */
             width: 100%;
         }
+
         .search-icon {
             position: absolute;
             left: 8px;
             top: 50%;
             transform: translateY(-50%);
-            pointer-events: none; /* Allows click-through to the input */
+            pointer-events: none;
+            /* Allows click-through to the input */
         }
+
         /* Clear (X) Button Styling */
         .clear-icon {
             position: absolute;
             right: 8px;
             top: 50%;
             transform: translateY(-50%);
-            display: none; 
+            display: none;
         }
-        .clear-icon.visible { display: flex; }
-        
+
+        .clear-icon.visible {
+            display: flex;
+        }
+
         /* Search Results Overlay */
         #search-results {
             /* FIX 2: Set absolute positioning to overlay everything below the search bar */
             display: none;
             position: absolute;
-            top: 130px; /* Below the header/search bar */
+            top: 130px;
+            /* Below the header/search bar */
             left: 0;
             right: 0;
             z-index: 50;
-            background-color: #F2F2F7; /* Match Back background */
+            background-color: #F2F2F7;
+            /* Match Back background */
             /* Ensure it fills the rest of the available height in the Back view */
-            height: calc(100% - 130px); 
-            overflow-y: auto; /* Make results scrollable */
+            height: calc(100% - 130px);
+            overflow-y: auto;
+            /* Make results scrollable */
         }
-        #search-results.active { display: block; }
+
+        #search-results.active {
+            display: block;
+        }
 
         /* Client Info Sheet (Bottom Sheet) & Overlay */
         #client-sheet {
             height: 60%;
-            transform: translateY(110%); /* Hidden state */
+            transform: translateY(110%);
+            /* Hidden state */
             transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
             z-index: 200;
         }
-        #client-sheet.open { transform: translateY(0); } /* Visible state */
+
+        #client-sheet.open {
+            transform: translateY(0);
+        }
+
+        /* Visible state */
         #client-overlay {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             z-index: 150;
             opacity: 0;
             pointer-events: none;
         }
+
         #client-overlay.open {
             opacity: 1;
             pointer-events: auto;
         }
-        
+
         /* Map Container for Directions View */
         .map-container iframe {
             width: 100%;
@@ -166,21 +206,36 @@
         }
 
         /* Utility to hide the scrollbar (for featured cards container) */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- 1. iOS Status Bar (Fixed Top) - Provides Time, Battery, and Notification Access -->
-    <div class="fixed top-0 w-full h-[44px] flex justify-between items-end pb-2 px-6 z-50 text-black text-xs font-semibold select-none pointer-events-none backdrop-blur-md bg-transparent">
+    <div
+        class="fixed top-0 w-full h-[44px] flex justify-between items-end pb-2 px-6 z-50 text-black text-xs font-semibold select-none pointer-events-none backdrop-blur-md bg-transparent">
         <div id="status-time" class="w-20">9:41</div>
         <div class="flex items-center space-x-2 pointer-events-auto">
-             <!-- Notification Center Trigger Button -->
+            <!-- Notification Center Trigger Button -->
             <button onclick="toggleNotificationCenter()" class="mr-2 active:opacity-50">
-                <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                    </path>
+                </svg>
             </button>
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+            </svg>
             <div class="flex items-center space-x-1">
                 <span id="battery-level">100%</span>
                 <div class="w-6 h-3 border border-gray-400 rounded-sm relative flex items-center px-[1px]">
@@ -191,22 +246,32 @@
     </div>
 
     <!-- 2. Dynamic Notification Banner - Appears briefly at the top -->
-    <div id="notification-banner" class="fixed top-2 left-2 right-2 z-[60] bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 p-3 flex flex-col cursor-pointer" onclick="toggleNotificationCenter()">
+    <div id="notification-banner"
+        class="fixed top-2 left-2 right-2 z-[60] bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 p-3 flex flex-col cursor-pointer"
+        onclick="toggleNotificationCenter()">
         <div class="flex items-center justify-between mb-1">
             <div class="flex items-center space-x-2">
                 <div class="w-5 h-5 bg-blue-500 rounded-md flex items-center justify-center">
-                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
                 </div>
                 <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">MESSAGES • NOW</span>
             </div>
-            <button class="text-xs text-gray-400 p-1 hover:text-gray-800" onclick="event.stopPropagation(); dismissBanner()">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <button class="text-xs text-gray-400 p-1 hover:text-gray-800"
+                onclick="event.stopPropagation(); dismissBanner()">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
             </button>
         </div>
         <div class="flex gap-3">
             <div class="flex-1">
                 <h4 class="font-bold text-sm text-black">Referral Program is here!</h4>
-                <p class="text-sm text-gray-600 leading-snug">Now you can Earn up to 15% commission on every successful referral. Tap to view details.</p>
+                <p class="text-sm text-gray-600 leading-snug">Now you can Earn up to 15% commission on every successful
+                    referral. Tap to view details.</p>
             </div>
         </div>
     </div>
@@ -215,8 +280,12 @@
     <div id="notification-center" class="fixed inset-0 pt-16 px-4 overflow-y-auto pb-10">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Notification Center</h2>
-            <button onclick="toggleNotificationCenter()" class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 active:bg-gray-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <button onclick="toggleNotificationCenter()"
+                class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 active:bg-gray-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
             </button>
         </div>
 
@@ -224,8 +293,13 @@
             <!-- 1 Notification Widget -->
             <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
                 <div class="flex items-center justify-between mb-2">
-                    <div class="flex items-center space-x-2 text-blue-600 font-semibold text-xs uppercase tracking-wider">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div
+                        class="flex items-center space-x-2 text-blue-600 font-semibold text-xs uppercase tracking-wider">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
                         <span>Opportunity</span>
                     </div>
                     <span class="text-xs text-gray-400">Just Now</span>
@@ -233,15 +307,25 @@
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Earn upto 15% Commission</h3>
                 <p class="text-gray-500 text-sm mb-4">Refer a client and get paid</p>
                 <div class="flex gap-2">
-                    <a href="https://wa.me/918851573195?text=Hi%20there,%20I%20have%20a%20client%20to%20refer" target="_blank" class="flex-1 bg-blue-500 text-white font-semibold py-2 rounded-xl text-sm active:opacity-90 flex items-center justify-center">Refer Now</a>
-                    <a href="/links/referral-policy.html" target="_blank" class="flex-1 bg-orange-500 text-white font-semibold py-2 rounded-xl text-sm active:opacity-90 flex items-center justify-center">Learn More</a>
+                    <a href="https://wa.me/918851573195?text=Hi%20there,%20I%20have%20a%20client%20to%20refer"
+                        target="_blank"
+                        class="flex-1 bg-blue-500 text-white font-semibold py-2 rounded-xl text-sm active:opacity-90 flex items-center justify-center">Refer
+                        Now</a>
+                    <a href="/links/referral-policy.html" target="_blank"
+                        class="flex-1 bg-orange-500 text-white font-semibold py-2 rounded-xl text-sm active:opacity-90 flex items-center justify-center">Learn
+                        More</a>
                 </div>
             </div>
             <!-- 2 Notification Widget -->
             <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
                 <div class="flex items-center justify-between mb-2">
-                    <div class="flex items-center space-x-2 text-blue-600 font-semibold text-xs uppercase tracking-wider">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div
+                        class="flex items-center space-x-2 text-blue-600 font-semibold text-xs uppercase tracking-wider">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
                         <span>Price update</span>
                     </div>
                     <span class="text-xs text-gray-400">Just Now</span>
@@ -249,14 +333,19 @@
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Pricing for our Services</h3>
                 <p class="text-gray-500 text-sm mb-4">A detailed look at our Pricing for various services we offer.</p>
                 <div class="flex gap-2">
-                    <a href="/links/services-pricing.html" target="_blank" class="flex-1 bg-orange-500 text-white font-semibold py-2 rounded-xl text-sm active:opacity-90 flex items-center justify-center">Learn More</a>
+                    <a href="/links/services-pricing.html" target="_blank"
+                        class="flex-1 bg-orange-500 text-white font-semibold py-2 rounded-xl text-sm active:opacity-90 flex items-center justify-center">Learn
+                        More</a>
                 </div>
-            </div>            
+            </div>
             <!-- System Status Widget -->
             <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
                     </div>
                     <div>
                         <h4 class="font-semibold text-gray-900">System Status</h4>
@@ -271,20 +360,27 @@
 
     <!-- 4. VIEW: MAIN Back (The primary screen) -->
     <!-- Added overflow-y-auto for the main view content to scroll -->
-    <div id="view-Back" class="page active overflow-y-auto"> 
+    <div id="view-Back" class="page active overflow-y-auto">
         <!-- Header Section -->
         <div class="px-4 pb-2 bg-[#F2F2F7]">
             <!-- Dynamic Day Heading -->
             <h1 id="header-day" class="text-[34px] font-bold text-black tracking-tight leading-tight">Back</h1>
             <!-- Search Bar Component -->
             <!-- FIX: Added w-full to search container to ensure it takes up max available width -->
-            <div class="mt-2 search-container w-full"> 
-                <svg class="search-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <div class="mt-2 search-container w-full">
+                <svg class="search-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
                 <!-- FIX 1: Added rounded-xl class to the search input -->
-                <input type="text" id="app-search" class="search-input w-full rounded-xl" placeholder="Search" onkeyup="handleSearch()">
+                <input type="text" id="app-search" class="search-input w-full rounded-xl" placeholder="Search"
+                    onkeyup="handleSearch()">
                 <!-- Clear Search Button -->
                 <div id="search-clear" class="clear-icon" onclick="clearSearch()">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -302,42 +398,68 @@
         <div id="Back-content" class="flex-1 overflow-y-auto">
             <!-- Group 1: Profile -->
             <div class="mt-6 mx-4">
-                <div class="bg-white rounded-[10px] flex items-center p-4 gap-4 active:bg-gray-50 transition-colors cursor-pointer" onclick="navigateTo('view-about')">
+                <div class="bg-white rounded-[10px] flex items-center p-4 gap-4 active:bg-gray-50 transition-colors cursor-pointer"
+                    onclick="navigateTo('view-about')">
                     <div class="w-[60px] h-[60px] rounded-full bg-gray-200 overflow-hidden border border-gray-100">
-                        <div class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-xl font-bold">CAI</div>
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-xl font-bold">
+                            CAI</div>
                     </div>
                     <div class="flex-1 min-w-0">
                         <h2 class="text-[20px] font-normal text-black truncate">Cyber Alliance India</h2>
                         <p class="text-[13px] text-gray-500 truncate">Managed IT Services and Development</p>
                     </div>
-                    <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </div>
             </div>
 
             <!-- Featured Cards (Horizontal Scroll) -->
             <div class="mt-8 mb-2 px-4">
-                <h3 class="text-xs font-semibold text-gray-500 uppercase ml-1 mb-2">Featured Services</h3>
-                <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-2">
-                    <!-- Card 1: webapp -->
-                    <div class="min-w-[160px] h-[160px] bg-white rounded-2xl p-4 flex flex-col justify-between shadow-sm border border-gray-100 cursor-pointer active:scale-95 transition-transform">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                <h3 class="text-[11px] font-black text-gray-900 uppercase tracking-wider ml-1 mb-4">
+                    Current Projects
+                </h3>
+
+                <div class="flex flex-wrap gap-6">
+
+                    <a href="your-link-here.html" class="group w-[240px] block no-underline">
+                        <div
+                            class="w-full h-[160px] rounded-2xl border border-gray-200 overflow-hidden shadow-sm transition-all duration-200 active:scale-95 group-hover:shadow-lg group-hover:border-blue-100">
+                            <img src="assets/img/c-projects/hrms.webp" alt="HRMS Portal"
+                                class="w-full h-full object-cover bg-gray-50 transition-transform duration-500 group-hover:scale-105" />
                         </div>
-                        <div>
-                            <div class="font-bold text-gray-900 leading-tight">Webapp Development</div>
-                            <div class="text-[10px] text-gray-500 mt-1">Stop using spreadsheets for everything</div>
+
+                        <div class="mt-3 px-1">
+                            <div
+                                class="font-extrabold text-gray-900 leading-tight text-lg group-hover:text-blue-600 transition-colors">
+                                HRMS Portal
+                            </div>
+                            <div class="text-[13px] font-medium text-gray-500 mt-1">
+                                Core UI Development Completed
+                            </div>
                         </div>
-                    </div>
-                    <!-- Card 2: shopify -->
-                    <div class="min-w-[160px] h-[160px] bg-white rounded-2xl p-4 flex flex-col justify-between shadow-sm border border-gray-100 cursor-pointer active:scale-95 transition-transform">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                    </a>
+
+                    <a href="your-link-here.html" class="group w-[240px] block no-underline">
+                        <div
+                            class="w-full h-[160px] rounded-2xl border border-gray-200 overflow-hidden shadow-sm transition-all duration-200 active:scale-95 group-hover:shadow-lg group-hover:border-blue-100">
+                            <img src="assets/img/coming-soon.png" alt="HRMS Portal"
+                                class="w-full h-full object-cover bg-gray-50 transition-transform duration-500 group-hover:scale-105" />
                         </div>
-                        <div>
-                            <div class="font-bold text-gray-900 leading-tight">Shopify Development</div>
-                            <div class="text-[10px] text-gray-500 mt-1">Go Online!</div>
+
+                        <div class="mt-3 px-1">
+                            <div
+                                class="font-extrabold text-gray-900 leading-tight text-lg group-hover:text-blue-600 transition-colors">
+                                Jewellery Website
+                            </div>
+                            <div class="text-[13px] font-medium text-gray-500 mt-1">
+                                Under Construction
+                            </div>
                         </div>
-                    </div>                    
+                    </a>
+
                 </div>
             </div>
 
@@ -345,76 +467,106 @@
             <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
 
                 <!-- Item 1: Website Link (Opens in new tab) -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="window.open('/index.html', '_blank')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/ios/safari.png" alt="Safari Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100"
+                    onclick="window.open('https://cyberalliance.in', '_blank')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/ios/safari.png" alt="Safari Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Website</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">Visit our Site</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
                 </div>
 
                 <!-- Item 2: Social Media View -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer" onclick="navigateTo('view-socials')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/instagram.webp" alt="Instagram Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer"
+                    onclick="navigateTo('view-socials')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/instagram.webp" alt="Instagram Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Social Media</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">Follow us</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
                 </div>
 
                 <!-- Item 3: Contact Link (Opens in new tab) -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="window.open('tel:+918851573195', '_blank')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/ios/contacts.png" alt="Contacts Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100"
+                    onclick="window.open('tel:+918851573195', '_blank')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/ios/contacts.png" alt="Contacts Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Contact</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">(885)-157-3195</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
                 </div>
 
                 <!-- Item 4: Whatsapp Link (Opens in new tab) -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="window.open('https://wa.me/918851573195', '_blank')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/whatsapp.webp" alt="Whatsapp Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100"
+                    onclick="window.open('https://wa.me/918851573195', '_blank')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/whatsapp.webp" alt="Whatsapp Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">WhatsApp</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">Let's Talk</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
-                </div>    
-                
+                </div>
+
                 <!-- Item 5: mail Link (Opens in new tab) -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="window.open('mailto:team@cyberalliance.in,?cc=cyberallianceindia@gmail.com', '_blank')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/ios/mail.png" alt="mail Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100"
+                    onclick="window.open('mailto:team@cyberalliance.in,?cc=cyberallianceindia@gmail.com', '_blank')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/ios/mail.png" alt="mail Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Mail</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">Let's Discuss</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
                 </div>
-                
+
                 <!-- Item 5: Meeting Link (Opens in new tab) -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="window.open('https://calendar.app.google/ibtZ5BofoAAVYZjR8', '_blank')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/ios/facetime.png" alt="mail Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100"
+                    onclick="window.open('https://calendar.app.google/ibtZ5BofoAAVYZjR8', '_blank')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/ios/facetime.png" alt="mail Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Meeting</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">Book a meeting</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
-                </div>                
+                </div>
 
             </div>
 
@@ -422,50 +574,70 @@
             <div class="mt-8 mx-4 bg-white rounded-[10px] overflow-hidden">
 
                 <!-- Item 1: Payment Information -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer" onclick="navigateTo('view-paymentnfo')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/upi.png" alt="upi Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer"
+                    onclick="navigateTo('view-paymentnfo')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/upi.png" alt="upi Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Payment Information</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">UPI, IMPS</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
-                </div>                
-                
+                </div>
+
                 <!-- Item: Client Gallery View -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="navigateTo('view-gallery')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/ios/photos.png" alt="photos Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100"
+                    onclick="navigateTo('view-gallery')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/ios/photos.png" alt="photos Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Client Gallery</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">View Projects</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
                 </div>
 
                 <!-- Item: Find My/Directions View (Includes new Directions button logic) -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer" onclick="navigateTo('view-findmy')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/ios/maps.png" alt="maps Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer"
+                    onclick="navigateTo('view-findmy')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/ios/maps.png" alt="maps Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Find My</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">Directions</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
-                </div>                
+                </div>
 
                 <!-- Item: Games View (NEW FEATURE) -->
-                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100" onclick="navigateTo('view-games')">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/ios/arcade.png" alt="arcade Icon">
+                <div class="flex items-center pl-4 pr-3 py-2 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100"
+                    onclick="navigateTo('view-games')">
+                    <div
+                        class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                        <img src="/assets/img/icons/ios/arcade.png" alt="arcade Icon">
                     </div>
                     <div class="flex-1 text-[17px] text-black">Games</div>
                     <div class="flex items-center text-gray-400">
                         <span class="text-[17px] mr-2 text-gray-500">Play</span>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </div>
                 </div>
 
@@ -481,7 +653,9 @@
         <!-- Navigation Header -->
         <div class="px-2 mb-4 flex items-center h-10 relative">
             <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
-                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+                </svg>
                 <span class="text-[17px]">Back</span>
             </button>
             <h1 class="w-full text-center text-[17px] font-semibold text-black">About</h1>
@@ -501,7 +675,7 @@
                 <span class="text-[17px] text-black">Founder</span>
                 <span class="text-[17px] text-gray-500">Yudhvir Singh Godara</span>
             </div>
-             <div class="flex justify-between items-center px-4 py-3">
+            <div class="flex justify-between items-center px-4 py-3">
                 <span class="text-[17px] text-black">Number of Staff members</span>
                 <span class="text-[17px] text-gray-500">7</span>
             </div>
@@ -512,66 +686,101 @@
                 <span class="text-[17px] text-black">Address</span>
                 <span class="text-[17px] text-gray-500 text-right w-1/2">Dwarka Sector 24</span>
             </div>
-             <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
                 <span class="text-[17px] text-black">Contact</span>
                 <span class="text-[17px] text-gray-500">(885) 157-3195</span>
             </div>
         </div>
         <div class="h-20"></div>
     </div>
-    
+
     <!-- 6. VIEW: SOCIALS (List of external social media links) -->
     <div id="view-socials" class="page overflow-y-auto">
         <!-- Navigation Header -->
         <div class="px-2 mb-4 flex items-center h-10 relative">
             <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
-                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+                </svg>
                 <span class="text-[17px]">Back</span>
             </button>
             <h1 class="w-full text-center text-[17px] font-semibold text-black">Social Media</h1>
         </div>
 
         <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
-            
-            <a href="https://www.instagram.com/cyberalliance.in/" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/instagram.webp" alt="Instagram Icon">
-                    </div>                
+
+            <a href="https://www.instagram.com/cyberalliance.in/" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div
+                    class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                    <img src="/assets/img/icons/instagram.webp" alt="Instagram Icon">
+                </div>
                 <div class="flex-1 text-[17px] text-black">Instagram</div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
             </a>
 
-            <a href="https://www.youtube.com/cyberalliance.in/" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/youtube.png" alt="youtube Icon">
-                    </div>                
+            <a href="https://www.facebook.com/cyberallianceindia" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div
+                    class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                    <img src="/assets/img/icons/facebook.png" alt="facebook Icon">
+                </div>
+                <div class="flex-1 text-[17px] text-black">Facebook</div>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+
+
+            <a href="https://www.youtube.com/cyberalliance.in/" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div
+                    class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                    <img src="/assets/img/icons/youtube.png" alt="youtube Icon">
+                </div>
                 <div class="flex-1 text-[17px] text-black">YouTube</div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
             </a>
 
-            <a href="https://www.linkedin.com/company/cyber-alliance-india" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/linkedin.png" alt="linkedin Icon">
-                    </div>                
+            <a href="https://www.linkedin.com/company/cyber-alliance-india" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div
+                    class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                    <img src="/assets/img/icons/linkedin.png" alt="linkedin Icon">
+                </div>
                 <div class="flex-1 text-[17px] text-black">LinkedIn</div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-            </a>  
-            
-            <a href="https://x.com/cyberalliancein" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/x.jpg" alt="x Icon">
-                    </div>                
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+
+            <a href="https://x.com/cyberalliancein" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div
+                    class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                    <img src="/assets/img/icons/x.jpg" alt="x Icon">
+                </div>
                 <div class="flex-1 text-[17px] text-black">X</div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-            </a>    
-            
-            <a href="https://github.com/godarayudhvir" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
-                    <div class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
-                         <img src="/assets/img/icons/github.svg" alt="Github Icon">
-                    </div>                
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+
+            <a href="https://github.com/godarayudhvir" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+                <div
+                    class="w-7 h-7 rounded-[7px] bg-white border border-gray-200 flex items-center justify-center mr-3 overflow-hidden relative">
+                    <img src="/assets/img/icons/github.svg" alt="Github Icon">
+                </div>
                 <div class="flex-1 text-[17px] text-black">Github</div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-            </a>                
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
 
         </div>
         <div class="h-20"></div>
@@ -579,193 +788,223 @@
 
     <!-- 6. VIEW: Payment information -->
 
-<div id="view-paymentnfo" class="page overflow-y-auto">
-    <div class="px-2 mb-4 flex items-center h-10 relative">
-        <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
-            <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
-            <span class="text-[17px]">Back</span>
-        </button>
-        <h1 class="w-full text-center text-[17px] font-semibold text-black">Payment Information</h1>
-    </div>
-
-    <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
-        <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
-            <span class="text-[17px] text-black">Company Name</span>
-            <span class="text-[17px] text-gray-500">Cyber Alliance India</span>
+    <div id="view-paymentnfo" class="page overflow-y-auto">
+        <div class="px-2 mb-4 flex items-center h-10 relative">
+            <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span class="text-[17px]">Back</span>
+            </button>
+            <h1 class="w-full text-center text-[17px] font-semibold text-black">Payment Information</h1>
         </div>
-        
-        <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
-            <span class="text-[17px] text-black">Account Number</span>
-            <div class="flex items-center space-x-2">
-                <span id="accountNumber" class="text-[17px] text-gray-500">10248243834</span>
-                <button onclick="copyToClipboard('accountNumber', this)" class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
-                    <img src="/assets/img/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
-                </button>
+
+        <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Company Name</span>
+                <span class="text-[17px] text-gray-500">Cyber Alliance India</span>
+            </div>
+
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Account Number</span>
+                <div class="flex items-center space-x-2">
+                    <span id="accountNumber" class="text-[17px] text-gray-500">10248243834</span>
+                    <button onclick="copyToClipboard('accountNumber', this)"
+                        class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
+                        <img src="/assets/img/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">IFSC</span>
+                <div class="flex items-center space-x-2">
+                    <span id="ifscCode" class="text-[17px] text-gray-500">IDFB0020231</span>
+                    <button onclick="copyToClipboard('ifscCode', this)"
+                        class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
+                        <img src="/assets/img/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">Branch Address</span>
+                <span class="text-[17px] text-gray-500">Dwarka sector 23, New Delhi - 110077</span>
             </div>
         </div>
 
-        <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
-            <span class="text-[17px] text-black">IFSC</span>
-            <div class="flex items-center space-x-2">
-                <span id="ifscCode" class="text-[17px] text-gray-500">IDFB0020231</span>
-                <button onclick="copyToClipboard('ifscCode', this)" class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
-                    <img src="/assets/img/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
-                </button>
+        <div class="mx-4 mt-8 bg-white rounded-[10px] overflow-hidden">
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
+                <span class="text-[17px] text-black">UPI</span>
+                <div class="flex items-center space-x-2">
+                    <span id="upiId" class="text-[17px] text-gray-500">cyberallianceindia@idfcbank</span>
+                    <button onclick="copyToClipboard('upiId', this)"
+                        class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
+                        <img src="/assets/img/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
-            <span class="text-[17px] text-black">Branch Address</span>
-            <span class="text-[17px] text-gray-500">Dwarka sector 23, New Delhi - 110077</span>
-        </div>            
-    </div>
+        <div class="mx-4 mt-6">
+            <a id="payNowButton" href="https://payments.cashfree.com/forms/cai-pay"
+                class="block w-full text-center bg-[#007AFF] text-white py-3 rounded-xl text-[17px] font-semibold active:opacity-80 transition-opacity shadow-lg">
+                Pay using other options
+            </a>
+        </div>
 
-    <div class="mx-4 mt-8 bg-white rounded-[10px] overflow-hidden">
-        <div class="flex justify-between items-center px-4 py-3 border-b border-gray-100">
-            <span class="text-[17px] text-black">UPI</span>
-            <div class="flex items-center space-x-2">
-                <span id="upiId" class="text-[17px] text-gray-500">cyberallianceindia@idfcbank</span>
-                <button onclick="copyToClipboard('upiId', this)" class="w-6 h-6 flex items-center justify-center active:opacity-50 transition-opacity p-0.5">
-                    <img src="/assets/img/icons/copy.png" alt="Copy" class="w-full h-full object-contain copy-icon">
-                </button>
-            </div>
+        <div class="h-20"></div>
+
+        <div id="copyNotification"
+            class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none">
+            Copied!
         </div>
     </div>
-    
-    <div class="mx-4 mt-6">
-        <a id="payNowButton" 
-           href="https://payments.cashfree.com/forms?code=cai-consultation" 
-           class="block w-full text-center bg-[#007AFF] text-white py-3 rounded-xl text-[17px] font-semibold active:opacity-80 transition-opacity shadow-lg">
-            Pay Consultation Fee (₹500)
-        </a>
-    </div>
 
-    <div class="h-20"></div>
-    
-    <div id="copyNotification" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none">
-        Copied!
-    </div>
-</div>
+    <script>
+        /**
+         * Copies the text content of a specified element to the clipboard and shows a brief notification.
+         * @param {string} elementId - The ID of the element whose text content should be copied.
+         * @param {HTMLElement} buttonElement - The button element that was clicked (for feedback).
+         */
+        function copyToClipboard(elementId, buttonElement) {
+            const textElement = document.getElementById(elementId);
+            if (!textElement) return;
 
-<script>
-    /**
-     * Copies the text content of a specified element to the clipboard and shows a brief notification.
-     * @param {string} elementId - The ID of the element whose text content should be copied.
-     * @param {HTMLElement} buttonElement - The button element that was clicked (for feedback).
-     */
-    function copyToClipboard(elementId, buttonElement) {
-        const textElement = document.getElementById(elementId);
-        if (!textElement) return;
+            const textToCopy = textElement.textContent.trim();
+            const iconImg = buttonElement.querySelector('.copy-icon');
 
-        const textToCopy = textElement.textContent.trim();
-        const iconImg = buttonElement.querySelector('.copy-icon');
+            // Use modern clipboard API
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // --- 1. Show Notification ---
+                const notification = document.getElementById('copyNotification');
+                const fieldName = textElement.closest('.flex').querySelector('span:first-child').textContent.trim();
+                notification.textContent = fieldName + ' Copied!';
 
-        // Use modern clipboard API
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            // --- 1. Show Notification ---
-            const notification = document.getElementById('copyNotification');
-            const fieldName = textElement.closest('.flex').querySelector('span:first-child').textContent.trim();
-            notification.textContent = fieldName + ' Copied!';
-            
-            notification.classList.add('opacity-100');
-            notification.classList.remove('opacity-0');
+                notification.classList.add('opacity-100');
+                notification.classList.remove('opacity-0');
 
-            // --- 2. Change Icon for Feedback (using checkmark SVG as a temporary replacement) ---
-            const originalHTML = buttonElement.innerHTML;
-            
-            // Temporary Success Icon (Checkmark)
-            buttonElement.innerHTML = `
+                // --- 2. Change Icon for Feedback (using checkmark SVG as a temporary replacement) ---
+                const originalHTML = buttonElement.innerHTML;
+
+                // Temporary Success Icon (Checkmark)
+                buttonElement.innerHTML = `
                 <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
             `;
 
-            // --- 3. Revert Icon and hide Notification after 1.5 seconds ---
-            setTimeout(() => {
-                notification.classList.remove('opacity-100');
-                notification.classList.add('opacity-0');
-                buttonElement.innerHTML = originalHTML; // Revert back to PNG icon
-            }, 1500);
+                // --- 3. Revert Icon and hide Notification after 1.5 seconds ---
+                setTimeout(() => {
+                    notification.classList.remove('opacity-100');
+                    notification.classList.add('opacity-0');
+                    buttonElement.innerHTML = originalHTML; // Revert back to PNG icon
+                }, 1500);
 
-        }).catch(err => {
-            console.error('Could not copy text: ', err);
-            // Fallback copy logic (kept simple for brevity)
-            alert('Copying failed. Please copy the text manually: ' + textToCopy);
-        });
-    }
-</script>
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+                // Fallback copy logic (kept simple for brevity)
+                alert('Copying failed. Please copy the text manually: ' + textToCopy);
+            });
+        }
+    </script>
 
 
     <!-- 7. VIEW: GALLERY (Client Project Showcase with Dynamic Grid) -->
     <!-- FIX: Removed bg-white from .page, added flex-col, and used a separate scrolling wrapper for content -->
-    <div id="view-gallery" class="page"> 
+    <div id="view-gallery" class="page">
         <!-- Header - Now fixed at the top of this page/view -->
-        <div class="px-2 pt-2 mb-2 flex items-center justify-between h-10 sticky top-0 bg-white/90 backdrop-blur-lg z-10 border-b border-gray-100 w-full">
+        <div
+            class="px-2 pt-2 mb-2 flex items-center justify-between h-10 sticky top-0 bg-white/90 backdrop-blur-lg z-10 border-b border-gray-100 w-full">
             <button onclick="navigateBack()" class="flex items-center text-[#007AFF] active:opacity-50 px-2">
-                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+                </svg>
                 <span class="text-[17px]">Back</span>
             </button>
-            <h1 class="text-[17px] font-semibold text-black absolute left-1/2 transform -translate-x-1/2">Client Showcase</h1>
-            <div class="w-16"></div> 
+            <h1 class="text-[17px] font-semibold text-black absolute left-1/2 transform -translate-x-1/2">Client
+                Showcase</h1>
+            <div class="w-16"></div>
         </div>
 
         <!-- Content Wrapper - This is the part that scrolls -->
         <!-- FIX: Added flex-1 and overflow-y-auto to this container to enable scrolling of only the content. -->
-        <div class="flex-1 overflow-y-auto bg-white"> 
-             <!-- Photo Grid - grid-cols-3 with the first item dynamically set to span 2x2 by JS -->
+        <div class="flex-1 overflow-y-auto bg-white">
+            <!-- Photo Grid - grid-cols-3 with the first item dynamically set to span 2x2 by JS -->
             <div class="grid grid-cols-3 gap-[1px] pb-20" id="gallery-grid">
                 <!-- Items injected via JS (check the renderGallery function) -->
             </div>
         </div>
     </div>
-    
+
     <!-- 8. VIEW: GAMES (NEW) - Links to external web games -->
     <div id="view-games" class="page overflow-y-auto">
         <!-- Navigation Header -->
         <div class="px-2 mb-4 flex items-center h-10 relative">
             <button onclick="navigateBack()" class="absolute left-2 flex items-center text-[#007AFF] active:opacity-50">
-                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+                </svg>
                 <span class="text-[17px]">Back</span>
             </button>
             <h1 class="w-full text-center text-[17px] font-semibold text-black">Games</h1>
         </div>
 
         <div class="mx-4">
-            <p class="text-[13px] text-gray-500 mb-4 px-4">A curated list of fun and simple web games to enjoy during your downtime.</p>
+            <p class="text-[13px] text-gray-500 mb-4 px-4">A curated list of fun and simple web games to enjoy during
+                your downtime.</p>
         </div>
 
         <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
             <!-- Game Link 1: Sunset Race (The user's requested link) -->
-            <a href="https://sunsetrace.ginrin.com/" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+            <a href="https://sunsetrace.ginrin.com/" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
                 <div class="w-7 h-7 rounded-[7px] bg-red-500 flex items-center justify-center text-white mr-3">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
                 </div>
                 <div class="flex-1 text-[17px] text-black">Sunset Race (Arcade)</div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
             </a>
         </div>
 
         <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
             <!-- Game Link 2: Bruno simon (The user's requested link) -->
-            <a href="https://bruno-simon.com/" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+            <a href="https://bruno-simon.com/" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
                 <div class="w-7 h-7 rounded-[7px] bg-red-500 flex items-center justify-center text-white mr-3">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
                 </div>
                 <div class="flex-1 text-[17px] text-black">Bruno simon</div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
             </a>
         </div>
 
         <div class="mx-4 bg-white rounded-[10px] overflow-hidden">
             <!-- Game Link 3: Slow Roads (The user's requested link) -->
-            <a href="https://slowroads.io/" target="_blank" class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
+            <a href="https://slowroads.io/" target="_blank"
+                class="flex items-center pl-4 pr-3 py-3 bg-white active:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100">
                 <div class="w-7 h-7 rounded-[7px] bg-red-500 flex items-center justify-center text-white mr-3">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
                 </div>
                 <div class="flex-1 text-[17px] text-black">Slow roads</div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                </svg>
             </a>
-        </div>        
+        </div>
 
         <div class="h-20"></div>
     </div>
@@ -774,31 +1013,44 @@
     <!-- 9. VIEW: FIND MY (Map/Directions View) -->
     <div id="view-findmy" class="page flex flex-col h-full bg-white">
         <!-- Header -->
-        <div class="px-2 pt-2 mb-0 flex items-center justify-between h-10 bg-white/90 backdrop-blur-lg z-10 border-b border-gray-100">
+        <div
+            class="px-2 pt-2 mb-0 flex items-center justify-between h-10 bg-white/90 backdrop-blur-lg z-10 border-b border-gray-100">
             <button onclick="navigateBack()" class="flex items-center text-[#007AFF] active:opacity-50 px-2">
-                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+                </svg>
                 <span class="text-[17px]">Back</span>
             </button>
-            <h1 class="text-[17px] font-semibold text-black absolute left-1/2 transform -translate-x-1/2">Directions</h1>
+            <h1 class="text-[17px] font-semibold text-black absolute left-1/2 transform -translate-x-1/2">Directions
+            </h1>
             <div class="w-16"></div>
         </div>
-        
+
         <!-- Map Container -->
         <div class="flex-1 w-full bg-gray-100 map-container relative">
-             <!-- Embedded Google Map centered on New Delhi HQ (28.6129,77.2295) -->
-              <iframe src="https://maps.google.com/maps?q=28.553778,77.033583&z=15&output=embed" width="100%" height="100%" allowfullscreen="" loading="lazy"></iframe>
-            
+            <!-- Embedded Google Map centered on New Delhi HQ (28.6129,77.2295) -->
+            <iframe src="https://maps.google.com/maps?q=28.553778,77.033583&z=15&output=embed" width="100%"
+                height="100%" allowfullscreen="" loading="lazy"></iframe>
+
             <!-- Floating overlay box with Directions button -->
-             <div class="absolute bottom-10 left-4 right-4 bg-white rounded-2xl p-4 shadow-xl border border-gray-100">
+            <div class="absolute bottom-10 left-4 right-4 bg-white rounded-2xl p-4 shadow-xl border border-gray-100">
                 <div class="flex items-center justify-between">
                     <div>
-                         <h3 class="font-bold text-lg text-black">New Delhi HQ</h3>
-                         <p class="text-sm text-gray-500">28.6129° N, 77.2295° E</p>
+                        <h3 class="font-bold text-lg text-black">New Delhi HQ</h3>
+                        <p class="text-sm text-gray-500">28.6129° N, 77.2295° E</p>
                     </div>
                     <!-- NEW: Directions Button. Calls getDirections() to open Google Maps/Chrome -->
-                    <button onclick="getDirections()" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg active:scale-95 transition-transform" aria-label="Get Directions">
+                    <button onclick="getDirections()"
+                        class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg active:scale-95 transition-transform"
+                        aria-label="Get Directions">
                         <!-- Map Pin Icon -->
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -807,14 +1059,16 @@
 
     <!-- 10. CLIENT DETAILS SHEET (Overlay for viewing client details from the gallery) -->
     <div id="client-overlay" onclick="closeClientSheet()"></div>
-    <div id="client-sheet" class="fixed bottom-0 left-0 right-0 max-h-[90%] bg-white rounded-t-3xl shadow-2xl p-4 flex flex-col">
+    <div id="client-sheet"
+        class="fixed bottom-0 left-0 right-0 max-h-[90%] bg-white rounded-t-3xl shadow-2xl p-4 flex flex-col">
         <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div> <!-- Drag Handle -->
-        
+
         <div id="sheet-content" class="flex-1 overflow-y-auto">
             <!-- Dynamic Client Content injected here by openClientSheet() -->
         </div>
-        
-        <button onclick="closeClientSheet()" class="mt-4 w-full bg-gray-100 text-black font-semibold py-3 rounded-xl active:bg-gray-200">Close</button>
+
+        <button onclick="closeClientSheet()"
+            class="mt-4 w-full bg-gray-100 text-black font-semibold py-3 rounded-xl active:bg-gray-200">Close</button>
     </div>
 
 
@@ -876,7 +1130,7 @@
             setTimeout(() => {
                 const banner = document.getElementById('notification-banner');
                 const center = document.getElementById('notification-center');
-                if(banner.classList.contains('show') && !center.classList.contains('open')) {
+                if (banner.classList.contains('show') && !center.classList.contains('open')) {
                     banner.classList.remove('show');
                 }
             }, 6000);
@@ -886,7 +1140,7 @@
             const center = document.getElementById('notification-center');
             center.classList.toggle('open');
             // Dismiss banner if notification center is opened
-            if(center.classList.contains('open')) document.getElementById('notification-banner').classList.remove('show');
+            if (center.classList.contains('open')) document.getElementById('notification-banner').classList.remove('show');
         }
 
         // --- 4. Navigation Logic (iOS style push/pop) ---
@@ -911,7 +1165,7 @@
                 mainView.classList.add('active');
             }
         }
-        
+
         // --- 5. Directions Logic (NEW FEATURE) ---
         // Opens an external application (Google Maps) for directions to the HQ.
         function getDirections() {
@@ -920,13 +1174,13 @@
             // Google Maps URL scheme for directions (travelmode=driving is optional)
             const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
             // Opens in a new window/tab
-            window.open(mapUrl, '_blank'); 
+            window.open(mapUrl, '_blank');
         }
 
         // --- 6. Search Logic ---
         // Data structure for all searchable items in the app.
         const searchableItems = [
-            
+
             // { name: "About", desc: "Comapany name, Founder", action: () => navigateTo('view-about') },
             // { name: "Social Media", desc: "Follow us", action: () => navigateTo('view-socials') },
             // { name: "Client Gallery", desc: "Clients showcase, Photos", action: () => navigateTo('view-gallery') },
@@ -972,8 +1226,8 @@
             }
 
             // Filter items based on query match in name or description
-            const matches = searchableItems.filter(item => 
-                item.name.toLowerCase().includes(query) || 
+            const matches = searchableItems.filter(item =>
+                item.name.toLowerCase().includes(query) ||
                 item.desc.toLowerCase().includes(query)
             );
 
@@ -995,12 +1249,12 @@
                 resultsList.innerHTML = `<div class="p-4 text-center text-gray-500">No results found</div>`;
             }
         }
-        
+
         // Clears the search input and hides results.
         function clearSearch() {
             const input = document.getElementById('app-search');
             input.value = '';
-            handleSearch(); 
+            handleSearch();
         }
 
         // --- 7. Gallery Data and Rendering ---
@@ -1012,9 +1266,9 @@
             { name: "Dosthaus", url: "https://cyberalliance.in/clients/dosthaus/", img: "/assets/img/clients/dosthaus.png", duration: "8 Days", cost: "Rs. 50,000", desc: "A website designed for a cafe in gurugram." },
             { name: "Essel Zone", url: "https://cyberalliance.in/clients/esselzone/", img: "/assets/img/clients/esselzone.png", duration: "1 Day", cost: "Rs. 5,000", desc: "A basic site was created for landing page." },
             { name: "Sarthak Enterprises", url: "https://cyberalliance.in/clients/sarthak/", img: "/assets/img/clients/sarthak.png", duration: "1 Day", cost: "Rs. 5,000", desc: "A basic site was created for landing page." },
-            
+
             // { name: "companynamehere", url: "urlhere", img: "assets/img/clients/companynamehere.png", duration: "3 Days", cost: "Rs. 45,000", desc: "This wasnt just a static site it was more than that." },
-            
+
         ];
 
         // Renders the gallery grid with dynamic sizing for the first item.
@@ -1028,7 +1282,7 @@
                 if (index === 0) {
                     itemClasses = "relative bg-gray-200 overflow-hidden cursor-pointer group col-span-2 row-span-2";
                 }
-                
+
                 // FIX 3: Ensure onclick is directly on the surrounding div, or the image if it's guaranteed to fill the space. 
                 // Using the image and ensuring object-cover is correct.
                 html += `
@@ -1047,7 +1301,7 @@
         function openClientSheet(index) {
             const client = clients[index];
             const content = document.getElementById('sheet-content');
-            
+
             content.innerHTML = `
                 <div class="flex items-center gap-4 mb-6">
                     <img src="${client.img}" class="w-16 h-16 rounded-xl object-cover border border-gray-100 shadow-sm" onerror="this.src='https://placehold.co/400x400/ccc/000?text=No+Image'">
@@ -1087,25 +1341,27 @@
         }
 
         /** Disables the default browser context menu (right-click menu) for the entire document body.**/
-    document.body.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
+        document.body.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
 
     </script>
-        <!-- Umami Analytics Script -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="1ee05dca-d5c9-4231-9003-5573cb92b0cd"></script>
+    <!-- Umami Analytics Script -->
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="1ee05dca-d5c9-4231-9003-5573cb92b0cd"></script>
 
     <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('./sw.js').then(function(registration) {
-                console.log('Service Worker registered successfully: ', registration.scope);
-            }, function(err) {
-                console.log('Service Worker registration failed: ', err);
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('./sw.js').then(function (registration) {
+                    console.log('Service Worker registered successfully: ', registration.scope);
+                }, function (err) {
+                    console.log('Service Worker registration failed: ', err);
+                });
             });
-        });
-    }
+        }
     </script>
 
 </body>
+
 </html>
